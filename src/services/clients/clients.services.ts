@@ -20,9 +20,17 @@ const clientsServices = baseApi.injectEndpoints({
           };
         },
       }),
+      getClientById: builder.query<any, any>({
+        providesTags: ["Clients"],
+        query: ({id}) => {
+          return {
+            url: `clients/${id}`,
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useFindClientsQuery, useRemoveClientByIdMutation } =
+export const { useFindClientsQuery, useRemoveClientByIdMutation,useGetClientByIdQuery } =
   clientsServices;

@@ -3,6 +3,7 @@ import { CellVariant } from "@/components/ui/table/TableCellVariant/TableCellVar
 import { ControlClient } from "@/pages/clients/client/controlClient/controlClient";
 import { useFindClientsQuery } from "@/services/clients/clients.services";
 import { ClientType } from "@/services/clients/clientsServicesType";
+import {useNavigate} from 'react-router-dom';
 
 export const TableClients = () => {
   return (
@@ -23,7 +24,7 @@ const ContentTableHead = () => {
         <Table.Cell variant={"head"}>Источник</Table.Cell>
         <Table.Cell variant={"head"}>Дата последнего заказа</Table.Cell>
         <Table.Cell variant={"head"}>Примечания</Table.Cell>
-        <Table.Cell variant={"head"}></Table.Cell>
+
       </Table.Row>
     </Table.Head>
   );
@@ -31,12 +32,15 @@ const ContentTableHead = () => {
 
 const ContentTableBody = () => {
   const { data } = useFindClientsQuery({});
-
+  const navigate = useNavigate()
+  const clickHandlerCellName = (id: string) => {
+    navigate(`/clients/${id}`)
+  }
   return (
     <Table.Body>
       {data?.map((client: ClientType) => (
         <Table.Row key={client.id}>
-          <Table.Cell>{client.name}</Table.Cell>
+          <Table.Cell onClick={() => clickHandlerCellName(client.id)}>{client.name}</Table.Cell>
           <Table.Cell>
             <CellVariant.Phones data={client.phones} />
           </Table.Cell>
@@ -47,9 +51,6 @@ const ContentTableBody = () => {
           <Table.Cell>{!client.dateLastOrder && "нет заказа"}</Table.Cell>
           <Table.Cell>
             {client.comments.length && client.comments[0]}
-          </Table.Cell>
-          <Table.Cell>
-            <ControlClient id={client.id} />
           </Table.Cell>
         </Table.Row>
       ))}
