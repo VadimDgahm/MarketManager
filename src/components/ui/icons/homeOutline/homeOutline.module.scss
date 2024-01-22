@@ -1,0 +1,12 @@
+.svg {
+  cursor: pointer;
+  transition: opacity 0.3s linear;
+}
+
+.svg path {
+  transition: opacity 0.3s ease-out;
+}
+
+.svg:hover path {
+  opacity: 0.8;
+}

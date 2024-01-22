@@ -1,0 +1,56 @@
+.cell {
+  display: flex;
+  align-items: center;
+}
+
+.star,
+.indentation {
+  margin-right: 10px;
+}
+
+.img {
+  width: 118px;
+  height: 48px;
+}
+
+.attached,
+.icon {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+
+  &:hover {
+    path {
+      fill: var(--color-dark-100);
+    }
+  }
+}
+.phoneWithModal {
+  position: relative;
+  margin-right: 5px;
+
+  &:hover {
+    .modalPhone {
+      visibility: visible;
+      opacity: 9;
+    }
+  }
+}
+.tel {
+  margin-right: 10px;
+}
+.modalPhone {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  padding: 10px;
+  left: 16px;
+  background-color: var(--color-light-500);
+  color: var(--color-dark-500);
+  border-radius: 0 5px 5px;
+  z-index: 1;
+  transition: all 0.2s ease-in;
+}
+.sort {
+  margin-right: 4px;
+}

@@ -1,0 +1,65 @@
+@import '@radix-ui/colors/black-alpha.css';
+@import '@radix-ui/colors/green.css';
+@import '@radix-ui/colors/mauve.css';
+@import '@radix-ui/colors/violet.css';
+
+.DialogOverlay {
+  position: fixed;
+  inset: 0;
+
+  background-color: var(--black-a9);
+
+  animation-name: overlay-show;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+}
+
+.borderTitle {
+  border-bottom: 1px solid var(--color-dark-500);
+}
+
+.DialogContent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 90vw;
+  max-width: 542px;
+
+  color: var(--color-light-100);
+
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+  border-radius: 6px;
+  box-shadow: hsl(206deg 22% 7% / 35%) 0 10px 38px -10px, hsl(206deg 22% 7% / 20%) 0 10px 20px -15px;
+
+  animation-name: content-show;
+  animation-duration: 0.5s;
+}
+
+.DialogContent:focus {
+  outline: none;
+}
+
+@keyframes overlay-show {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes content-show {
+  from {
+    transform: translate(-50%, -48%) scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,30 @@
+.DialogTitle {
+  position: relative;
+  margin: 0;
+  padding: 18px 24px;
+}
+
+.IconButton {
+  all: unset;
+
+  cursor: pointer;
+
+  position: absolute;
+  top: 15px;
+  right: 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  border-radius: 100%;
+
+  transition: 0.3s;
+}
+
+.IconButton:hover {
+  background-color: var(--color-dark-300);
+}

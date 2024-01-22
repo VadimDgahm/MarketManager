@@ -1,0 +1,44 @@
+.signUpWrapper {
+  width: 100%;
+  max-width: 420px;
+  height: 528px;
+  margin: 36px auto;
+  padding: 33px 36px 29px;
+
+  border: 1px solid var(--color-dark-500);
+  border-radius: 5px;
+}
+
+.signInBtn {
+  width: 100%;
+}
+
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.emailInput,
+.passwordInput {
+  margin-bottom: 24px;
+}
+
+.signUpTitle {
+  margin: 0 auto 27px;
+}
+
+.confirmInput {
+  margin-bottom: 60px;
+}
+
+.account {
+  cursor: default;
+  margin: 20px auto 11px;
+}
+
+.signIn {
+  font-weight: 700;
+  color: var(--color-primary-500);
+}

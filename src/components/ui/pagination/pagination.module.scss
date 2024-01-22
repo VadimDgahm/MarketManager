@@ -1,0 +1,66 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  margin: 0 10px;
+}
+
+.boxSelector {
+  display: flex;
+}
+
+.paginationContainer {
+  display: flex;
+  list-style-type: none;
+
+  .paginationItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    min-width: 24px;
+    height: 24px;
+    margin: 0 6px;
+
+    font-size: 13px;
+    line-height: 1.43;
+    color: var(--color-light-100);
+    text-align: center;
+    letter-spacing: 0.01em;
+
+    border-radius: 2px;
+
+    transition: 0.3s;
+
+    &.dots:hover {
+      cursor: default;
+      background-color: transparent;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--color-dark-500);
+    }
+
+    &.selected {
+      color: var(--color-dark-900);
+      background-color: var(--color-light-100);
+    }
+
+    &.disabled {
+      pointer-events: none;
+
+      svg path {
+        fill: var(--color-dark-100);
+      }
+
+      &:hover {
+        cursor: default;
+        background-color: transparent;
+      }
+    }
+  }
+}

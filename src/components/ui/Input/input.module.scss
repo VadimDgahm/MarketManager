@@ -1,0 +1,130 @@
+.input {
+  width: 100%;
+  margin-bottom: 3px;
+  padding: 6px 12px;
+
+  font-size: var(--font-size-m);
+
+  background: none;
+  border: 1px solid var(--color-dark-100);
+  border-radius: 2px;
+  outline: none;
+
+  transition: background-color 0.3s linear, border 0.3s linear;
+
+  &:focus {
+    border: 1px solid var(--color-info-700);
+  }
+
+  &:hover {
+    background-color: var(--color-dark-500);
+    border: 1px solid var(--color-light-900);
+  }
+
+  &:active {
+    border: 1px solid var(--color-light-900);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background: none;
+    border: 1px solid var(--color-dark-300);
+  }
+}
+
+input[type='search'] {
+  &::-webkit-search-cancel-button {
+    cursor: pointer;
+
+    display: block;
+
+    width: 10px;
+    height: 10px;
+
+    appearance: none;
+    background-image: url('./svg/close.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+.buttonEye {
+  all: unset;
+
+  cursor: pointer;
+
+  position: absolute;
+  top: 50%;
+  right: 10px;
+}
+
+.inputContainer {
+  position: relative;
+  width: 100%;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: var(--font-size-s);
+
+  .searchIcon path {
+    fill: var(--color-dark-100);
+  }
+
+  &:hover {
+    .searchIcon path {
+      fill: var(--color-light-300);
+    }
+  }
+
+  &:focus {
+    .searchIcon path {
+      fill: var(--color-light-300);
+    }
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  top: 5px;
+  left: 12px;
+}
+
+.box label {
+  display: block;
+  color: var(--color-dark-100);
+}
+
+.inputBox {
+  display: block;
+  width: 100%;
+}
+
+.error {
+  border: 1px solid var(--color-danger-300);
+}
+
+.error::placeholder {
+  color: var(--color-danger-300);
+}
+
+.errorMessage {
+  position: absolute;
+  top: 95%;
+  color: var(--color-danger-300) !important;
+}
+
+.search {
+  padding: 6px 12px 6px 41px;
+}
+
+.title {
+  color: var(--color-dark-300);
+}
+
+.label {
+  color: var(--color-dark-100);
+  text-align: start;
+}

@@ -1,0 +1,16 @@
+.content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 18px 24px;
+}
+
+.buttonSecondary {
+  max-width: 100px;
+  box-shadow: 0 0 5px var(--color-dark-300);
+}
+
+.button {
+  min-width: 132px;
+  box-shadow: 0 0 5px var(--color-accent-500);
+}

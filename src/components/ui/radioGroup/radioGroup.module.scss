@@ -1,0 +1,77 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.DisabledRadioGroup {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.radioString {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+
+  height: 24px;
+  margin-bottom: 12px;
+}
+
+.RadioGroupItem {
+  cursor: pointer;
+
+  position: relative;
+
+  display: flex;
+
+  width: 16px;
+  height: 16px;
+
+  background-color: var(--color-dark-900);
+  border: 2px solid var(--color-accent-500);
+  border-radius: 50%;
+
+  &:active::before,
+  &:focus::before {
+    content: '';
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 8px;
+    height: 8px;
+
+    background-color: var(--color-accent-500);
+    border-radius: 50%;
+  }
+}
+
+.RadioGroupIndicator {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  opacity: 0.3;
+  background-color: var(--color-accent-500);
+  border-radius: 50%;
+}
+
+.RadioLabel {
+  //cursor: pointer;
+  color: var(--color-light-100);
+}
+
+.error {
+  font-size: 0.75rem;
+  color: red;
+}

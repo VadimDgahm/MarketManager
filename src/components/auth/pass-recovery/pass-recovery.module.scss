@@ -1,0 +1,39 @@
+.wrapper {
+  width: 420px;
+  height: 456px;
+  margin: 36px auto 0;
+  padding: 33px 36px 29px;
+
+  border: 1px solid var(--color-dark-500);
+  border-radius: 5px;
+}
+
+.forgotPassForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signInTitle {
+  margin: 0 auto 51px;
+}
+
+.emailInput {
+  margin-bottom: 19px;
+}
+
+.passInform {
+  margin-bottom: 65px;
+  color: var(--color-light-900);
+}
+
+.remember {
+  cursor: default;
+  margin: 20px auto 11px;
+}
+
+.signUp {
+  font-weight: 700;
+  color: var(--color-primary-500);
+}

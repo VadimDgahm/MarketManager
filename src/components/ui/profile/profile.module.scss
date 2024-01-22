@@ -1,0 +1,97 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  max-width: 420px;
+  min-height: 348px;
+  margin: 36px auto;
+  padding: 33px 20px 41px;
+
+  text-align: center;
+
+  border: 1px solid var(--color-dark-500);
+  border-radius: 5px;
+
+  &:hover {
+    .email {
+      color: var(--color-dark-100);
+    }
+  }
+}
+
+.avatarEditor {
+  display: none;
+}
+
+.title {
+  margin-bottom: 27px;
+}
+
+.avatarGroup {
+  position: relative;
+}
+
+.iconImage {
+  cursor: pointer;
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  background-color: var(--color-dark-300);
+  border-radius: 4px;
+  box-shadow: 0 0 5px var(--color-dark-300);
+
+  transition: 0.2s;
+
+  &:hover {
+    box-shadow: 0 0 5px var(--color-info-300);
+
+    path {
+      fill: var(--color-info-300);
+    }
+  }
+}
+
+.customAvatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+}
+
+.editName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.iconName {
+  cursor: pointer;
+  margin-left: 9px;
+
+  &:hover {
+    path {
+      fill: var(--color-info-300);
+    }
+  }
+}
+
+.email {
+  display: inline-block;
+  margin-bottom: 13px;
+  color: var(--color-dark-300);
+  transition: 1s;
+}
+
+.button {
+  width: 122px;
+}

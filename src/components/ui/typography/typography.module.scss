@@ -1,0 +1,78 @@
+@mixin base-styles($fontSize, $lineHeight, $fontWeight) {
+  display: block;
+
+  width: fit-content;
+  margin: 0;
+
+  font-family: var(--font-family-primary);
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  line-height: $lineHeight;
+  color: var(--color-light-100);
+}
+
+.body1 {
+  @include base-styles(var(--font-size-m), var(--line-height-m), var(--font-weight-regular));
+}
+
+.body2 {
+  @include base-styles(var(--font-size-s), var(--line-height-m), var(--font-weight-regular));
+}
+
+.large {
+  @include base-styles(var(--font-size-xxl), var(--line-height-l), var(--font-weight-bold));
+}
+
+.overline {
+  @include base-styles(var(--font-size-xs), var(--line-height-s), var(--font-weight-bold));
+}
+
+.subtitle1 {
+  @include base-styles(var(--font-size-m), var(--line-height-m), var(--font-weight-bold));
+}
+
+.subtitle2 {
+  @include base-styles(var(--font-size-s), var(--line-height-m), var(--font-weight-bold));
+}
+
+.caption {
+  @include base-styles(var(--font-size-xs), var(--line-height-s), var(--font-weight-regular));
+}
+
+.h1 {
+  @include base-styles(var(--font-size-xl), var(--line-height-l), var(--font-weight-bold));
+}
+
+.h2 {
+  @include base-styles(var(--font-size-l), var(--line-height-m), var(--font-weight-bold));
+}
+
+.h3 {
+  @include base-styles(var(--font-size-m), var(--line-height-m), var(--font-weight-bold));
+}
+
+.link1 {
+  @include base-styles(var(--font-size-s), var(--line-height-m), var(--font-weight-regular));
+
+  cursor: pointer;
+  color: var(--color-info-500);
+  text-decoration-line: underline;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+.link2 {
+  @include base-styles(var(--font-size-xs), var(--line-height-s), var(--font-weight-regular));
+
+  cursor: pointer;
+  color: var(--color-info-500);
+  text-decoration-line: underline;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}

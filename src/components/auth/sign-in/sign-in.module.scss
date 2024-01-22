@@ -1,0 +1,68 @@
+.signInWrapper {
+  display: flex;
+  flex-direction: column;
+
+  width: 420px;
+  height: 528px;
+  margin: 36px auto;
+  padding: 33px 36px 29px;
+
+  border: 1px solid var(--color-dark-500);
+  border-radius: 5px;
+}
+
+.submitButton {
+  width: 100%;
+}
+
+.signInForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signInTitle {
+  margin: 0 auto 27px;
+}
+
+.emailInput {
+  margin-bottom: 24px;
+  color: var(--color-dark-100) !important;
+}
+
+.passwordInput {
+  margin-bottom: 10px;
+}
+
+.checkbox {
+  width: 140px;
+  height: 36px;
+  margin-right: auto;
+  margin-bottom: 6px;
+}
+
+.repairPassword {
+  cursor: pointer;
+
+  margin-bottom: 66px;
+  margin-left: auto;
+
+  text-decoration: none;
+
+  transition: 0.3s;
+
+  &:hover {
+    color: var(--color-info-500);
+  }
+}
+
+.account {
+  cursor: default;
+  margin: 20px auto 11px;
+}
+
+.signUp {
+  font-weight: 700;
+  color: var(--color-primary-500);
+}

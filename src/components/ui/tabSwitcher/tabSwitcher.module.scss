@@ -1,0 +1,47 @@
+.toggleGroup {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.toggleGroupItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 24px;
+
+  background-color: transparent;
+  border: 1px solid var(--color-dark-300);
+
+  &:first-child {
+    margin-left: 0;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+  }
+
+  &:last-child {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+  }
+
+  &:hover {
+    background-color: var(--color-dark-300);
+  }
+
+  &[data-state='on'] {
+    background-color: var(--color-accent-500);
+  }
+
+  &:focus {
+    position: relative;
+    border-radius: 2px;
+    box-shadow: 0 0 0 2px var(--color-info-900);
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
