@@ -8,7 +8,7 @@ import '@radix-ui/themes/styles.css'
 
 import s from './select.module.scss'
 
-type SelectorPropsType = {
+export type SelectorPropsType = {
   className?: string
   options: (number | string)[]
   title?: string

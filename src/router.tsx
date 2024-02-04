@@ -9,10 +9,12 @@ import {
 import { Client } from "@/pages/clients/client/client";
 import { Clients } from "@/pages/clients/clients";
 import { Layout } from "@/pages/layout/layout";
+import { Login } from "./pages/auth/login";
+import { useCheckAuthQuery } from "./services/auth/auth.services";
 
 const publicRoutes: RouteObject[] = [
   {
-    element: <div>Login</div>,
+    element: <Login/>,
     path: "/login",
   },
 ];
@@ -42,16 +44,17 @@ const router = createBrowserRouter([
     ],
     element: <Layout />,
   },
-  ...publicRoutes,
+  ...publicRoutes
 ]);
 
-function useAuthenticationCheck() {
-  return false;
+export function useAuthenticationCheck() {
+  // const {data,isError, isLoading} = useCheckAuthQuery()
+
+  // return {data,isError,isLoading} ;
 }
 function PrivateRoutes() {
-  const isAuthenticated = useAuthenticationCheck();
 
-  return !isAuthenticated ? <Outlet /> : <Navigate to={"/login"} />;
+  return false ?  <Navigate to={"/login"} /> : <Outlet />;
 }
 
 export const Router = () => {

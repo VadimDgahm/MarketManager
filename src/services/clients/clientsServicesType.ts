@@ -14,7 +14,6 @@ export type AddressClient = {
   statusAddress?: "apartment" | "house" | "job";
   street: string;
 };
-type Source = "instagram" | "kufar" | "sarafan" | "telegram" | "viber";
 export type ClientType = {
   addresses: AddressClient[];
   comments: string[];
@@ -23,6 +22,7 @@ export type ClientType = {
   id: string;
   name: string;
   phones: PhoneClient[];
-  source: Source;
+  source:string
   status?: StatusClient;
 };
+export type CreateClientBody = Omit<ClientType, 'dateLastOrder' | 'id' | 'createdDate' | 'status'>

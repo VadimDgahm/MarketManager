@@ -5,7 +5,6 @@ import { ControlledCheckbox } from '@/components/controlled/controlledCheckbox/c
 import { ControlledInput } from '@/components/controlled/controlledInput/controlledInput'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
-import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -19,7 +18,6 @@ const loginSchema = z.object({
     .string()
     .min(3, 'Password has to be at least 3 characters long')
     .max(30, 'Password should be less than' + ' 30 characters'),
-  rememberMe: z.boolean(),
 })
 
 type FormValues = z.infer<typeof loginSchema>
@@ -29,7 +27,6 @@ export const LoginForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
     defaultValues: {
       email: '',
       password: '',
-      rememberMe: true,
     },
     mode: 'onSubmit',
     resolver: zodResolver(loginSchema),
@@ -37,41 +34,24 @@ export const LoginForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 
   return (
     <>
-      <DevTool control={control} />
       <Card className={s.signInWrapper}>
         <Typography className={s.signInTitle} variant={'large'}>
-          Sign in
+          Войти
         </Typography>
         <form className={s.signInForm} onSubmit={handleSubmit(onSubmit)}>
           <ControlledInput
             className={s.emailInput}
             control={control}
-            label={'Email'}
+            label={'Логин'}
             name={'email'}
-            placeholder={'Email'}
           />
           <ControlledInput
             className={s.passwordInput}
             control={control}
-            label={'Password'}
+            label={'Пароль'}
             name={'password'}
-            placeholder={'Password'}
             type={'password'}
           />
-          <ControlledCheckbox
-            className={s.checkbox}
-            control={control}
-            label={'remember Me'}
-            name={'rememberMe'}
-          />
-          <Typography
-            as={Link}
-            className={s.repairPassword}
-            to={'/forgot-password'}
-            variant={'body2'}
-          >
-            Forgot Password?
-          </Typography>
           <Button className={s.submitButton} type={'submit'}>
             Sign In
           </Button>

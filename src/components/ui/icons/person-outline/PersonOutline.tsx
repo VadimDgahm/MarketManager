@@ -5,15 +5,15 @@ import { IconProps } from '@/components/ui/icons/typeIcons'
 
 import s from '../Icons.module.scss'
 
-export const PersonOutline: FC<IconProps> = ({ color = '', version = 'dark', ...rest }) => {
+export const PersonOutline: FC<IconProps> = ({color = '', version = 'dark', ...rest }) => {
   return (
     <svg
       {...rest}
       className={`${s.svg} ${rest.className} `}
       fill={'none'}
-      height={'24'}
+      height={'16'}
       viewBox={'0 0 24 24'}
-      width={'24'}
+      width={'16'}
       xmlns={'http://www.w3.org/2000/svg'}
     >
       <path

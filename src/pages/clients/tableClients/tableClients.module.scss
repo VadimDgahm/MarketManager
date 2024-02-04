@@ -1,0 +1,7 @@
+.linkClient{
+  transition: 0.3s;
+  cursor: pointer;
+  &:hover{
+    color: var(--color-info-700)
+  }
+}

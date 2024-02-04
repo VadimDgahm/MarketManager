@@ -1,12 +1,11 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-const API_URL = "http://localhost:3000/";
+import { createApi} from "@reduxjs/toolkit/query/react";
+import {baseQueryWithReauth} from '@/services/base-query-with-reauth';
+
 
 export const baseApi = createApi({
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_URL,
-    // credentials: "include",
-  }),
+  baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
   reducerPath: "baseApi",
   tagTypes: ["Auth", "Clients"],
+
 });

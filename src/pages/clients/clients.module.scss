@@ -1,0 +1,21 @@
+.button{
+  display: flex;
+  justify-content: right;
+  margin-bottom: 10px;
+}
+.clientsContainer{
+  padding: 10px 50px;
+}
+.iconAdd{
+  margin-right: 10px;
+}
+.adress{
+  display: flex;
+}
+.inputAddress{
+  margin-right: 10px;
+}
+.title{
+  margin-bottom: 10px ;
+  color: var(--color-accent-500),
+}

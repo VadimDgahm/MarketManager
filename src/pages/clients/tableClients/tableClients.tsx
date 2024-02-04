@@ -1,10 +1,13 @@
 import { Table } from "@/components/ui/table/Table";
 import { CellVariant } from "@/components/ui/table/TableCellVariant/TableCellVariant";
-import { ControlClient } from "@/pages/clients/client/controlClient/controlClient";
-import { useFindClientsQuery } from "@/services/clients/clients.services";
+import {useFindClientsQuery, useRemoveClientByIdMutation} from '@/services/clients/clients.services';
 import { ClientType } from "@/services/clients/clientsServicesType";
 import {useNavigate} from 'react-router-dom';
-
+import s from './tableClients.module.scss'
+import {TrashIcon} from '@/components/ui/icons/trash/TrashIcon';
+import {TrashOutline} from '@/components/ui/icons/trash-outline/TrashOutline';
+import {DeleteModal} from '@/components/ui/delete-modal/deleteModal';
+import {useState} from 'react';
 export const TableClients = () => {
   return (
     <Table.Root>
@@ -24,6 +27,7 @@ const ContentTableHead = () => {
         <Table.Cell variant={"head"}>Источник</Table.Cell>
         <Table.Cell variant={"head"}>Дата последнего заказа</Table.Cell>
         <Table.Cell variant={"head"}>Примечания</Table.Cell>
+        <Table.Cell variant={"head"}></Table.Cell>
 
       </Table.Row>
     </Table.Head>
@@ -31,16 +35,26 @@ const ContentTableHead = () => {
 };
 
 const ContentTableBody = () => {
-  const { data } = useFindClientsQuery({});
+  const [isOpenModal,setIsOpenModal] = useState(false)
+  const { data,error } = useFindClientsQuery({});
+  const [removeClient] = useRemoveClientByIdMutation()
+
   const navigate = useNavigate()
+  if(error?.status === 403){
+    navigate('/activation')
+  }
   const clickHandlerCellName = (id: string) => {
     navigate(`/clients/${id}`)
+  }
+  const removeClientHandler = (id: string) => {
+    removeClient({id})
+    setIsOpenModal(false)
   }
   return (
     <Table.Body>
       {data?.map((client: ClientType) => (
         <Table.Row key={client.id}>
-          <Table.Cell onClick={() => clickHandlerCellName(client.id)}>{client.name}</Table.Cell>
+          <Table.Cell className={s.linkClient} onClick={() => clickHandlerCellName(client.id)}>{client.name}</Table.Cell>
           <Table.Cell>
             <CellVariant.Phones data={client.phones} />
           </Table.Cell>
@@ -51,6 +65,10 @@ const ContentTableBody = () => {
           <Table.Cell>{!client.dateLastOrder && "нет заказа"}</Table.Cell>
           <Table.Cell>
             {client.comments.length && client.comments[0]}
+          </Table.Cell>
+          <Table.Cell>
+           <CellVariant.EditAndTrash onClickTrash={() => setIsOpenModal(true)} onClickEdit={() => {}}/>
+            <DeleteModal title={'Удаление клиента'}  open={isOpenModal} setOpen={setIsOpenModal} name={client.name} removeHandler={() => removeClientHandler(client.id)}/>
           </Table.Cell>
         </Table.Row>
       ))}

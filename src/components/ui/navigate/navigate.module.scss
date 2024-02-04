@@ -1,9 +1,35 @@
 .navigate {
+  display: flex;
+  flex-direction: column;
   border-radius: 5px;
   width: 20%;
   margin-right: 10px;
   min-height: 100%;
   background-color: var(--color-dark-300);
 
-  padding: 10px;
+  padding: 15px;
+}
+.link{
+  text-decoration: none;
+
+}
+.icon{
+  margin-right: 5px;
+}
+.boxLink{
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--color-dark-500);
+  &:hover{
+    color: var(--color-info-100);
+    border-bottom: 1px solid var(--color-info-100);
+    svg path {
+      fill: var(--color-info-100);
+    }
+  }
+  transition: 0.3s;
+}
+.active{
+  color: red;
 }

@@ -1,0 +1,19 @@
+.tab{
+  margin-left: 10px;
+}
+.text{
+  margin-bottom: 5px;
+}
+.address{
+  margin-bottom: 10px;
+}
+.iconPlus{
+  margin-left: 5px;
+}
+.button{
+  &:hover{
+    svg path{
+      fill: var(--color-success-300)
+    }
+  }
+}

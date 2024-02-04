@@ -6,23 +6,21 @@ import s from './modalWithButton.module.scss'
 
 type ModalWithButtonProps = {
   className?: string
-  isSecondary?: boolean
   onClickPrimaryButton?: () => void
   onClickSecondaryButton?: () => void
-  secondaryTitle?: boolean
+  secondaryTitle?: string
   titleButton: string
 }
 const ModalWithButton: FC<ModalWithButtonProps> = ({
   className,
-  isSecondary = true,
   onClickPrimaryButton,
   onClickSecondaryButton,
-  secondaryTitle = 'Cancel',
+  secondaryTitle = 'Отмена',
   titleButton,
 }) => {
   return (
     <div className={`${s.content} ${className}`}>
-      {isSecondary && (
+      {secondaryTitle && (
         <div>
           <Button
             className={s.buttonSecondary}

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { ControlledInput } from '@/components/controlled/controlledInput/controlledInput'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
-import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -43,7 +42,6 @@ export const SingUpForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void 
 
   return (
     <>
-      <DevTool control={control} />
       <Card className={s.signUpWrapper}>
         <Typography className={s.signUpTitle} variant={'large'}>
           Sign Up
