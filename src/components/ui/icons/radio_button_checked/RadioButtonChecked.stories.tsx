@@ -1,26 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { RadioButtonCheckedIcon } from './RadioButtonCheckedIcon'
+import { RadioButtonCheckedIcon } from "./RadioButtonCheckedIcon";
 
 const meta = {
   argTypes: {
     version: {
-      control: { type: 'radio' },
-      options: ['dark', 'light'],
+      control: { type: "radio" },
+      options: ["dark", "light"],
     },
   },
   component: RadioButtonCheckedIcon,
-  tags: ['autodocs'],
-  title: 'Components/Icons',
-} satisfies Meta<typeof RadioButtonCheckedIcon>
+  tags: ["autodocs"],
+  title: "Components/Icons",
+} satisfies Meta<typeof RadioButtonCheckedIcon>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const RadioButtonChecked: Story = {
   args: {
-    color: '',
+    color: "",
 
-    onClick: () => alert('ку'),
+    onClick: () => alert("ку"),
   },
-}
+};

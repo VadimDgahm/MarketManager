@@ -22,7 +22,10 @@ export type ClientType = {
   id: string;
   name: string;
   phones: PhoneClient[];
-  source:string
+  source: string;
   status?: StatusClient;
 };
-export type CreateClientBody = Omit<ClientType, 'dateLastOrder' | 'id' | 'createdDate' | 'status'>
+export type CreateClientBody = Omit<
+  ClientType,
+  "createdDate" | "dateLastOrder" | "id" | "status"
+>;

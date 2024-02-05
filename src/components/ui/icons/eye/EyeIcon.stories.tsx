@@ -1,26 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { EyeIcon } from './EyeIcon'
+import { EyeIcon } from "./EyeIcon";
 
 const meta = {
   argTypes: {
     version: {
-      control: { type: 'radio' },
-      options: ['dark', 'light'],
+      control: { type: "radio" },
+      options: ["dark", "light"],
     },
   },
   component: EyeIcon,
-  tags: ['autodocs'],
-  title: 'Components/Icons',
-} satisfies Meta<typeof EyeIcon>
+  tags: ["autodocs"],
+  title: "Components/Icons",
+} satisfies Meta<typeof EyeIcon>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Eye2: Story = {
   args: {
-    color: '',
+    color: "",
 
-    onClick: () => alert('ку'),
+    onClick: () => alert("ку"),
   },
-}
+};

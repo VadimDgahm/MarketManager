@@ -1,21 +1,24 @@
-import { ElementRef, forwardRef, useId } from 'react'
+import { ElementRef, forwardRef, useId } from "react";
 
-import * as CheckboxRadix from '@radix-ui/react-checkbox'
+import * as CheckboxRadix from "@radix-ui/react-checkbox";
 
-import s from './checkbox.module.scss'
+import s from "./checkbox.module.scss";
 
-import Check from './check'
+import Check from "./check";
 
 export type CheckboxProps = {
-  checked?: boolean
-  className?: string
-  disabled?: boolean
-  label?: string
+  checked?: boolean;
+  className?: string;
+  disabled?: boolean;
+  label?: string;
   // onChange?: (checked: boolean) => void
-  onValueChange?: (checked: boolean) => void
-}
+  onValueChange?: (checked: boolean) => void;
+};
 
-export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, CheckboxProps>(
+export const Checkbox = forwardRef<
+  ElementRef<typeof CheckboxRadix.Root>,
+  CheckboxProps
+>(
   (
     {
       checked,
@@ -26,12 +29,12 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, Checkb
       // onChange,
       ...rest
     },
-    ref
+    ref,
   ) => {
-    const id = useId()
+    const id = useId();
 
     return (
-      <div className={`${s.container} ${className || ''}`}>
+      <div className={`${s.container} ${className || ""}`}>
         <div className={`${s.buttonContainer} ${disabled && s.disabled}`}>
           <CheckboxRadix.Root
             checked={checked}
@@ -43,7 +46,9 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, Checkb
             {...rest}
           >
             <CheckboxRadix.Indicator className={s.indicator}>
-              <Check color={`${disabled ? 'var(--color-dark-100)' : 'white'}`} />
+              <Check
+                color={`${disabled ? "var(--color-dark-100)" : "white"}`}
+              />
             </CheckboxRadix.Indicator>
           </CheckboxRadix.Root>
           <div className={s.back} />
@@ -52,8 +57,8 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, Checkb
           {label}
         </label>
       </div>
-    )
-  }
-)
+    );
+  },
+);
 
 /* замена в checkbox onChange на onValueChange*/

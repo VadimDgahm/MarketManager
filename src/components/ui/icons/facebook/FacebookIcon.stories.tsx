@@ -1,26 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { FacebookIcon } from './FacebookIcon'
+import { FacebookIcon } from "./FacebookIcon";
 
 const meta = {
   argTypes: {
     version: {
-      control: { type: 'radio' },
-      options: ['dark', 'light'],
+      control: { type: "radio" },
+      options: ["dark", "light"],
     },
   },
   component: FacebookIcon,
-  tags: ['autodocs'],
-  title: 'Components/Icons',
-} satisfies Meta<typeof FacebookIcon>
+  tags: ["autodocs"],
+  title: "Components/Icons",
+} satisfies Meta<typeof FacebookIcon>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Facebook: Story = {
   args: {
-    color: '',
+    color: "",
 
-    onClick: () => alert('ку'),
+    onClick: () => alert("ку"),
   },
-}
+};

@@ -1,19 +1,19 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from "@storybook/react";
 
-import NameEditor from './nameEditor'
+import NameEditor from "./nameEditor";
 
 const meta = {
   component: NameEditor,
-  tags: ['autodocs'],
-  title: 'Profile/NameEditor',
-} satisfies Meta<typeof NameEditor>
+  tags: ["autodocs"],
+  title: "Profile/NameEditor",
+} satisfies Meta<typeof NameEditor>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const DefaultNameEditor: Story = {
   args: {
-    name: 'name',
-    onSubmit: data => console.info(data),
+    name: "name",
+    onSubmit: (data) => console.info(data),
   },
-}
+};

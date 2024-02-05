@@ -1,26 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { MenuIcon } from './MenuIcon'
+import { MenuIcon } from "./MenuIcon";
 
 const meta = {
   argTypes: {
     version: {
-      control: { type: 'radio' },
-      options: ['dark', 'light'],
+      control: { type: "radio" },
+      options: ["dark", "light"],
     },
   },
   component: MenuIcon,
-  tags: ['autodocs'],
-  title: 'Components/Icons',
-} satisfies Meta<typeof MenuIcon>
+  tags: ["autodocs"],
+  title: "Components/Icons",
+} satisfies Meta<typeof MenuIcon>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Menu: Story = {
   args: {
-    color: '',
+    color: "",
 
-    onClick: () => alert('ку'),
+    onClick: () => alert("ку"),
   },
-}
+};

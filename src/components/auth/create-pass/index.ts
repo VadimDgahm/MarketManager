@@ -1,1 +1,1 @@
-export * from './create-pass'
+export * from "./create-pass";

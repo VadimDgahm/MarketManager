@@ -1,19 +1,19 @@
-.tab{
+.tab {
   margin-left: 10px;
 }
-.text{
+.text {
   margin-bottom: 5px;
 }
-.address{
+.address {
   margin-bottom: 10px;
 }
-.iconPlus{
+.iconPlus {
   margin-left: 5px;
 }
-.button{
-  &:hover{
-    svg path{
-      fill: var(--color-success-300)
+.button {
+  &:hover {
+    svg path {
+      fill: var(--color-success-300);
     }
   }
 }

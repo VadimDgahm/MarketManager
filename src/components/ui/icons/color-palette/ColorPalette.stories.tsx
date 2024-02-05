@@ -1,26 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { ColorPalette } from './ColorPalette'
+import { ColorPalette } from "./ColorPalette";
 
 const meta = {
   argTypes: {
     version: {
-      control: { type: 'radio' },
-      options: ['dark', 'light'],
+      control: { type: "radio" },
+      options: ["dark", "light"],
     },
   },
   component: ColorPalette,
-  tags: ['autodocs'],
-  title: 'Components/Icons',
-} satisfies Meta<typeof ColorPalette>
+  tags: ["autodocs"],
+  title: "Components/Icons",
+} satisfies Meta<typeof ColorPalette>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const ColorPaletteIcon: Story = {
   args: {
-    color: '',
+    color: "",
 
-    onClick: () => alert('ку'),
+    onClick: () => alert("ку"),
   },
-}
+};

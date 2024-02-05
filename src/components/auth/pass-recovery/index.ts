@@ -1,1 +1,1 @@
-export * from './pass-recovery'
+export * from "./pass-recovery";

@@ -1,14 +1,14 @@
-import { FC } from 'react'
+import { FC } from "react";
 
-import { Select } from '@/components/ui/select/select'
-import { Typography } from '@/components/ui/typography'
+import { Select } from "@/components/ui/select/select";
+import { Typography } from "@/components/ui/typography";
 
-import s from './PaginationControls.module.scss'
+import s from "./PaginationControls.module.scss";
 
 export type PaginationControlsProps = {
-  currentOptions: (number | string)[]
-  onChangePageSize: (pageSize: number | string) => void
-}
+  currentOptions: (number | string)[];
+  onChangePageSize: (pageSize: number | string) => void;
+};
 
 export const PaginationControls: FC<PaginationControlsProps> = ({
   currentOptions,
@@ -16,13 +16,17 @@ export const PaginationControls: FC<PaginationControlsProps> = ({
 }) => {
   return (
     <div className={s.boxSelector}>
-      <Typography className={s.text} variant={'body2'}>
+      <Typography className={s.text} variant={"body2"}>
         Показать
       </Typography>
-      <Select onValueChange={onChangePageSize} options={currentOptions} variant={'pagination'} />
-      <Typography className={s.text} variant={'body2'}>
+      <Select
+        onValueChange={onChangePageSize}
+        options={currentOptions}
+        variant={"pagination"}
+      />
+      <Typography className={s.text} variant={"body2"}>
         на странице
       </Typography>
     </div>
-  )
-}
+  );
+};

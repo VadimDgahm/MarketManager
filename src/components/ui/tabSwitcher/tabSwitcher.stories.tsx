@@ -1,49 +1,49 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-import { TabSwitcher } from '@/components/ui/tabSwitcher/tabSwitcher'
-import { Meta, StoryObj } from '@storybook/react'
+import { TabSwitcher } from "@/components/ui/tabSwitcher/tabSwitcher";
+import { Meta, StoryObj } from "@storybook/react";
 
 const collection = [
   {
-    location: 'left',
-    value: 'Switcher',
+    location: "left",
+    value: "Switcher",
   },
   {
-    location: 'center',
-    value: 'Switcher',
+    location: "center",
+    value: "Switcher",
   },
   {
-    location: 'right',
-    value: 'Switcher',
+    location: "right",
+    value: "Switcher",
   },
-]
+];
 
 const meta = {
   args: {
     valuesCollection: collection,
   },
   component: TabSwitcher,
-  tags: ['autodocs'],
-  title: 'Components/TabSwitcher',
-} satisfies Meta<typeof TabSwitcher>
+  tags: ["autodocs"],
+  title: "Components/TabSwitcher",
+} satisfies Meta<typeof TabSwitcher>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 type DefaultSwitcherArgs = {
-  disable: boolean
-  value: string
-  valuesCollection: { location: string; value: string }[]
-}
+  disable: boolean;
+  value: string;
+  valuesCollection: { location: string; value: string }[];
+};
 
-type DefaultSwitcherStory = StoryObj<DefaultSwitcherArgs>
+type DefaultSwitcherStory = StoryObj<DefaultSwitcherArgs>;
 
-export const DefaultSwitcher: DefaultSwitcherStory = args => {
-  const [value, setValue] = useState(args?.value || '')
+export const DefaultSwitcher: DefaultSwitcherStory = (args) => {
+  const [value, setValue] = useState(args?.value || "");
 
   const handleValueChange = (newValue: string) => {
-    setValue(newValue)
-  }
+    setValue(newValue);
+  };
 
   return (
     <TabSwitcher
@@ -52,18 +52,18 @@ export const DefaultSwitcher: DefaultSwitcherStory = args => {
       value={value}
       valuesCollection={args.valuesCollection}
     />
-  )
-}
+  );
+};
 
 DefaultSwitcher.args = {
   disable: false,
-  value: 'left',
+  value: "left",
   valuesCollection: collection,
-}
+};
 
 export const DisabledSwitcher: Story = {
   args: {
     disable: true,
-    value: 'left',
+    value: "left",
   },
-}
+};

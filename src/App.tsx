@@ -1,5 +1,6 @@
-import { Router } from "@/router";
 import { useEffect } from "react";
+
+import { Router } from "@/router";
 
 export function App() {
   return <Router />;

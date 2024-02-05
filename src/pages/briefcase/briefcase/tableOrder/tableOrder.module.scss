@@ -1,0 +1,30 @@
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.briefcase{
+  padding: 10px 20px;
+}
+
+.headerTitle{
+  width: 100%;
+  font-size: 30px;
+  border-bottom: 1px solid var(--color-dark-100) ;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+.table{
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.button{
+
+}
+.tableTextEmpty{
+padding: 100px;
+}

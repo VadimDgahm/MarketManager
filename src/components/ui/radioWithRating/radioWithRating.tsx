@@ -1,56 +1,60 @@
-import { useForm } from 'react-hook-form'
+import { useForm } from "react-hook-form";
 
-import { ControlledRadio } from '@/components/controlled/controlledRadio/controlledRadio'
-import { Button } from '@/components/ui/button'
-import { RadioValues } from '@/components/ui/radioGroup'
-import { Typography } from '@/components/ui/typography'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import { ControlledRadio } from "@/components/controlled/controlledRadio/controlledRadio";
+import { Button } from "@/components/ui/button";
+import { RadioValues } from "@/components/ui/radioGroup";
+import { Typography } from "@/components/ui/typography";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
-import s from './radioWithRating.module.scss'
+import s from "./radioWithRating.module.scss";
 
 const radioSchema = z.object({
   grade: z.string(),
-})
+});
 
-export type FormValues = z.infer<typeof radioSchema>
+export type FormValues = z.infer<typeof radioSchema>;
 
 const values: RadioValues[] = [
-  { grade: 1, value: 'Did not know' },
-  { grade: 2, value: 'Forgot' },
-  { grade: 3, value: 'A lot of though' },
+  { grade: 1, value: "Did not know" },
+  { grade: 2, value: "Forgot" },
+  { grade: 3, value: "A lot of though" },
   {
     grade: 4,
-    value: 'Confused',
+    value: "Confused",
   },
-  { grade: 5, value: 'Knew the answer' },
-]
+  { grade: 5, value: "Knew the answer" },
+];
 
-export const RadioWithRating = ({ onSubmit }: { onSubmit: (data: FormValues) => void }) => {
+export const RadioWithRating = ({
+  onSubmit,
+}: {
+  onSubmit: (data: FormValues) => void;
+}) => {
   const { control, handleSubmit, setValue, watch } = useForm<FormValues>({
     defaultValues: {
       grade: undefined,
     },
-    mode: 'onSubmit',
+    mode: "onSubmit",
     resolver: zodResolver(radioSchema),
-  })
+  });
 
   const handleFormSubmit = () => {
-    const selectedGrade = watch('grade')
-    const selectedValue = values.find(value => value.value === selectedGrade)
+    const selectedGrade = watch("grade");
+    const selectedValue = values.find((value) => value.value === selectedGrade);
 
     if (selectedValue) {
       const data: FormValues = {
         grade: selectedValue.grade.toString(),
-      }
+      };
 
-      onSubmit(data)
+      onSubmit(data);
     }
-  }
+  };
 
   return (
     <>
-      <Typography className={s.title} variant={'subtitle1'}>
+      <Typography className={s.title} variant={"subtitle1"}>
         Rate yourself:
       </Typography>
       <div className={s.radioForm}>
@@ -58,15 +62,15 @@ export const RadioWithRating = ({ onSubmit }: { onSubmit: (data: FormValues) => 
           <ControlledRadio
             className={s.radioGroupItems}
             control={control}
-            name={'grade'}
-            onValueChange={value => setValue('grade', value)}
+            name={"grade"}
+            onValueChange={(value) => setValue("grade", value)}
             options={values}
           />
-          <Button className={s.nextButton} type={'submit'}>
+          <Button className={s.nextButton} type={"submit"}>
             Next Question
           </Button>
         </form>
       </div>
     </>
-  )
-}
+  );
+};

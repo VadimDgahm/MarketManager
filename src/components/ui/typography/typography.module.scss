@@ -12,47 +12,91 @@
 }
 
 .body1 {
-  @include base-styles(var(--font-size-m), var(--line-height-m), var(--font-weight-regular));
+  @include base-styles(
+    var(--font-size-m),
+    var(--line-height-m),
+    var(--font-weight-regular)
+  );
 }
 
 .body2 {
-  @include base-styles(var(--font-size-s), var(--line-height-m), var(--font-weight-regular));
+  @include base-styles(
+    var(--font-size-s),
+    var(--line-height-m),
+    var(--font-weight-regular)
+  );
 }
 
 .large {
-  @include base-styles(var(--font-size-xxl), var(--line-height-l), var(--font-weight-bold));
+  @include base-styles(
+    var(--font-size-xxl),
+    var(--line-height-l),
+    var(--font-weight-bold)
+  );
 }
 
 .overline {
-  @include base-styles(var(--font-size-xs), var(--line-height-s), var(--font-weight-bold));
+  @include base-styles(
+    var(--font-size-xs),
+    var(--line-height-s),
+    var(--font-weight-bold)
+  );
 }
 
 .subtitle1 {
-  @include base-styles(var(--font-size-m), var(--line-height-m), var(--font-weight-bold));
+  @include base-styles(
+    var(--font-size-m),
+    var(--line-height-m),
+    var(--font-weight-bold)
+  );
 }
 
 .subtitle2 {
-  @include base-styles(var(--font-size-s), var(--line-height-m), var(--font-weight-bold));
+  @include base-styles(
+    var(--font-size-s),
+    var(--line-height-m),
+    var(--font-weight-bold)
+  );
 }
 
 .caption {
-  @include base-styles(var(--font-size-xs), var(--line-height-s), var(--font-weight-regular));
+  @include base-styles(
+    var(--font-size-xs),
+    var(--line-height-s),
+    var(--font-weight-regular)
+  );
 }
 
 .h1 {
-  @include base-styles(var(--font-size-xl), var(--line-height-l), var(--font-weight-bold));
+  @include base-styles(
+    var(--font-size-xl),
+    var(--line-height-l),
+    var(--font-weight-bold)
+  );
 }
 
 .h2 {
-  @include base-styles(var(--font-size-l), var(--line-height-m), var(--font-weight-bold));
+  @include base-styles(
+    var(--font-size-l),
+    var(--line-height-m),
+    var(--font-weight-bold)
+  );
 }
 
 .h3 {
-  @include base-styles(var(--font-size-m), var(--line-height-m), var(--font-weight-bold));
+  @include base-styles(
+    var(--font-size-m),
+    var(--line-height-m),
+    var(--font-weight-bold)
+  );
 }
 
 .link1 {
-  @include base-styles(var(--font-size-s), var(--line-height-m), var(--font-weight-regular));
+  @include base-styles(
+    var(--font-size-s),
+    var(--line-height-m),
+    var(--font-weight-regular)
+  );
 
   cursor: pointer;
   color: var(--color-info-500);
@@ -65,7 +109,11 @@
 }
 
 .link2 {
-  @include base-styles(var(--font-size-xs), var(--line-height-s), var(--font-weight-regular));
+  @include base-styles(
+    var(--font-size-xs),
+    var(--line-height-s),
+    var(--font-weight-regular)
+  );
 
   cursor: pointer;
   color: var(--color-info-500);

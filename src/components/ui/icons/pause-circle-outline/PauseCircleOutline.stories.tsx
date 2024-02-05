@@ -1,26 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { PauseCircleOutline } from './PauseCircleOutline'
+import { PauseCircleOutline } from "./PauseCircleOutline";
 // import { _ } from '@/components/ui/icons/home/HomeIcon.tsx'
 
 const meta = {
   argTypes: {
     version: {
-      control: { type: 'radio' },
-      options: ['dark', 'light'],
+      control: { type: "radio" },
+      options: ["dark", "light"],
     },
   },
   component: PauseCircleOutline,
-  tags: ['autodocs'],
-  title: 'Components/Icons',
-} satisfies Meta<typeof PauseCircleOutline>
+  tags: ["autodocs"],
+  title: "Components/Icons",
+} satisfies Meta<typeof PauseCircleOutline>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const PauseCircle1: Story = {
   args: {
-    color: '',
-    onClick: () => alert('ку'),
+    color: "",
+    onClick: () => alert("ку"),
   },
-}
+};

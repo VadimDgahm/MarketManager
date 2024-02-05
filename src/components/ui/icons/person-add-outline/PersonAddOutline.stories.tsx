@@ -1,26 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { PersonAddOutline } from './PersonAddOutline'
+import { PersonAddOutline } from "./PersonAddOutline";
 
 const meta = {
   argTypes: {
     version: {
-      control: { type: 'radio' },
-      options: ['dark', 'light'],
+      control: { type: "radio" },
+      options: ["dark", "light"],
     },
   },
   component: PersonAddOutline,
-  tags: ['autodocs'],
-  title: 'Components/Icons',
-} satisfies Meta<typeof PersonAddOutline>
+  tags: ["autodocs"],
+  title: "Components/Icons",
+} satisfies Meta<typeof PersonAddOutline>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const PersonAdd1: Story = {
   args: {
-    color: '',
+    color: "",
 
-    onClick: () => alert('ку'),
+    onClick: () => alert("ку"),
   },
-}
+};

@@ -1,26 +1,42 @@
-import {useState} from 'react';
-import {Typography} from '@/components/ui/typography';
-import {Input} from '@/components/ui/Input';
-import s from './editableText.module.scss'
-type EditableTextProps = {
-    text: string
-    onChange: ((newText: string) => void)
-    title?: string
-}
+import { useState } from "react";
 
-export const EditableText = ({text, onChange,title}: EditableTextProps) => {
-    const [isOpen, setIsOpen] = useState(false)
-    const [value, setValue] = useState(text)
-    const onChangeText = () => {
-        onChange(value)
-        setIsOpen(false)
-    }
-    return (
-        <div className={s.box}>
-            {title &&  <Typography className={s.title} variant={'body2'}>{title}:</Typography>}
-            {!isOpen
-                ? <Typography className={s.text} onDoubleClick={() => setIsOpen(true)}>{value}</Typography>
-                : <Input autoFocus onBlur={onChangeText} onValueChange={setValue} defaultValue={value}/>}
-        </div>
-    )
-}
+import { Input } from "@/components/ui/Input";
+import { Typography } from "@/components/ui/typography";
+
+import s from "./editableText.module.scss";
+type EditableTextProps = {
+  onChange: (newText: string) => void;
+  text: string;
+  title?: string;
+};
+
+export const EditableText = ({ onChange, text, title }: EditableTextProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [value, setValue] = useState(text);
+  const onChangeText = () => {
+    onChange(value);
+    setIsOpen(false);
+  };
+
+  return (
+    <div className={s.box}>
+      {title && (
+        <Typography className={s.title} variant={"body2"}>
+          {title}:
+        </Typography>
+      )}
+      {!isOpen ? (
+        <Typography className={s.text} onDoubleClick={() => setIsOpen(true)}>
+          {value}
+        </Typography>
+      ) : (
+        <Input
+          autoFocus
+          defaultValue={value}
+          onBlur={onChangeText}
+          onValueChange={setValue}
+        />
+      )}
+    </div>
+  );
+};

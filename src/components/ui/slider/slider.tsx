@@ -1,26 +1,26 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
 
-import { Typography } from '@/components/ui/typography'
-import * as SliderRadix from '@radix-ui/react-slider'
+import { Typography } from "@/components/ui/typography";
+import * as SliderRadix from "@radix-ui/react-slider";
 
-import s from './slider.module.scss'
+import s from "./slider.module.scss";
 
 export const Slider = forwardRef<
   ElementRef<typeof SliderRadix.Root>,
   ComponentPropsWithoutRef<typeof SliderRadix.Root> & {
-    maxValue: number
+    maxValue: number;
 
-    onSliderValuesChange: (values: number[]) => void
-    values: number[]
+    onSliderValuesChange: (values: number[]) => void;
+    values: number[];
   }
 >(({ maxValue, onSliderValuesChange, values, ...rest }, ref) => {
   const onValueChangeHandler = (numbers: number[]) => {
-    onSliderValuesChange(numbers)
-  }
+    onSliderValuesChange(numbers);
+  };
 
   return (
     <div className={s.SliderStyle}>
-      <Typography className={s.SliderNumbers} variant={'body1'}>
+      <Typography className={s.SliderNumbers} variant={"body1"}>
         {values[0]}
       </Typography>
       <SliderRadix.Root
@@ -40,9 +40,9 @@ export const Slider = forwardRef<
 
         <SliderRadix.Thumb className={s.SliderThumb} />
       </SliderRadix.Root>
-      <Typography className={s.SliderNumbers} variant={'body1'}>
+      <Typography className={s.SliderNumbers} variant={"body1"}>
         {values[1]}
       </Typography>
     </div>
-  )
-})
+  );
+});

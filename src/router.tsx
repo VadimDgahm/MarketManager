@@ -6,15 +6,18 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 
+import { Briefcases } from "@/pages/briefcase/briefcases";
 import { Client } from "@/pages/clients/client/client";
 import { Clients } from "@/pages/clients/clients";
 import { Layout } from "@/pages/layout/layout";
+
 import { Login } from "./pages/auth/login";
-import { useCheckAuthQuery } from "./services/auth/auth.services";
+import {Briefcase} from '@/pages/briefcase/briefcase/briefcase';
+import {Catalog} from '@/pages/catalog/catalog';
 
 const publicRoutes: RouteObject[] = [
   {
-    element: <Login/>,
+    element: <Login />,
     path: "/login",
   },
 ];
@@ -32,6 +35,18 @@ const privateRoutes: RouteObject[] = [
     element: <Client />,
     path: "/clients/:id",
   },
+  {
+    element: <Briefcases />,
+    path: "/briefcases",
+  },
+  {
+    element: <Briefcase />,
+    path: "/briefcases/:id",
+  },
+  {
+    element: <Catalog />,
+    path: "/catalog",
+  },
 ];
 
 const router = createBrowserRouter([
@@ -44,17 +59,15 @@ const router = createBrowserRouter([
     ],
     element: <Layout />,
   },
-  ...publicRoutes
+  ...publicRoutes,
 ]);
 
 export function useAuthenticationCheck() {
   // const {data,isError, isLoading} = useCheckAuthQuery()
-
   // return {data,isError,isLoading} ;
 }
 function PrivateRoutes() {
-
-  return false ?  <Navigate to={"/login"} /> : <Outlet />;
+  return false ? <Navigate to={"/login"} /> : <Outlet />;
 }
 
 export const Router = () => {

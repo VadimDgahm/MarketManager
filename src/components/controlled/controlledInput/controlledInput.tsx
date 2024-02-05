@@ -1,8 +1,13 @@
-import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
+import {
+  FieldValues,
+  UseControllerProps,
+  useController,
+} from "react-hook-form";
 
-import { Input, InputProps } from '@/components/ui/Input'
+import { Input, InputProps } from "@/components/ui/Input";
 
-export type ControlledInputProps<T extends FieldValues> = UseControllerProps<T> & InputProps
+export type ControlledInputProps<T extends FieldValues> =
+  UseControllerProps<T> & InputProps;
 
 export const ControlledInput = <T extends FieldValues>({
   control,
@@ -24,7 +29,7 @@ export const ControlledInput = <T extends FieldValues>({
     name,
     rules,
     shouldUnregister,
-  })
+  });
 
   return (
     <Input
@@ -37,5 +42,5 @@ export const ControlledInput = <T extends FieldValues>({
       ref={ref}
       value={value}
     />
-  )
-}
+  );
+};

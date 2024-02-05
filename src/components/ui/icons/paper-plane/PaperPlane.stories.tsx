@@ -1,26 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { PaperPlane } from './PaperPlane'
+import { PaperPlane } from "./PaperPlane";
 
 const meta = {
   argTypes: {
     version: {
-      control: { type: 'radio' },
-      options: ['dark', 'light'],
+      control: { type: "radio" },
+      options: ["dark", "light"],
     },
   },
   component: PaperPlane,
-  tags: ['autodocs'],
-  title: 'Components/Icons',
-} satisfies Meta<typeof PaperPlane>
+  tags: ["autodocs"],
+  title: "Components/Icons",
+} satisfies Meta<typeof PaperPlane>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const PaperPlaneIcon: Story = {
   args: {
-    color: '',
+    color: "",
 
-    onClick: () => alert('ку'),
+    onClick: () => alert("ку"),
   },
-}
+};

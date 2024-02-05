@@ -1,8 +1,13 @@
-import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
+import {
+  FieldValues,
+  UseControllerProps,
+  useController,
+} from "react-hook-form";
 
-import { RadioGroup, RadioGroupProps } from '@/components/ui/radioGroup'
+import { RadioGroup, RadioGroupProps } from "@/components/ui/radioGroup";
 
-export type CustomRadioGroupProps<T extends FieldValues> = UseControllerProps<T> & RadioGroupProps
+export type CustomRadioGroupProps<T extends FieldValues> =
+  UseControllerProps<T> & RadioGroupProps;
 
 export const ControlledRadio = <T extends FieldValues>({
   control,
@@ -25,18 +30,18 @@ export const ControlledRadio = <T extends FieldValues>({
     name,
     rules,
     shouldUnregister,
-  })
+  });
 
   return (
     <RadioGroup
       {...rest}
       disabled={disabled}
-      errorMessage={error?.message ? 'Please, choose a grade' : ''}
+      errorMessage={error?.message ? "Please, choose a grade" : ""}
       name={name}
       onValueChange={onChange}
       options={options}
       ref={ref}
       value={value}
     />
-  )
-}
+  );
+};

@@ -1,18 +1,18 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { useState } from 'react'
+import { useState } from "react";
 
-import { Slider } from '@/components/ui/slider/slider'
+import { Slider } from "@/components/ui/slider/slider";
 
 const meta = {
   argTypes: {},
   component: Slider,
-  tags: ['autodocs'],
-  title: 'Components/Slider',
-} satisfies Meta<typeof Slider>
+  tags: ["autodocs"],
+  title: "Components/Slider",
+} satisfies Meta<typeof Slider>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const SliderView: Story = {
   args: {
@@ -20,10 +20,10 @@ export const SliderView: Story = {
     values: [0, 15],
   },
   render: () => {
-    const [values, setValues] = useState({ max: 15, min: 0 })
+    const [values, setValues] = useState({ max: 15, min: 0 });
     const onChangeHandler = (newValues: number[]) => {
-      setValues({ max: newValues[1], min: newValues[0] })
-    }
+      setValues({ max: newValues[1], min: newValues[0] });
+    };
 
     return (
       <>
@@ -33,6 +33,6 @@ export const SliderView: Story = {
           values={[values.min, values.max]}
         />
       </>
-    )
+    );
   },
-}
+};

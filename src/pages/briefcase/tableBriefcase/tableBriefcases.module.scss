@@ -1,0 +1,10 @@
+.table{
+  width: 100%;
+}
+.linkBriefcase{
+  transition: .3s;
+  cursor: pointer;
+  &:hover{
+    color: var(--color-accent-100)
+  }
+}

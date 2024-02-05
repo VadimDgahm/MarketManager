@@ -1,26 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { CreditCardOutline } from './CreditCardOutline'
+import { CreditCardOutline } from "./CreditCardOutline";
 
 const meta = {
   argTypes: {
     version: {
-      control: { type: 'radio' },
-      options: ['dark', 'light'],
+      control: { type: "radio" },
+      options: ["dark", "light"],
     },
   },
   component: CreditCardOutline,
-  tags: ['autodocs'],
-  title: 'Components/Icons',
-} satisfies Meta<typeof CreditCardOutline>
+  tags: ["autodocs"],
+  title: "Components/Icons",
+} satisfies Meta<typeof CreditCardOutline>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const CreditCard1: Story = {
   args: {
-    color: '',
+    color: "",
 
-    onClick: () => alert('ку'),
+    onClick: () => alert("ку"),
   },
-}
+};

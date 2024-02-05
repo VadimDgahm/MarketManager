@@ -1,26 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { PersonRemove } from './PersonRemove'
+import { PersonRemove } from "./PersonRemove";
 
 const meta = {
   argTypes: {
     version: {
-      control: { type: 'radio' },
-      options: ['dark', 'light'],
+      control: { type: "radio" },
+      options: ["dark", "light"],
     },
   },
   component: PersonRemove,
-  tags: ['autodocs'],
-  title: 'Components/Icons',
-} satisfies Meta<typeof PersonRemove>
+  tags: ["autodocs"],
+  title: "Components/Icons",
+} satisfies Meta<typeof PersonRemove>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const PersonRemove2: Story = {
   args: {
-    color: '',
+    color: "",
 
-    onClick: () => alert('ку'),
+    onClick: () => alert("ку"),
   },
-}
+};

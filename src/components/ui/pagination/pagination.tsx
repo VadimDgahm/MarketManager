@@ -1,21 +1,21 @@
-import { FC } from 'react'
+import { FC } from "react";
 
-import { ArrowBack } from '@/components/ui/icons/arrow-back/ArrowBack'
-import { ArrowForward } from '@/components/ui/icons/arrow-forward/ArrowForward'
-import { PaginationControls } from '@/components/ui/pagination/PaginationControls/PaginationControls'
-import { usePagination } from '@/components/ui/pagination/usePagination'
+import { ArrowBack } from "@/components/ui/icons/arrow-back/ArrowBack";
+import { ArrowForward } from "@/components/ui/icons/arrow-forward/ArrowForward";
+import { PaginationControls } from "@/components/ui/pagination/PaginationControls/PaginationControls";
+import { usePagination } from "@/components/ui/pagination/usePagination";
 
-import s from './pagination.module.scss'
+import s from "./pagination.module.scss";
 
 export type PaginationProps = {
-  availablePageSizes: (number | string)[]
-  currentPage: number
-  onChangePageSize: (pageSize: number | string) => void
-  onPageChange: (page: number | string) => void
-  pageSize: number
-  siblingCount?: number
-  totalCount: number | undefined
-}
+  availablePageSizes: (number | string)[];
+  currentPage: number;
+  onChangePageSize: (pageSize: number | string) => void;
+  onPageChange: (page: number | string) => void;
+  pageSize: number;
+  siblingCount?: number;
+  totalCount: number | undefined;
+};
 
 export const Pagination: FC<PaginationProps> = ({
   availablePageSizes,
@@ -31,20 +31,22 @@ export const Pagination: FC<PaginationProps> = ({
     pageSize,
     siblingCount,
     totalCount,
-  })
+  });
 
   if (currentPage === 0 || (paginationRange && paginationRange.length < 2)) {
-    return null
+    return null;
   }
   const onNext = () => {
-    onPageChange(currentPage + 1)
-  }
+    onPageChange(currentPage + 1);
+  };
 
   const onPrevious = () => {
-    onPageChange(currentPage - 1)
-  }
-  const lastPage = paginationRange[paginationRange.length - 1]
-  const currentOptions = availablePageSizes.filter(el => totalCount / +el > 1)
+    onPageChange(currentPage - 1);
+  };
+  const lastPage = paginationRange[paginationRange.length - 1];
+  const currentOptions = availablePageSizes.filter(
+    (el) => totalCount / +el > 1,
+  );
 
   return (
     <div className={s.container}>
@@ -56,32 +58,39 @@ export const Pagination: FC<PaginationProps> = ({
           <ArrowBack />
         </li>
         {paginationRange.map((pageNumber, index) => {
-          if (pageNumber === '...') {
+          if (pageNumber === "...") {
             return (
               <li className={`${s.paginationItem} ${s.dots}`} key={index}>
                 &#8230;
               </li>
-            )
+            );
           }
 
           return (
             <li
-              className={`${s.paginationItem} ${pageNumber === currentPage && s.selected}`}
+              className={`${s.paginationItem} ${
+                pageNumber === currentPage && s.selected
+              }`}
               key={index}
               onClick={() => onPageChange(pageNumber)}
             >
               {pageNumber}
             </li>
-          )
+          );
         })}
         <li
-          className={`${s.paginationItem} ${currentPage === lastPage && s.disabled}`}
+          className={`${s.paginationItem} ${
+            currentPage === lastPage && s.disabled
+          }`}
           onClick={onNext}
         >
           <ArrowForward className={s.arrow} />
         </li>
       </ul>
-      <PaginationControls currentOptions={currentOptions} onChangePageSize={onChangePageSize} />
+      <PaginationControls
+        currentOptions={currentOptions}
+        onChangePageSize={onChangePageSize}
+      />
     </div>
-  )
-}
+  );
+};

@@ -1,5 +1,5 @@
-import s from './loader.module.scss'
+import s from "./loader.module.scss";
 
 export const Loader = () => {
-  return <div className={s.loader}></div>
-}
+  return <div className={s.loader}></div>;
+};

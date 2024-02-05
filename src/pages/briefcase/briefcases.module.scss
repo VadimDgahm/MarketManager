@@ -1,0 +1,16 @@
+.button {
+  margin-bottom: 10px;
+  color: var(--color-accent-100) ;
+  svg path {
+    fill: var(--color-accent-100)
+  }
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.briefcase {
+  display: flex;
+  flex-direction: column;
+}

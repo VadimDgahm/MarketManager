@@ -1,26 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { ImageOutline } from './ImageOutline'
+import { ImageOutline } from "./ImageOutline";
 
 const meta = {
   argTypes: {
     version: {
-      control: { type: 'radio' },
-      options: ['dark', 'light'],
+      control: { type: "radio" },
+      options: ["dark", "light"],
     },
   },
   component: ImageOutline,
-  tags: ['autodocs'],
-  title: 'Components/Icons',
-} satisfies Meta<typeof ImageOutline>
+  tags: ["autodocs"],
+  title: "Components/Icons",
+} satisfies Meta<typeof ImageOutline>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Image1: Story = {
   args: {
-    color: '',
+    color: "",
 
-    onClick: () => alert('ку'),
+    onClick: () => alert("ку"),
   },
-}
+};
