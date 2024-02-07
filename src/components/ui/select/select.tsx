@@ -10,7 +10,7 @@ import s from "./select.module.scss";
 
 export type SelectorPropsType = {
   className?: string;
-  options: (number | string)[];
+  options: (number | string)[] | { id: string; value: string }[];
   title?: string;
   variant?: "default" | "pagination";
 } & SelectRadix.SelectProps;
@@ -19,8 +19,14 @@ export const Select = forwardRef<
   SelectorPropsType
 >(({ className, options, title, variant = "default", ...rest }, ref) => {
   const optionsItem = options.map((op, i) => (
-    <SelectRadix.Item className={s.SelectItem} key={i} value={op.toString()}>
-      <SelectRadix.ItemText>{op}</SelectRadix.ItemText>
+    <SelectRadix.Item
+      className={s.SelectItem}
+      key={i}
+      value={op.id ? op.id : op.toString()}
+    >
+      <SelectRadix.ItemText>
+        {op.value ? op.value : op.toString()}
+      </SelectRadix.ItemText>
     </SelectRadix.Item>
   ));
 
@@ -32,11 +38,11 @@ export const Select = forwardRef<
         </Typography>
       )}
       <SelectRadix.Root {...rest}>
-        <div className={`${s.back} ${className}`}>
+        <div className={`${s.back} `}>
           <SelectRadix.Trigger
-            className={`${s.SelectTrigger} ${
+            className={`${s.SelectTrigger}  ${
               variant === "pagination" && s.pagination
-            }`}
+            } ${className}`}
             ref={ref}
           >
             <SelectRadix.Value

@@ -5,7 +5,6 @@ import { Card } from "@/components/ui/card";
 import { PlusCircleOutline } from "@/components/ui/icons/plus-circle-outline/PlusCircleOutline";
 import { Typography } from "@/components/ui/typography";
 import { useGetClientByIdQuery } from "@/services/clients/clients.services";
-import { ClientType } from "@/services/clients/clientsServicesType";
 
 import s from "./client.module.scss";
 

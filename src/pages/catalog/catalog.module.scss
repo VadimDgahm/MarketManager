@@ -1,0 +1,54 @@
+
+.catalogContainer {
+  padding: 10px;
+}
+
+.cards {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 300px;
+  justify-content: space-between;
+  position: relative;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.removeIcon {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.titlePage {
+  margin-bottom: 30px;
+}
+
+.boxButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonAddProduct {
+  margin-bottom: 20px;
+}
+
+.nameProduct {
+  margin-bottom: 10px;
+  width: 80%;
+}
+
+.titleBox {
+  position: absolute;
+  right: -5px;
+  top: 5px;
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,21 @@
+
+.basket{
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+
+}
+.titleBasket{
+  display: flex;
+  margin: 10px 0;
+  align-items: center;
+}
+
+.basketIcon{
+  margin-right: 2px;
+}
+
+.tableProductsForClient{
+  width: 100%;
+}
+

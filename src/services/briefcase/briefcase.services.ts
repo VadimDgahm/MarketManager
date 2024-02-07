@@ -13,6 +13,16 @@ const briefcaseService = baseApi.injectEndpoints({
           };
         },
       }),
+      createOrderClient: builder.mutation<any, any>({
+        invalidatesTags: ["Briefcase"],
+        query: ({ body, id }) => {
+          return {
+            body,
+            method: "POST",
+            url: `briefcase/${id}`,
+          };
+        },
+      }),
       getBriefcase: builder.query<any, any>({
         providesTags: ["Briefcase"],
         query: () => {
@@ -22,7 +32,7 @@ const briefcaseService = baseApi.injectEndpoints({
         },
       }),
       getBriefcaseById: builder.query<any, any>({
-        query: ({id}) => {
+        query: ({ id }) => {
           return {
             url: `briefcase/${id}`,
           };
@@ -43,7 +53,8 @@ const briefcaseService = baseApi.injectEndpoints({
 
 export const {
   useCreateBriefcaseMutation,
+  useCreateOrderClientMutation,
+  useGetBriefcaseByIdQuery,
   useGetBriefcaseQuery,
   useRemoveBriefcaseMutation,
-    useGetBriefcaseByIdQuery
 } = briefcaseService;
