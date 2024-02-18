@@ -19,7 +19,7 @@ const passwordSchema = z
 const loginSchema = z
   .object({
     confirm: passwordSchema.min(1, "Confirm your password"),
-    email: z.string().email({ message: "Invalid email address" }),
+    email: z.string(),
     password: passwordSchema,
   })
   .refine(

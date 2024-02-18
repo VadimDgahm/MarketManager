@@ -26,7 +26,6 @@ export const Briefcase = () => {
     return <div>isLoading</div>;
   }
   const createOrder = (body: OrderClientType) => {
-    debugger;
     createOrderForClient({ body, id: params.id });
   };
 

@@ -6,19 +6,26 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 
+import { Activation } from "@/pages/activation/activation";
+import { Briefcase } from "@/pages/briefcase/briefcase/briefcase";
 import { Briefcases } from "@/pages/briefcase/briefcases";
+import { Catalog } from "@/pages/catalog/catalog";
 import { Client } from "@/pages/clients/client/client";
 import { Clients } from "@/pages/clients/clients";
 import { Layout } from "@/pages/layout/layout";
+import { Purchase } from "@/pages/purchases/purchase/purchase";
+import { Purchases } from "@/pages/purchases/purchases";
 
 import { Login } from "./pages/auth/login";
-import {Briefcase} from '@/pages/briefcase/briefcase/briefcase';
-import {Catalog} from '@/pages/catalog/catalog';
 
 const publicRoutes: RouteObject[] = [
   {
     element: <Login />,
     path: "/login",
+  },
+  {
+    element: <Activation />,
+    path: "/activation",
   },
 ];
 
@@ -30,6 +37,14 @@ const privateRoutes: RouteObject[] = [
   {
     element: <Clients />,
     path: "/clients",
+  },
+  {
+    element: <Purchases />,
+    path: "/purchases",
+  },
+  {
+    element: <Purchase />,
+    path: "/purchases/:id",
   },
   {
     element: <Client />,

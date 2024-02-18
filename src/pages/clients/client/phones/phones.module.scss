@@ -1,0 +1,41 @@
+.boxTel {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.tab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-info-700);
+  margin-bottom: 10px;
+}
+.text {
+  margin-bottom: 10px;
+}
+.address {
+  margin-bottom: 10px;
+}
+.iconPlus {
+  margin-left: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  svg path {
+    fill: var(--color-accent-300);
+  }
+  &:hover {
+    svg path {
+      fill: var(--color-success-300);
+    }
+  }
+}
+.iconTrash {
+  margin-left: 10px;
+  cursor: pointer;
+  &:hover {
+    path {
+      fill: var(--color-danger-300);
+    }
+  }
+}

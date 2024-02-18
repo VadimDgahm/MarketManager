@@ -5,14 +5,8 @@ import { ChoiceClientComponent } from "@/pages/briefcase/briefcase/choiceClient/
 import { BasketClient } from "@/pages/briefcase/briefcase/modalCreateOrder/basket/basket";
 import { FormOrderClient } from "@/pages/briefcase/briefcase/modalCreateOrder/formOrderClient/formOrderClient";
 import { useCreateOrder } from "@/pages/briefcase/briefcase/modalCreateOrder/useCreateOrder";
+import { OrderType } from "@/services/briefcase/briefcase.type";
 
-export type OrderType = {
-  comments: string;
-  name: string;
-  positionId: string;
-  price: string;
-  quantity: string;
-};
 export type OrderClientType = {
   idClient: string;
   orders: OrderType[];

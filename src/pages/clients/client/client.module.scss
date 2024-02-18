@@ -1,19 +1,19 @@
-.tab {
-  margin-left: 10px;
-}
 .text {
-  margin-bottom: 5px;
+  margin: 10px 0;
 }
-.address {
-  margin-bottom: 10px;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.iconPlus {
-  margin-left: 5px;
+.card {
+  display: flex;
+  justify-content: center;
 }
-.button {
-  &:hover {
-    svg path {
-      fill: var(--color-success-300);
-    }
-  }
+.content {
+  margin-top: 50px;
+}
+.date {
+  color: var(--color-dark-100);
 }

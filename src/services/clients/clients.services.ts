@@ -1,6 +1,8 @@
 import { baseApi } from "@/services/base-api";
-import { ClientType } from "@/services/clients/clientsServicesType";
-import { a } from "@storybook/addon-links/dist/index.d-3adcfc00";
+import {
+  ClientType,
+  ClientTypeFilter,
+} from "@/services/clients/clientsServicesType";
 
 const clientsServices = baseApi.injectEndpoints({
   endpoints: (builder) => {
@@ -40,14 +42,27 @@ const clientsServices = baseApi.injectEndpoints({
           };
         },
       }),
+      updateClient: builder.mutation<
+        any,
+        { filter: ClientTypeFilter; id: string }
+      >({
+        invalidatesTags: ["Clients"],
+        query: ({ filter, id }) => {
+          return {
+            body: filter,
+            method: "PUT",
+            url: `clients/${id}`,
+          };
+        },
+      }),
     };
   },
 });
 
 export const {
-  enhanceEndpoints,
   useCreateClientMutation,
   useFindClientsQuery,
   useGetClientByIdQuery,
   useRemoveClientByIdMutation,
+  useUpdateClientMutation,
 } = clientsServices;

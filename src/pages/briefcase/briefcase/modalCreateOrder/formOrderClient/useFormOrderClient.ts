@@ -33,6 +33,7 @@ export const useFormOrderClient = ({
         positionId: uuidv4(),
         price: product.price,
         quantity: `${valueWeightInput}${valueWeightSelect}`,
+        reductionName: product.reductionName,
       };
 
       setComments("");

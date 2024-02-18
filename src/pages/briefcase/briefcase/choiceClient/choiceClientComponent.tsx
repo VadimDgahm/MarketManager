@@ -57,7 +57,7 @@ export const ChoiceClientComponent = ({
                   key={el.id}
                   name={el.name}
                   onClick={() => choiceClient(el)}
-                  phone={el.phones[0].tel}
+                  phone={el.phones[0]?.tel}
                 />
               );
             })

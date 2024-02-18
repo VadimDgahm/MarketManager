@@ -6,11 +6,13 @@ import { ControlledRadio } from "@/components/controlled/controlledRadio/control
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ChickenIcon } from "@/components/ui/icons/chiken/chicken";
+import { Pig } from "@/components/ui/icons/pig/pig";
 import { TrashOutline } from "@/components/ui/icons/trash-outline/TrashOutline";
 import Modal from "@/components/ui/modal/modal";
 import ModalWithButton from "@/components/ui/modal/modalWithButton/modalWithButton";
 import ModalWithContent from "@/components/ui/modal/modalWithContent/modalWithContent";
 import { Typography } from "@/components/ui/typography";
+import { ChangeStatus } from "@/pages/clients/client/controlClient/controlClient";
 import {
   useCreateProductMutation,
   useGetCatalogQuery,
@@ -29,6 +31,7 @@ export const Catalog = () => {
   if (isLoading) {
     return <div>IsLoading</div>;
   }
+  console.log(data);
 
   return (
     <div className={s.catalogContainer}>
@@ -67,6 +70,7 @@ export const Catalog = () => {
                     width={34}
                   />
                 </div>
+                {el.view}
                 <Typography variant={"overline"}>Цена - {el.price}</Typography>
               </div>
             </Card>
@@ -86,6 +90,7 @@ const loginSchema = z.object({
     .min(3, "Минимум 3 символа")
     .max(3000, "Слишком большое название"),
   price: z.string().regex(/^\d+\.\d+$/, "Цена должна быть на примере - 11.0 "),
+  reductionName: z.string().optional(),
   type: z.string(),
 });
 
@@ -96,6 +101,7 @@ type ModalCreateProductProps = {
 type FormDataAddProduct = {
   name: string;
   price: string;
+  reductionName: string;
   type: "Готовый" | "Сырьевой";
 };
 const ModalCreateProduct = ({
@@ -103,18 +109,27 @@ const ModalCreateProduct = ({
   onOpenWindow,
 }: ModalCreateProductProps) => {
   const [createProduct] = useCreateProductMutation();
+  const [viewProduct, setViewProduct] = useState<string | undefined>("Птица");
   const { control, handleSubmit, reset } = useForm<FormDataAddProduct>({
     defaultValues: {
       name: "",
       price: "",
+      reductionName: "",
       type: "Сырьевой",
     },
     mode: "onSubmit",
     resolver: zodResolver(loginSchema),
   });
   const onSubmitHandler = async (dateForm: FormDataAddProduct) => {
-    createProduct(dateForm);
-    console.log(dateForm);
+    const body = {
+      view: viewProduct,
+      ...dateForm,
+    };
+
+    if (!dateForm.reductionName) {
+      body.reductionName = dateForm.name;
+    }
+    createProduct(body);
     reset();
     onOpenWindow(false);
   };
@@ -132,9 +147,16 @@ const ModalCreateProduct = ({
           <ControlledInput
             className={s.input}
             control={control}
+            label={"Сокращение"}
+            name={"reductionName"}
+          />
+          <ControlledInput
+            className={s.input}
+            control={control}
             label={"Цена"}
             name={"price"}
           />
+
           <div>
             <Typography variant={"body2"}>Тип продукта: </Typography>
             <ControlledRadio
@@ -147,6 +169,15 @@ const ModalCreateProduct = ({
             />
           </div>
         </ModalWithContent>
+        <ChangeStatus
+          changeStatus={(value) => setViewProduct(value)}
+          collection={[
+            { location: "0", value: "Говядина" },
+            { location: "1", value: "Свинина" },
+            { location: "2", value: "Птица" },
+          ]}
+          status={viewProduct}
+        />
         <ModalWithButton
           onClickSecondaryButton={() => onOpenWindow(false)}
           secondaryTitle={"Отменить"}

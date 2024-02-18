@@ -138,22 +138,26 @@ type PhonesProps = {
 const Phones = ({ className, data, ...rest }: PhonesProps) => {
   const classNames = clsx(className, s.cell);
 
-  return (
-    <div className={classNames} {...rest}>
-      <div className={s.tel}>{data[0].tel}</div>
-      <div>
-        {data
-          .filter((el, i) => i !== 0)
-          .map((phone, i) => (
-            <PhoneWithModal
-              key={i}
-              name={phone.nameUserPhone}
-              tel={phone.tel}
-            />
-          ))}
+  if (data.length) {
+    return (
+      <div className={classNames} {...rest}>
+        <div className={s.tel}>{data[0].tel}</div>
+        <div>
+          {data
+            .filter((el, i) => i !== 0)
+            .map((phone, i) => (
+              <PhoneWithModal
+                key={i}
+                name={phone.nameUserPhone}
+                tel={phone.tel}
+              />
+            ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return <div>Нет телефонов</div>;
 };
 
 type PhoneWithModalType = {
@@ -178,13 +182,17 @@ type AddressesProps = {
 const Addresses = ({ className, data, ...rest }: AddressesProps) => {
   const classNames = clsx(className, s.cell);
 
-  const firstAddresses = data[0];
+  if (data.length) {
+    const firstAddresses = data[0];
 
-  return (
-    <div className={classNames} {...rest}>
-      <div>{`${firstAddresses.street} ${firstAddresses.numberStreet}`}</div>
-    </div>
-  );
+    return (
+      <div className={classNames} {...rest}>
+        <div>{`${firstAddresses.street} ${firstAddresses.numberStreet}`}</div>
+      </div>
+    );
+  }
+
+  return <div>Нет данных</div>;
 };
 
 export const CellVariant = {

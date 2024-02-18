@@ -12,6 +12,7 @@ import { TableClients } from "@/pages/clients/tableClients/tableClients";
 import { useCreateClientMutation } from "@/services/clients/clients.services";
 import { CreateClientBody } from "@/services/clients/clientsServicesType";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 
 import s from "./clients.module.scss";
@@ -113,22 +114,24 @@ const ModalCreateClient = ({
       source,
       street,
     } = dateForm;
+
     const body: CreateClientBody = {
       addresses: [
         {
-          buildingSection,
-          city,
-          code,
-          floor,
-          lobby,
-          numberApartment,
-          numberStreet,
-          street,
+          buildingSection: buildingSection && null,
+          city: city && null,
+          code: code && null,
+          floor: floor && null,
+          idAddress: uuidv4(),
+          lobby: lobby && null,
+          numberApartment: numberApartment && null,
+          numberStreet: numberStreet && null,
+          street: street && null,
         },
       ],
       comments: [comments],
       name,
-      phones: [{ nameUserPhone: "", tel: phone }],
+      phones: [{ idPhone: uuidv4(), nameUserPhone: "", tel: phone }],
       source: source,
     };
 

@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-import { ControlledCheckbox } from "@/components/controlled/controlledCheckbox/controlledCheckbox";
 import { ControlledInput } from "@/components/controlled/controlledInput/controlledInput";
 import { Card } from "@/components/ui/card";
 import { Typography } from "@/components/ui/typography";
@@ -13,7 +12,7 @@ import s from "./sign-in.module.scss";
 import { Button } from "../../ui/button";
 
 const loginSchema = z.object({
-  email: z.string().email({ message: "Invalid email address" }),
+  email: z.string(),
   password: z
     .string()
     .min(3, "Password has to be at least 3 characters long")

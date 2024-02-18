@@ -1,0 +1,25 @@
+.content {
+  width: 100%;
+}
+.table {
+  width: 100%;
+}
+.click {
+  text-align: center;
+  transition: 0.3s;
+}
+.clickCell {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+
+  &:hover {
+    .click {
+      color: var(--color-accent-700);
+    }
+  }
+}
+.cell {
+  text-align: center;
+}

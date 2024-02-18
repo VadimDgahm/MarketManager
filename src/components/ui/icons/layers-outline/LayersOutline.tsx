@@ -15,9 +15,9 @@ export const LayersOutline: FC<IconProps> = ({
       {...rest}
       className={`${s.svg} ${rest.className} `}
       fill={"none"}
-      height={"16"}
+      height={"18"}
       viewBox={"0 0 24 24"}
-      width={"16"}
+      width={"18"}
       xmlns={"http://www.w3.org/2000/svg"}
     >
       <path

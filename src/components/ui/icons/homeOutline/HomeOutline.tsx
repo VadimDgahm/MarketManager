@@ -6,11 +6,11 @@ import { IconProps } from "@/components/ui/icons/typeIcons";
 import s from "./homeOutline.module.scss";
 
 export const HomeOutline: FC<IconProps> = ({
+  className,
   color = "",
-    width = '16',
-    height = '16',
-className,
+  height = "18",
   version = "dark",
+  width = "18",
   ...rest
 }) => {
   return (

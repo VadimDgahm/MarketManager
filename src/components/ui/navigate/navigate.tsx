@@ -1,10 +1,13 @@
-import {ReactNode} from 'react';
-import {NavLink} from 'react-router-dom';
-import {LayersOutline} from '@/components/ui/icons/layers-outline/LayersOutline';
-import {PersonOutline} from '@/components/ui/icons/person-outline/PersonOutline';
+import { ReactNode } from "react";
+import { NavLink } from "react-router-dom";
 
-import s from './navigate.module.scss';
-import {HomeOutline} from '@/components/ui/icons/homeOutline/HomeOutline';
+import { HomeOutline } from "@/components/ui/icons/homeOutline/HomeOutline";
+import { LayersOutline } from "@/components/ui/icons/layers-outline/LayersOutline";
+import { PersonOutline } from "@/components/ui/icons/person-outline/PersonOutline";
+import { Portfile } from "@/components/ui/icons/portfile/portfile";
+import { PurchaseIcon } from "@/components/ui/icons/purchase/purchaseIcon";
+
+import s from "./navigate.module.scss";
 
 export const Navigate = () => {
   return (
@@ -14,20 +17,20 @@ export const Navigate = () => {
         name={"Клиенты"}
         url={"clients"}
       />
-        <IconLink
-            icon={<HomeOutline  className={s.icon} />}
-            name={"Каталог"}
-            url={"catalog"}
-        />
       <IconLink
-        icon={<LayersOutline className={s.icon} />}
-        name={"Списки портфелей"}
+        icon={<HomeOutline className={s.icon} />}
+        name={"Каталог"}
+        url={"catalog"}
+      />
+      <IconLink
+        icon={<Portfile className={s.icon} />}
+        name={"Портфели"}
         url={"briefcases"}
       />
       <IconLink
-        icon={<LayersOutline className={s.icon} />}
-        name={"Смета по продукции"}
-        url={"listOder"}
+        icon={<PurchaseIcon className={s.icon} />}
+        name={"Закупки"}
+        url={"purchases"}
       />
     </nav>
   );

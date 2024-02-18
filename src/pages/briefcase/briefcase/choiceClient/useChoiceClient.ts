@@ -8,6 +8,7 @@ type PropsType = {
 };
 export const useChoiceClient = ({ setClient }: PropsType) => {
   const { data } = useFindClientsQuery({});
+
   const [foundClients, setSearchClient] = useState([]);
   const [showTextNotFound, setShowTextNotFound] = useState(false);
   const [value, setValue] = useState("");
@@ -21,7 +22,8 @@ export const useChoiceClient = ({ setClient }: PropsType) => {
 
     if (value.trim()) {
       const clientsFound = data.filter(
-        (el: ClientType) => regex.test(el.name) || regex.test(el.phones[0].tel),
+        (el: ClientType) =>
+          regex.test(el.name) || regex.test(el.phones[0]?.tel),
       );
 
       setSearchClient(clientsFound);

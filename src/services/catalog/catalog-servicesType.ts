@@ -3,6 +3,7 @@ export type ProductTypeRequest = {
   price: string;
   type: "Готовый" | "Сырьевой";
   userId: string;
+  view: "Говядина" | "Птица" | "Свинина";
 };
 
 export type ProductType = {

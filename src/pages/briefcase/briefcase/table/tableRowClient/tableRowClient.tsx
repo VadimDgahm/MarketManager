@@ -15,7 +15,7 @@ export const TableRowClient = ({
   return (
     <div className={s.row}>
       <Typography variant={"body2"}>{name}</Typography>
-      <Typography variant={"body2"}>{phone}</Typography>
+      <Typography variant={"body2"}>{phone || "нет данных"}</Typography>
       <button className={s.btnСhooseClient} onClick={onClick}>
         <Typography variant={"caption"}>Выбрать</Typography>
       </button>

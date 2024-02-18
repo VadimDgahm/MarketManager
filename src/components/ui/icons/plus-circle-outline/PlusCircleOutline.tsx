@@ -7,17 +7,18 @@ import s from "../Icons.module.scss";
 
 export const PlusCircleOutline: FC<IconProps> = ({
   color = "",
+
   version = "dark",
   ...rest
 }) => {
   return (
     <svg
+      height={"16"}
+      width={"16"}
       {...rest}
       className={`${s.svg} ${rest.className} `}
       fill={"none"}
-      height={"16"}
       viewBox={"0 0 24 24"}
-      width={"16"}
       xmlns={"http://www.w3.org/2000/svg"}
     >
       <path

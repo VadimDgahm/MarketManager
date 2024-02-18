@@ -20,12 +20,13 @@ export const useCreateOrder = ({ onOpenWindow, setResult }: PropsType) => {
   const onSubmitHandler = () => {
     if (client) {
       const body = {
+        clientName: client.name,
         idClient: client.id,
         orders: arrProductsForClient,
       };
 
-      setArrProductsForClient([]);
       setResult(body);
+      setArrProductsForClient([]);
     }
     onOpenWindow(false);
   };

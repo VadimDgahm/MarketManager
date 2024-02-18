@@ -1,15 +1,28 @@
 import { useParams } from "react-router-dom";
 
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { PlusCircleOutline } from "@/components/ui/icons/plus-circle-outline/PlusCircleOutline";
 import { Typography } from "@/components/ui/typography";
-import { useGetClientByIdQuery } from "@/services/clients/clients.services";
+import { Addresses } from "@/pages/clients/client/addresses/addresses";
+import {
+  collectionSource,
+  collectionStatus,
+} from "@/pages/clients/client/collection";
+import {
+  ChangeInfoAboutClient,
+  ChangeStatus,
+} from "@/pages/clients/client/controlClient/controlClient";
+import { Phones } from "@/pages/clients/client/phones/phones";
+import { useClient } from "@/pages/clients/client/useClient";
+import {
+  useGetClientByIdQuery,
+  useUpdateClientMutation,
+} from "@/services/clients/clients.services";
+import { ClientTypeFilter } from "@/services/clients/clientsServicesType";
 
 import s from "./client.module.scss";
 
 export const Client = () => {
-  const param = useParams();
+  const { changeName, changeSource, changeStatus, param } = useClient();
   const { data, isLoading } = useGetClientByIdQuery({ id: param.id });
 
   if (isLoading) {
@@ -17,64 +30,41 @@ export const Client = () => {
   }
 
   return (
-    <div>
-      <Card>
-        <Typography className={s.text} variant={"h1"}>
-          Информация о клиенте
-        </Typography>
+    <div className={s.card}>
+      <Card className={s.content}>
+        <div className={s.header}>
+          <Typography className={s.text} variant={"h1"}>
+            Информация о клиенте
+          </Typography>
+          <Typography className={s.date} variant={"overline"}>
+            {data.createdDate}
+          </Typography>
+        </div>
+
+        <ChangeInfoAboutClient
+          changeValue={changeName}
+          title={"ФИО"}
+          value={data?.name}
+        />
+
+        <Addresses data={data.addresses} />
+        <Phones data={data.phones} />
         <Typography className={s.text} variant={"body1"}>
-          ФИО: {data?.name}
+          Пришел к нам: {data.dateLastOrder}
         </Typography>
-        <Typography className={s.text} variant={"body1"}>
-          Статус: {data.status}
-        </Typography>
-        <Typography className={s.text} variant={"body1"}>
-          Адресса:
-          <div className={s.address}>
-            {data.addresses.length &&
-              data.addresses.map((el, i) => (
-                <Typography className={s.tab} key={i} variant={"body1"}>
-                  {++i}. ул.{el.street} д.{el.numberStreet}{" "}
-                  {el.buildingSection && `корпус${el.buildingSection}`}, кв.
-                  {el.numberApartment}, под.{el.lobby}, этаж.{el.floor},{" "}
-                  {el.code && `код.${el.code}`}
-                </Typography>
-              ))}
-          </div>
-          <Button disabled variant={"secondary"}>
-            Добавить адрес <PlusCircleOutline className={s.iconPlus} />
-          </Button>
-        </Typography>
-        <Typography className={s.text} variant={"body1"}>
-          Источник: {data.source}
-        </Typography>
-        <Typography className={s.text} variant={"body1"}>
-          Телефоны:
-          <div>
-            {data.phones.length &&
-              data.phones.map((el, i) => (
-                <Typography className={s.tab} key={i} variant={"body1"}>
-                  {" "}
-                  {++i}. {el.tel}-{el.nameUserPhone}
-                </Typography>
-              ))}
-          </div>
-          <Button
-            className={s.button}
-            title={
-              "Возможность добавить номер телефона выйдет со след обновлением"
-            }
-            variant={"secondary"}
-          >
-            Номер телефона <PlusCircleOutline className={s.iconPlus} />
-          </Button>
-        </Typography>
+        <ChangeStatus
+          changeStatus={changeSource}
+          collection={collectionSource}
+          status={data?.source || "неопределен"}
+        />
         <Typography className={s.text} variant={"body1"}>
           Дата последнего заказа: {data.dateLastOrder}
         </Typography>
-        <Typography className={s.text} variant={"body1"}>
-          Дата создания клиента: {data.createdDate}
-        </Typography>
+        <ChangeStatus
+          changeStatus={changeStatus}
+          collection={collectionStatus}
+          status={data?.status}
+        />
       </Card>
     </div>
   );
