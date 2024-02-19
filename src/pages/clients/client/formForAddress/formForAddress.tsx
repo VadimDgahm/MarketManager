@@ -11,7 +11,7 @@ import { z } from "zod";
 import s from "./formForAddress.module.scss";
 
 type ModalCreateAddressProps = {
-  idClient: string;
+  idClient: string | undefined;
   isOpen: boolean;
   onOpenWindow: () => void;
 };

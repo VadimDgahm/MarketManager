@@ -2,7 +2,7 @@ import { Basket } from "@/components/ui/icons/basket/basket";
 import { TrashOutline } from "@/components/ui/icons/trash-outline/TrashOutline";
 import { Table } from "@/components/ui/table/Table";
 import { Typography } from "@/components/ui/typography";
-import { OrderType } from "@/pages/briefcase/briefcase/modalCreateOrder/modalCreateOrder";
+import { OrderType } from "@/services/briefcase/briefcase.type";
 
 import s from "./basket.module.scss";
 

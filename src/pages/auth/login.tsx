@@ -1,10 +1,8 @@
-import { useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { LoginForm } from "@/components/auth/sign-in";
 import { SingUpForm } from "@/components/auth/sign-up";
 import {
-  useCheckAuthQuery,
   useLoginMutation,
   useLogoutMutation,
   useRegistrationMutation,
@@ -20,31 +18,30 @@ export const Login = () => {
     try {
       const res = await login({ email, password });
 
+      // @ts-ignore
       if (res.data) {
-        localStorage.setItem("token", res.data?.accessToken);
+        // @ts-ignore
+        localStorage.setItem("token", res.data.accessToken);
         navigate("/");
       }
     } catch (e) {
+      // @ts-ignore
       console.log(e.response.data?.message);
     }
   };
   const onSubmitRegistration = async ({ email, password }: LoginData) => {
     try {
-      const res = await registration({ email, password });
-
-      localStorage.setItem("token", res.data?.accessToken);
-      console.log(res);
+      await registration({ email, password });
     } catch (e) {
+      // @ts-ignore
       console.log(e.response.data?.message);
     }
   };
   const onSubmitLOGOUT = async () => {
     try {
-      const res = await logout();
-
-      localStorage.setItem("token", "");
-      console.log(res);
+      await logout();
     } catch (e) {
+      // @ts-ignore
       console.log(e.response.data?.message);
     }
   };

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { Table } from "@/components/ui/table/Table";
@@ -6,13 +5,11 @@ import { Typography } from "@/components/ui/typography";
 import { useGetBriefcaseByIdQuery } from "@/services/briefcase/briefcase.services";
 import { BriefcaseOrder, OrderType } from "@/services/briefcase/briefcase.type";
 import { useGetCatalogQuery } from "@/services/catalog/catalog.services";
-import { ProductType } from "@/services/catalog/catalog-servicesType";
 
 export const Purchase = () => {
   const param = useParams();
   const { data: catalog, isLoading: loadingCatalog } = useGetCatalogQuery({});
   const { data, isLoading } = useGetBriefcaseByIdQuery({ id: param.id });
-  const [arrOrder, setArrOrder] = useState<OrderType[]>([]);
 
   if (isLoading || loadingCatalog) {
     return <div>Loading</div>;
@@ -25,14 +22,18 @@ export const Purchase = () => {
       <Table.Root>
         <Table.Head>
           <Table.Row>
-            {catalog.map((el) => (
-              <Table.Cell variant={"head"}>{el.name}</Table.Cell>
+            {catalog.map((el: any) => (
+              <Table.Cell key={el.id} variant={"head"}>
+                {el.name}
+              </Table.Cell>
             ))}
           </Table.Row>
         </Table.Head>
         <Table.Body>
-          {catalog.map((el) => (
-            <Table.Cell>{calculateTotalSum(el.name, order)}</Table.Cell>
+          {catalog.map((el: any) => (
+            <Table.Cell key={el.id}>
+              {calculateTotalSum(el.name, order)}
+            </Table.Cell>
           ))}
         </Table.Body>
       </Table.Root>
@@ -58,9 +59,11 @@ const calculateTotalSum = (nameProduct: string, orders: OrderType[]) => {
 
   needProductsArr.forEach((el) => {
     if (el.quantity !== null) {
+      // @ts-ignore
       if (el.quantity.match(regex)[0] === "шт.") {
         result.quantity = result.quantity + parseInt(el.quantity);
       }
+      // @ts-ignore
       if (el.quantity.match(regex)[0] === "кг.") {
         result.totalWeight = result.totalWeight + parseInt(el.quantity);
       }

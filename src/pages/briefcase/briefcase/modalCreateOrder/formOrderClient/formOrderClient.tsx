@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select/select";
 import { useFormOrderClient } from "@/pages/briefcase/briefcase/modalCreateOrder/formOrderClient/useFormOrderClient";
-import { OrderType } from "@/pages/briefcase/briefcase/modalCreateOrder/modalCreateOrder";
+import { OrderType } from "@/services/briefcase/briefcase.type";
 
 import s from "./formOrderClient.module.scss";
 
@@ -51,7 +51,10 @@ export const FormOrderClient = ({
           className={s.selectWeight}
           defaultValue={valueWeightSelect}
           onValueChange={(value) => setValueWeightSelect(value)}
-          options={["кг.", "шт."]}
+          options={[
+            { id: "кг", value: "кг." },
+            { id: "шт.", value: "шт." },
+          ]}
         />
       </div>
       <Input

@@ -1,6 +1,5 @@
+import { API_URL } from "@/services/base-query-with-reauth";
 import axios from "axios";
-
-import { API_URL } from "../base-api";
 
 const api = axios.create({
   baseURL: API_URL,

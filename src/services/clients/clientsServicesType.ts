@@ -1,4 +1,3 @@
-type StatusClient = "loyal" | "new" | "uncertain";
 export type PhoneClient = {
   idPhone: string;
   nameUserPhone: string;
@@ -25,7 +24,7 @@ export type ClientType = {
   name: string;
   phones: PhoneClient[];
   source: string;
-  status?: StatusClient;
+  status: string;
 };
 export type CreateClientBody = Omit<
   ClientType,

@@ -2,26 +2,9 @@ import { useState } from "react";
 
 import { Input } from "@/components/ui/Input";
 import { TabSwitcher, ValuesPosition } from "@/components/ui/tabSwitcher";
-import { CellVariant } from "@/components/ui/table/TableCellVariant/TableCellVariant";
 import { Typography } from "@/components/ui/typography";
-import { useRemoveClientByIdMutation } from "@/services/clients/clients.services";
 
 import s from "./controlClient.module.scss";
-type ControlClientProps = {
-  id: string;
-};
-export const ControlClient = ({ id }: ControlClientProps) => {
-  const [removeClient] = useRemoveClientByIdMutation();
-
-  return (
-    <>
-      <CellVariant.EditAndTrash
-        onClickEdit={() => {}}
-        onClickTrash={() => removeClient({ id })}
-      />
-    </>
-  );
-};
 
 type ChangeInfoAboutClientProps = {
   changeValue: (value: string | undefined) => void;
@@ -62,7 +45,7 @@ export const ChangeInfoAboutClient = ({
 };
 
 type ChangeStatusProps = {
-  changeStatus: (value: string | undefined) => void;
+  changeStatus: (value: string) => void;
   collection: ValuesPosition[];
   status: string | undefined;
 };
@@ -72,13 +55,19 @@ export const ChangeStatus = ({
   status,
 }: ChangeStatusProps) => {
   const statusObj = collection.find((el) => el.value === status);
+  const [value, setValue] = useState("");
 
-  const [value, setValue] = useState(statusObj.location);
+  if (statusObj) {
+    setValue(statusObj.location);
+  }
+
   const onChangeStatus = (value: string) => {
     const obj = collection.find((el) => el.location === value);
 
-    changeStatus(obj.value);
-    setValue(value);
+    if (obj) {
+      changeStatus(obj.value);
+      setValue(value);
+    }
   };
 
   return (

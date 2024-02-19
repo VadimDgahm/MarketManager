@@ -54,7 +54,7 @@ const ContentTableBody = () => {
 
   return (
     <Table.Body>
-      {data?.map((briefcase: BriefcaseType, index) => (
+      {data?.map((briefcase: BriefcaseType, index: number) => (
         <Table.Row key={briefcase.id}>
           <Table.Cell
             className={s.linkBriefcase}

@@ -5,6 +5,7 @@ import { Typography } from "@/components/ui/typography";
 import { useGetBriefcaseQuery } from "@/services/briefcase/briefcase.services";
 
 import s from "./purchases.module.scss";
+
 export const Purchases = () => {
   const { data, isLoading } = useGetBriefcaseQuery({});
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export const Purchases = () => {
           </Table.Row>
         </Table.Head>
         <Table.Body>
-          {data.map((el) => (
+          {data.map((el: any) => (
             <Table.Row key={el.id}>
               <Table.Cell>{el.name}</Table.Cell>
               <Table.Cell className={s.cell}>{el.createdDate}</Table.Cell>

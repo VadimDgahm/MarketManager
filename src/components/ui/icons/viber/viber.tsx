@@ -1,9 +1,6 @@
 import { FC } from "react";
 
-import { determineVersion } from "@/components/ui/icons/settingsIcons";
 import { IconProps } from "@/components/ui/icons/typeIcons";
-
-import s from "../Icons.module.scss";
 
 export const Viber: FC<IconProps> = ({
   color = "",
@@ -14,6 +11,7 @@ export const Viber: FC<IconProps> = ({
 }) => {
   return (
     <svg
+      {...rest}
       fill={"none"}
       height={"21"}
       viewBox={"0 0 48 48"}

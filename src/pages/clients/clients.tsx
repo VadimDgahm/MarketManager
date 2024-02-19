@@ -27,7 +27,10 @@ export const Clients = () => {
           <PersonAddOutline className={s.iconAdd} />
           Создать клиента
         </Button>
-        <ModalCreateClient isOpen={isOpen} onOpenWindow={setOpen} />
+        <ModalCreateClient
+          isOpen={isOpen}
+          onOpenWindow={() => setOpen(false)}
+        />
       </div>
       <TableClients />
     </div>

@@ -1,9 +1,5 @@
 import { FC } from "react";
-
-import { determineVersion } from "@/components/ui/icons/settingsIcons";
 import { IconProps } from "@/components/ui/icons/typeIcons";
-
-import s from "../Icons.module.scss";
 
 export const ActivationIcon: FC<IconProps> = ({
   color = "",

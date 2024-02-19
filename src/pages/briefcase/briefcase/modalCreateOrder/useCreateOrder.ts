@@ -1,9 +1,7 @@
 import { useState } from "react";
 
-import {
-  OrderClientType,
-  OrderType,
-} from "@/pages/briefcase/briefcase/modalCreateOrder/modalCreateOrder";
+import { OrderClientType } from "@/pages/briefcase/briefcase/modalCreateOrder/modalCreateOrder";
+import { OrderType } from "@/services/briefcase/briefcase.type";
 import { ClientType } from "@/services/clients/clientsServicesType";
 
 type PropsType = {

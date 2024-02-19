@@ -6,7 +6,6 @@ import { ControlledRadio } from "@/components/controlled/controlledRadio/control
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ChickenIcon } from "@/components/ui/icons/chiken/chicken";
-import { Pig } from "@/components/ui/icons/pig/pig";
 import { TrashOutline } from "@/components/ui/icons/trash-outline/TrashOutline";
 import Modal from "@/components/ui/modal/modal";
 import ModalWithButton from "@/components/ui/modal/modalWithButton/modalWithButton";
@@ -31,7 +30,6 @@ export const Catalog = () => {
   if (isLoading) {
     return <div>IsLoading</div>;
   }
-  console.log(data);
 
   return (
     <div className={s.catalogContainer}>
@@ -50,7 +48,7 @@ export const Catalog = () => {
         </div>
         <div className={s.cards}>
           {!data.length && <div>Список пуст</div>}
-          {data.map((el) => (
+          {data.map((el: any) => (
             <Card className={s.card} key={el.id}>
               <Typography className={s.nameProduct} variant={"h2"}>
                 {el.name}

@@ -44,7 +44,7 @@ const clientsServices = baseApi.injectEndpoints({
       }),
       updateClient: builder.mutation<
         any,
-        { filter: ClientTypeFilter; id: string }
+        { filter: ClientTypeFilter; id: string | undefined }
       >({
         invalidatesTags: ["Clients"],
         query: ({ filter, id }) => {

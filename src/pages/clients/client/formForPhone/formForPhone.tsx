@@ -11,7 +11,7 @@ import { z } from "zod";
 import s from "./formForPhone.module.scss";
 
 type ModalCreatePhoneProps = {
-  idClient: string;
+  idClient: string | undefined;
   isOpen: boolean;
   onOpenWindow: () => void;
 };

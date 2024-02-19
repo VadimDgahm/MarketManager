@@ -10,8 +10,6 @@ import {
   SmailTrue,
 } from "@/components/ui/icons/smail/smail";
 import { Telegram } from "@/components/ui/icons/telegramm/telegram";
-import { TrashIcon } from "@/components/ui/icons/trash/TrashIcon";
-import { TrashOutline } from "@/components/ui/icons/trash-outline/TrashOutline";
 import { Viber } from "@/components/ui/icons/viber/viber";
 import { Table } from "@/components/ui/table/Table";
 import { CellVariant } from "@/components/ui/table/TableCellVariant/TableCellVariant";
@@ -56,6 +54,7 @@ const ContentTableBody = () => {
 
   const navigate = useNavigate();
 
+  // @ts-ignore
   if (error?.status === 403) {
     navigate("/activation");
   }

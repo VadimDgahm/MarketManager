@@ -5,21 +5,21 @@ import * as TabSwitcherRadix from "@radix-ui/react-toggle-group";
 
 import s from "./tabSwitcher.module.scss";
 
-type TabSwitcherProps = {
+type TabSwitcherProps<T> = {
   disable?: boolean;
   onValueChange: (value: string) => void;
   value: string;
-  valuesCollection: ValuesPosition[];
+  valuesCollection: ValuesPosition<T>[];
 };
 
-export type ValuesPosition = {
-  location: string;
-  value: string;
+export type ValuesPosition<T = string> = {
+  location: T;
+  value: T;
 };
 export const TabSwitcher = forwardRef<
   ElementRef<typeof TabSwitcherRadix.Root>,
-  TabSwitcherProps
->(({ disable, onValueChange, value, valuesCollection }, ref) => {
+  TabSwitcherProps<string>
+>(({ disable, onValueChange, value, valuesCollection }, _ref) => {
   return (
     <TabSwitcherRadix.Root
       className={s.toggleGroup}

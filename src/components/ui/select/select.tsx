@@ -10,7 +10,7 @@ import s from "./select.module.scss";
 
 export type SelectorPropsType = {
   className?: string;
-  options: (number | string)[] | { id: string; value: string }[];
+  options: { id: string; value: string }[];
   title?: string;
   variant?: "default" | "pagination";
 } & SelectRadix.SelectProps;
@@ -46,7 +46,7 @@ export const Select = forwardRef<
             ref={ref}
           >
             <SelectRadix.Value
-              placeholder={variant === "pagination" ? options[0] : ""}
+              placeholder={variant === "pagination" ? options[0].value : ""}
             />
             <SelectRadix.Icon>
               <ArrowDown className={s.icon} color={"white"} width={16} />

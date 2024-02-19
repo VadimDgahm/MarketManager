@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 
 import { HomeOutline } from "@/components/ui/icons/homeOutline/HomeOutline";
-import { LayersOutline } from "@/components/ui/icons/layers-outline/LayersOutline";
 import { PersonOutline } from "@/components/ui/icons/person-outline/PersonOutline";
 import { Portfile } from "@/components/ui/icons/portfile/portfile";
 import { PurchaseIcon } from "@/components/ui/icons/purchase/purchaseIcon";

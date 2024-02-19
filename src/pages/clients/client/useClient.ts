@@ -15,7 +15,7 @@ export const useClient = () => {
 
     updateDataClient({ filter, id: param.id });
   };
-  const changeStatus = (value: string | undefined) => {
+  const changeStatus = (value: string) => {
     const filter: ClientTypeFilter = {
       status: value,
     };

@@ -144,7 +144,9 @@ const Phones = ({ className, data, ...rest }: PhonesProps) => {
         <div className={s.tel}>{data[0].tel}</div>
         <div>
           {data
-            .filter((el, i) => i !== 0)
+            .filter((_, i) => {
+              return i !== 0;
+            })
             .map((phone, i) => (
               <PhoneWithModal
                 key={i}

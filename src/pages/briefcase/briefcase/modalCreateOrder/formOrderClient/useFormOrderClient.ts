@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { OrderType } from "@/pages/briefcase/briefcase/modalCreateOrder/modalCreateOrder";
+import { OrderType } from "@/services/briefcase/briefcase.type";
 import { useGetCatalogQuery } from "@/services/catalog/catalog.services";
 import { ProductType } from "@/services/catalog/catalog-servicesType";
 import { v4 as uuidv4 } from "uuid";
+
 type PropsType = {
   arrProductsForClient: OrderType[];
   setArrProductsForClient: (arr: OrderType[]) => void;
