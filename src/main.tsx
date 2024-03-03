@@ -13,3 +13,9 @@ createRoot(document.getElementById("root") as HTMLElement).render(
     <App />
   </Provider>,
 );
+
+const performanceTiming = window.performance.timing;
+const firstPaintTime =
+  performanceTiming.responseStart - performanceTiming.navigationStart;
+
+console.log("Время первой отрисовки: " + firstPaintTime + " мс");
