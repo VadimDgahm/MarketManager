@@ -4,7 +4,6 @@ import {
   RouteObject,
   RouterProvider,
   createBrowserRouter,
-  useNavigate,
 } from "react-router-dom";
 
 import { Activation } from "@/pages/activation/activation";
@@ -85,8 +84,7 @@ const router = createBrowserRouter([
 function PrivateRoutes() {
   const omg = useCheckAuthQuery();
   if (omg.isLoading) return <div>Loading</div>;
-  console.log(omg);
-  return omg.data.message === "Пользователь не авторизован" ? (
+  return omg.data?.message === "Пользователь не авторизован" ? (
     <Navigate to={"/login"} />
   ) : (
     <Outlet />
