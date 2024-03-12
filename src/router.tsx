@@ -16,7 +16,7 @@ import { Layout } from "@/pages/layout/layout";
 import { Purchase } from "@/pages/purchases/purchase/purchase";
 import { Purchases } from "@/pages/purchases/purchases";
 
-import { Login } from "./pages/auth/login";
+import { Login } from "@/pages/login/login";
 import { useCheckAuthQuery } from "@/services/auth/auth.services";
 
 const publicRoutes: RouteObject[] = [
