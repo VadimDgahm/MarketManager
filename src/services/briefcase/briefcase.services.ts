@@ -48,6 +48,15 @@ const briefcaseService = baseApi.injectEndpoints({
           };
         },
       }),
+      removeOrder: builder.mutation<any, any>({
+        invalidatesTags: ["Briefcase"],
+        query: ({ id, orderId }) => {
+          return {
+            method: "DELETE",
+            url: `briefcase/${id}/orders/${orderId}`,
+          };
+        },
+      }),
     };
   },
 });
@@ -58,4 +67,5 @@ export const {
   useGetBriefcaseByIdQuery,
   useGetBriefcaseQuery,
   useRemoveBriefcaseMutation,
+  useRemoveOrderMutation,
 } = briefcaseService;

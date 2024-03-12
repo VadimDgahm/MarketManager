@@ -53,7 +53,7 @@ export const Briefcase = () => {
               Таблица пуста
             </Typography>
           ) : (
-            <TableOrders orders={data.orders} />
+            <TableOrders orders={data.orders} idBriefcase={params.id} />
           )}
         </div>
       </div>

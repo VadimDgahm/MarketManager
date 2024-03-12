@@ -24,7 +24,7 @@ export const DeleteModal = ({
       <ModalWithButton
         onClickPrimaryButton={removeHandler}
         onClickSecondaryButton={() => setOpen(false)}
-        titleButton={"Удалить клиента"}
+        titleButton={title}
       />
     </Modal>
   );

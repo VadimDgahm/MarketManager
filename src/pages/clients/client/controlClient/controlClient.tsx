@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Input } from "@/components/ui/Input";
 import { TabSwitcher, ValuesPosition } from "@/components/ui/tabSwitcher";
@@ -57,9 +57,11 @@ export const ChangeStatus = ({
   const statusObj = collection.find((el) => el.value === status);
   const [value, setValue] = useState("");
 
-  if (statusObj) {
-    setValue(statusObj.location);
-  }
+  useEffect(()=>{
+    if (statusObj) {
+      setValue(statusObj.location);
+    }
+  },[])
 
   const onChangeStatus = (value: string) => {
     const obj = collection.find((el) => el.location === value);

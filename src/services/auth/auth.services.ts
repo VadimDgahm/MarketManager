@@ -5,10 +5,10 @@ import { AuthResponse, LoginData } from "./authServicesType";
 const authService = baseApi.injectEndpoints({
   endpoints: (builder) => {
     return {
-      checkAuth: builder.mutation<AuthResponse, void>({
+      checkAuth: builder.query<any, void>({
         query: () => {
           return {
-            url: "refresh",
+            url: "me",
           };
         },
       }),
@@ -42,5 +42,9 @@ const authService = baseApi.injectEndpoints({
   },
 });
 
-export const { useLoginMutation, useLogoutMutation, useRegistrationMutation } =
-  authService;
+export const {
+  useLoginMutation,
+  useLogoutMutation,
+  useRegistrationMutation,
+  useCheckAuthQuery,
+} = authService;

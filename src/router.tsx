@@ -17,6 +17,7 @@ import { Purchase } from "@/pages/purchases/purchase/purchase";
 import { Purchases } from "@/pages/purchases/purchases";
 
 import { Login } from "./pages/auth/login";
+import { useCheckAuthQuery } from "@/services/auth/auth.services";
 
 const publicRoutes: RouteObject[] = [
   {
@@ -77,12 +78,14 @@ const router = createBrowserRouter([
   ...publicRoutes,
 ]);
 
-export function useAuthenticationCheck() {
-  // const {data,isError, isLoading} = useCheckAuthQuery()
-  // return {data,isError,isLoading} ;
-}
 function PrivateRoutes() {
-  return false ? <Navigate to={"/login"} /> : <Outlet />;
+  const { isLoading, data } = useCheckAuthQuery();
+  if (isLoading) return <div>Loading</div>;
+  return data.message === "Пользователь не авторизован" ? (
+    <Navigate to={"/login"} />
+  ) : (
+    <Outlet />
+  );
 }
 
 export const Router = () => {

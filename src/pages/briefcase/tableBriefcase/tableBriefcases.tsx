@@ -77,7 +77,7 @@ const ContentTableBody = () => {
               }}
             />
             <DeleteModal
-              name={briefcase.name}
+              name={`портфель - ${briefcase.name}`}
               open={isOpenModal[index]}
               removeHandler={function () {
                 removeBriefcaseHandler(briefcase.id, index);
@@ -91,7 +91,7 @@ const ContentTableBody = () => {
                   return updatedModalState;
                 })
               }
-              title={"Удаление клиента"}
+              title={"Удалить портфель"}
             />
           </Table.Cell>
         </Table.Row>
