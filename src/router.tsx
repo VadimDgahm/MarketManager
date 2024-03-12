@@ -75,16 +75,13 @@ const router = createBrowserRouter([
     ],
     element: <Layout />,
   },
-  {
-    children: [...publicRoutes],
-    element: <Outlet />,
-  },
+  ...publicRoutes,
 ]);
 
 function PrivateRoutes() {
-  const omg = useCheckAuthQuery();
-  if (omg.isLoading) return <div>Loading</div>;
-  return omg.data?.message === "Пользователь не авторизован" ? (
+  const { data, isLoading } = useCheckAuthQuery();
+  if (isLoading) return <div>Loading</div>;
+  return data?.message === "Пользователь не авторизован" ? (
     <Navigate to={"/login"} />
   ) : (
     <Outlet />
