@@ -21,6 +21,10 @@ import { useCheckAuthQuery } from "@/services/auth/auth.services";
 
 const publicRoutes: RouteObject[] = [
   {
+    element: <Activation />,
+    path: "/activation",
+  },
+  {
     element: <Login />,
     path: "/login",
   },
@@ -58,10 +62,6 @@ const privateRoutes: RouteObject[] = [
   {
     element: <Catalog />,
     path: "/catalog",
-  },
-  {
-    element: <Activation />,
-    path: "/activation",
   },
 ];
 

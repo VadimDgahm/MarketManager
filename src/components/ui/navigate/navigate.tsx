@@ -40,7 +40,7 @@ type IconLink = {
   name: string;
   url: string;
 };
-const IconLink = ({ icon, name, url }: IconLink) => {
+export const IconLink = ({ icon, name, url }: IconLink) => {
   return (
     <div className={s.boxLink}>
       {icon}

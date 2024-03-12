@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import { ControlledInput } from "@/components/controlled/controlledInput/controlledInput";
 import { Card } from "@/components/ui/card";
@@ -38,6 +38,7 @@ export const LoginForm = ({
   return (
     <>
       <Card className={s.signInWrapper}>
+        <NavLink to={"/"}>Главная</NavLink>
         <Typography className={s.signInTitle} variant={"large"}>
           Войти
         </Typography>
