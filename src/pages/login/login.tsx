@@ -17,11 +17,8 @@ export const Login = () => {
   const onSubmitLogin = async ({ email, password }: LoginData) => {
     try {
       const res = await login({ email, password });
-
       // @ts-ignore
       if (res.data) {
-        // @ts-ignore
-        localStorage.setItem("token", res.data.accessToken);
         navigate("/");
       }
     } catch (e) {

@@ -15,7 +15,6 @@ export const Purchase = () => {
     return <div>Loading</div>;
   }
   const order = createPurchases(data.orders);
-
   return (
     <div>
       <Typography variant={"large"}>{data.name}</Typography>
@@ -60,11 +59,11 @@ const calculateTotalSum = (nameProduct: string, orders: OrderType[]) => {
   needProductsArr.forEach((el) => {
     if (el.quantity !== null) {
       // @ts-ignore
-      if (el.quantity.match(regex)[0] === "шт.") {
+      if (el.quantity.match(regex)[0] === "шт") {
         result.quantity = result.quantity + parseInt(el.quantity);
       }
       // @ts-ignore
-      if (el.quantity.match(regex)[0] === "кг.") {
+      if (el.quantity.match(regex)[0] === "кг") {
         result.totalWeight = result.totalWeight + parseInt(el.quantity);
       }
     }

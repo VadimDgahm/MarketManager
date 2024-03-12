@@ -4,6 +4,7 @@ import {
   RouteObject,
   RouterProvider,
   createBrowserRouter,
+  useNavigate,
 } from "react-router-dom";
 
 import { Activation } from "@/pages/activation/activation";
@@ -24,15 +25,11 @@ const publicRoutes: RouteObject[] = [
     element: <Login />,
     path: "/login",
   },
-  {
-    element: <Activation />,
-    path: "/activation",
-  },
 ];
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <div>private</div>,
+    element: <div>ГЛАВНАЯ</div>,
     path: "/",
   },
   {
@@ -63,6 +60,10 @@ const privateRoutes: RouteObject[] = [
     element: <Catalog />,
     path: "/catalog",
   },
+  {
+    element: <Activation />,
+    path: "/activation",
+  },
 ];
 
 const router = createBrowserRouter([
@@ -75,19 +76,22 @@ const router = createBrowserRouter([
     ],
     element: <Layout />,
   },
-  ...publicRoutes,
+  {
+    children: [...publicRoutes],
+    element: <Outlet />,
+  },
 ]);
 
 function PrivateRoutes() {
-  const { isLoading, data } = useCheckAuthQuery();
-  if (isLoading) return <div>Loading</div>;
-  return data.message === "Пользователь не авторизован" ? (
+  const omg = useCheckAuthQuery();
+  if (omg.isLoading) return <div>Loading</div>;
+  console.log(omg);
+  return omg.data.message === "Пользователь не авторизован" ? (
     <Navigate to={"/login"} />
   ) : (
     <Outlet />
   );
 }
-
 export const Router = () => {
   return <RouterProvider router={router} />;
 };
