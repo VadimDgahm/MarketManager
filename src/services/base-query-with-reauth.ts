@@ -32,10 +32,11 @@ export const baseQueryWithReauth: BaseQueryFn<
             url: "refresh",
           },
           api,
-          extraOptions,
+          extraOptions
         );
 
         if (refreshResult.data) {
+          debugger;
           result = await baseQuery(args, api, extraOptions);
         } else {
           window.location.href = "/login";
