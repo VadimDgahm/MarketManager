@@ -7,7 +7,7 @@ import type {
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { Mutex } from "async-mutex";
 
-export const API_URL = "https://api-market-manager.vercel.app/";
+export const API_URL = "http://localhost:5000/";
 const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,
@@ -38,7 +38,7 @@ export const baseQueryWithReauth: BaseQueryFn<
         if (refreshResult.data) {
           result = await baseQuery(args, api, extraOptions);
         } else {
-          window.location.href = "/login";
+          // window.location.href = "/login";
         }
       } finally {
         release();
