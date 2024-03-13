@@ -76,7 +76,6 @@ const router = createBrowserRouter([
   },
   {
     children: [...publicRoutes],
-    element: <Layout />,
   },
 ]);
 
