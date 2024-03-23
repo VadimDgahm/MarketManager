@@ -4,9 +4,6 @@ import { useForm } from "react-hook-form";
 import { ControlledInput } from "@/components/controlled/controlledInput/controlledInput";
 import { ControlledRadio } from "@/components/controlled/controlledRadio/controlledRadio";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { ChickenIcon } from "@/components/ui/icons/chiken/chicken";
-import { TrashOutline } from "@/components/ui/icons/trash-outline/TrashOutline";
 import Modal from "@/components/ui/modal/modal";
 import ModalWithButton from "@/components/ui/modal/modalWithButton/modalWithButton";
 import ModalWithContent from "@/components/ui/modal/modalWithContent/modalWithContent";
@@ -15,22 +12,21 @@ import { ChangeStatus } from "@/pages/clients/client/controlClient/controlClient
 import {
   useCreateProductMutation,
   useGetCatalogQuery,
-  useRemoveProductMutation,
 } from "@/services/catalog/catalog.services";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 import s from "./catalog.module.scss";
+import { CardProduct } from "@/pages/catalog/cardProduct/cardProduct";
+import { ProductType } from "@/services/catalog/catalog-servicesType";
 
 export const Catalog = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [removeProduct] = useRemoveProductMutation();
+  const [createProduct] = useCreateProductMutation();
   const { data, isLoading } = useGetCatalogQuery({});
-
   if (isLoading) {
     return <div>IsLoading</div>;
   }
-
   return (
     <div className={s.catalogContainer}>
       <Typography className={s.titlePage} variant={"large"}>
@@ -48,33 +44,15 @@ export const Catalog = () => {
         </div>
         <div className={s.cards}>
           {!data.length && <div>Список пуст</div>}
-          {data.map((el: any) => (
-            <Card className={s.card} key={el.id}>
-              <Typography className={s.nameProduct} variant={"h2"}>
-                {el.name}
-                <TrashOutline
-                  className={s.removeIcon}
-                  onClick={() => {
-                    removeProduct({ id: el.id });
-                  }}
-                />
-              </Typography>
-              <div>
-                <div className={s.titleBox}>
-                  <ChickenIcon
-                    className={s.icon}
-                    color={el.type === "Сырьевой" ? "#ffc0c0" : "#ff9200"}
-                    isReady={el.type !== "Сырьевой"}
-                    width={34}
-                  />
-                </div>
-                {el.view}
-                <Typography variant={"overline"}>Цена - {el.price}</Typography>
-              </div>
-            </Card>
+          {data.map((product: ProductType) => (
+            <CardProduct key={product.id} product={product} />
           ))}
         </div>
-        <ModalCreateProduct isOpen={isOpen} onOpenWindow={setIsOpen} />
+        <ModalProduct
+          resultFn={(body) => createProduct(body)}
+          isOpen={isOpen}
+          onOpenWindow={setIsOpen}
+        />
       </div>
     </div>
   );
@@ -82,7 +60,7 @@ export const Catalog = () => {
 
 ////////////////////////Модальное окно для создания продукта/////////////////////////////////
 
-const loginSchema = z.object({
+export const loginSchemaProduct = z.object({
   name: z
     .string()
     .min(3, "Минимум 3 символа")
@@ -92,33 +70,36 @@ const loginSchema = z.object({
   type: z.string(),
 });
 
-type ModalCreateProductProps = {
+export type ModalProductProps = {
   isOpen: boolean;
   onOpenWindow: (open: boolean) => void;
+  product?: ProductType;
+  resultFn: (body: any) => void;
 };
-type FormDataAddProduct = {
+export type FormDataProduct = {
   name: string;
   price: string;
   reductionName: string;
   type: "Готовый" | "Сырьевой";
 };
-const ModalCreateProduct = ({
+export const ModalProduct = ({
   isOpen,
   onOpenWindow,
-}: ModalCreateProductProps) => {
-  const [createProduct] = useCreateProductMutation();
+  product,
+  resultFn,
+}: ModalProductProps) => {
   const [viewProduct, setViewProduct] = useState<string | undefined>("Птица");
-  const { control, handleSubmit, reset } = useForm<FormDataAddProduct>({
+  const { control, handleSubmit, reset } = useForm<FormDataProduct>({
     defaultValues: {
-      name: "",
-      price: "",
-      reductionName: "",
-      type: "Сырьевой",
+      name: product?.name || "",
+      price: product?.price || "",
+      reductionName: product?.reductionName || "",
+      type: product?.type || "Сырьевой",
     },
     mode: "onSubmit",
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(loginSchemaProduct),
   });
-  const onSubmitHandler = async (dateForm: FormDataAddProduct) => {
+  const onSubmitHandler = async (dateForm: FormDataProduct) => {
     const body = {
       view: viewProduct,
       ...dateForm,
@@ -127,16 +108,21 @@ const ModalCreateProduct = ({
     if (!dateForm.reductionName) {
       body.reductionName = dateForm.name;
     }
-    createProduct(body);
-    reset();
+    resultFn(body);
     onOpenWindow(false);
+    reset(dateForm);
   };
 
   return (
-    <Modal onOpenChange={onOpenWindow} open={isOpen} title={"Создать продукт"}>
+    <Modal
+      onOpenChange={onOpenWindow}
+      open={isOpen}
+      title={product ? "Редактировать" : "Создать продукт"}
+    >
       <form onSubmit={handleSubmit(onSubmitHandler)}>
         <ModalWithContent>
           <ControlledInput
+            defaultValue={"jjjjjjjjjjj"}
             className={s.input}
             control={control}
             label={"Название"}
@@ -179,7 +165,7 @@ const ModalCreateProduct = ({
         <ModalWithButton
           onClickSecondaryButton={() => onOpenWindow(false)}
           secondaryTitle={"Отменить"}
-          titleButton={"Создать"}
+          titleButton={product ? "Изменить" : "Создать"}
         />
       </form>
     </Modal>

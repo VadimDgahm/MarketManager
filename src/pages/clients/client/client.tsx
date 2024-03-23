@@ -16,9 +16,9 @@ import { useGetClientByIdQuery } from "@/services/clients/clients.services";
 import s from "./client.module.scss";
 
 export const Client = () => {
-  const { changeName, changeSource, changeStatus, param } = useClient();
+  const { changeName, changeSource, changeStatus, param, changeComments } =
+    useClient();
   const { data, isLoading } = useGetClientByIdQuery({ id: param.id });
-
   if (isLoading || !data) {
     return <div>isLoading</div>;
   } else {
@@ -42,9 +42,6 @@ export const Client = () => {
 
           <Addresses data={data.addresses} />
           <Phones data={data.phones} />
-          <Typography className={s.text} variant={"body1"}>
-            Пришел к нам: {data.dateLastOrder}
-          </Typography>
           <ChangeStatus
             changeStatus={changeSource}
             collection={collectionSource}
@@ -57,6 +54,11 @@ export const Client = () => {
             changeStatus={changeStatus}
             collection={collectionStatus}
             status={data?.status}
+          />
+          <ChangeInfoAboutClient
+            value={data?.comments[0]}
+            changeValue={changeComments}
+            title={"Комментарии о клиенте"}
           />
         </Card>
       </div>

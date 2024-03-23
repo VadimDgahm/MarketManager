@@ -28,7 +28,7 @@ export type ClientType = {
 };
 export type CreateClientBody = Omit<
   ClientType,
-  "createdDate" | "dateLastOrder" | "id" | "status"
+  "createdDate" | "dateLastOrder" | "id" | "status" | "addresses" | "source"
 >;
 export type ClientTypeFilter = Partial<
   Pick<ClientType, "comments" | "name" | "source" | "status">

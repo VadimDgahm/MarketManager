@@ -51,7 +51,7 @@ export const Addresses = ({ data }: AddressesProps) => {
                     {buildingSection && `корпус${buildingSection},`}
                     {numberApartment && `кв.${numberApartment},`}
                     {lobby && `под.${lobby},`}
-                    {floor && `$этаж.{floor},`}
+                    {floor && `$этаж.${floor},`}
                     {code && `код.${code}`}
                   </Typography>
                   <TrashOutline

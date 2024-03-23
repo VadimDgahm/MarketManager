@@ -4,11 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { DeleteModal } from "@/components/ui/delete-modal/deleteModal";
 import { Instagram } from "@/components/ui/icons/instagram/instagram";
 import { Kufar } from "@/components/ui/icons/kufar/kufar";
-import {
-  SmailFalse,
-  SmailNew,
-  SmailTrue,
-} from "@/components/ui/icons/smail/smail";
 import { Telegram } from "@/components/ui/icons/telegramm/telegram";
 import { Viber } from "@/components/ui/icons/viber/viber";
 import { Table } from "@/components/ui/table/Table";
@@ -20,6 +15,8 @@ import {
 import { ClientType } from "@/services/clients/clientsServicesType";
 
 import s from "./tableClients.module.scss";
+import { TrashOutline } from "@/components/ui/icons/trash-outline/TrashOutline";
+import { Badge } from "@radix-ui/themes";
 
 export const TableClients = () => {
   return (
@@ -51,7 +48,7 @@ const ContentTableBody = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean[]>([]);
   const { data, error } = useFindClientsQuery({});
   const [removeClient] = useRemoveClientByIdMutation();
-
+  console.log(data);
   const navigate = useNavigate();
 
   // @ts-ignore
@@ -79,11 +76,12 @@ const ContentTableBody = () => {
           <Table.Cell>
             <div className={s.status}>
               {client.status === "постоянный" ? (
-                <SmailTrue color={"#4ca657"} />
-              ) : client.status === "новый" ? (
-                <SmailNew />
+                <Badge color={"green"}>постоянный</Badge>
+              ) : // <SmailTrue color={"#4ca657"} />
+              client.status === "новый" ? (
+                <Badge color={"orange"}>новый</Badge>
               ) : (
-                <SmailFalse color={"#db6363"} />
+                <Badge color={"red"}>непостоянный</Badge>
               )}
             </div>
           </Table.Cell>
@@ -113,9 +111,9 @@ const ContentTableBody = () => {
             {client.comments.length && client.comments[0]}
           </Table.Cell>
           <Table.Cell>
-            <CellVariant.EditAndTrash
-              onClickEdit={() => {}}
-              onClickTrash={() => {
+            <TrashOutline
+              className={s.removeIcon}
+              onClick={() => {
                 setIsOpenModal((prev) => {
                   const updatedModalState = [...prev];
 

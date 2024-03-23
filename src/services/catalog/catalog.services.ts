@@ -30,6 +30,16 @@ const catalogServices = baseApi.injectEndpoints({
           };
         },
       }),
+      changeProduct: builder.mutation<any, any>({
+        invalidatesTags: ["Catalog"],
+        query: ({ id, body }) => {
+          return {
+            body,
+            method: "PUT",
+            url: `catalog/${id}`,
+          };
+        },
+      }),
     };
   },
 });
@@ -38,4 +48,5 @@ export const {
   useCreateProductMutation,
   useGetCatalogQuery,
   useRemoveProductMutation,
+  useChangeProductMutation,
 } = catalogServices;

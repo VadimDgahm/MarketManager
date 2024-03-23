@@ -7,7 +7,6 @@ import { PersonAddOutline } from "@/components/ui/icons/person-add-outline/Perso
 import Modal from "@/components/ui/modal/modal";
 import ModalWithButton from "@/components/ui/modal/modalWithButton/modalWithButton";
 import ModalWithContent from "@/components/ui/modal/modalWithContent/modalWithContent";
-import { Typography } from "@/components/ui/typography";
 import { TableClients } from "@/pages/clients/tableClients/tableClients";
 import { useCreateClientMutation } from "@/services/clients/clients.services";
 import { CreateClientBody } from "@/services/clients/clientsServicesType";
@@ -58,24 +57,14 @@ type FormDataAddClient = {
 };
 
 const loginSchema = z.object({
-  buildingSection: z.string().optional(),
-  city: z.string().optional(),
-  code: z.string().optional(),
   comments: z.string().optional(),
-  floor: z.string().optional(),
-  lobby: z.string().optional(),
   name: z.string().min(3, "Минимум 3 символа").max(3000, "Слишком большое имя"),
-  numberApartment: z.string().optional(),
-  numberStreet: z.string(),
   phone: z
     .string()
     .regex(
       /^\+375\s?\(?17|25|29|33|44\)?\s?\d{3}-\d{2}-\d{2}$/,
-      "Неверный формат номера телефона Беларуси",
+      "Неверный формат номера телефона Беларуси"
     ),
-  source: z.string(),
-  statusAddress: z.string().optional(),
-  street: z.string(),
 });
 
 const ModalCreateClient = ({
@@ -85,57 +74,21 @@ const ModalCreateClient = ({
   const [createClient] = useCreateClientMutation();
   const { control, handleSubmit, reset } = useForm<FormDataAddClient>({
     defaultValues: {
-      buildingSection: "",
-      city: "",
-      code: "",
-      comments: "",
-      floor: "",
-      lobby: "",
       name: "",
-      numberApartment: "",
-      numberStreet: "",
       phone: "",
-      source: "",
-      statusAddress: "",
-      street: "",
+      comments: "",
     },
     mode: "onSubmit",
     resolver: zodResolver(loginSchema),
   });
   const onSubmitHandler = async (dateForm: FormDataAddClient) => {
-    const {
-      buildingSection,
-      city,
-      code,
-      comments,
-      floor,
-      lobby,
-      name,
-      numberApartment,
-      numberStreet,
-      phone,
-      source,
-      street,
-    } = dateForm;
-
+    const { comments, name, phone } = dateForm;
     const body: CreateClientBody = {
-      addresses: [
-        {
-          buildingSection: buildingSection && null,
-          city: city && null,
-          code: code && null,
-          floor: floor && null,
-          idAddress: uuidv4(),
-          lobby: lobby && null,
-          numberApartment: numberApartment && null,
-          numberStreet: numberStreet && null,
-          street: street && null,
-        },
-      ],
       comments: [comments],
       name,
-      phones: [{ idPhone: uuidv4(), nameUserPhone: "", tel: phone }],
-      source: source,
+      phones: [
+        { idPhone: uuidv4(), nameUserPhone: "Номер клиента", tel: phone },
+      ],
     };
 
     createClient(body);
@@ -153,87 +106,18 @@ const ModalCreateClient = ({
             label={"ФИО"}
             name={"name"}
           />
-          <Typography className={s.title} variant={"h3"}>
-            Адрес :
-          </Typography>
-          <div>
-            <div className={s.adress}>
-              <ControlledInput
-                className={s.inputAddress}
-                control={control}
-                label={"Город"}
-                name={"city"}
-              />
-              <ControlledInput
-                className={s.inputAddress}
-                control={control}
-                label={"Улица"}
-                name={"street"}
-              />
-              <ControlledInput
-                className={s.inputAddress}
-                control={control}
-                label={"№ Дом"}
-                name={"numberStreet"}
-                type={"number"}
-              />
-            </div>
-
-            <div className={s.adress}>
-              <ControlledInput
-                className={s.inputAddress}
-                control={control}
-                label={"№-кв"}
-                name={"numberApartment"}
-                type={"number"}
-              />
-              <ControlledInput
-                className={s.inputAddress}
-                control={control}
-                label={"Корпус"}
-                name={"buildingSection"}
-                type={"number"}
-              />
-              <ControlledInput
-                className={s.inputAddress}
-                control={control}
-                label={"Подъезд"}
-                name={"lobby"}
-                type={"number"}
-              />
-              <ControlledInput
-                className={s.inputAddress}
-                control={control}
-                label={"Этаж"}
-                name={"floor"}
-                type={"number"}
-              />
-              <ControlledInput
-                className={s.inputAddress}
-                control={control}
-                label={"Домофон"}
-                name={"code"}
-              />
-            </div>
-            <ControlledInput
-              className={s.inputAddress}
-              control={control}
-              label={"Источник"}
-              name={"source"}
-            />
-            <ControlledInput
-              className={s.inputAddress}
-              control={control}
-              label={"Телефон: пример - +375290000000"}
-              name={"phone"}
-            />
-            <ControlledInput
-              className={s.inputAddress}
-              control={control}
-              label={"Примечания"}
-              name={"comments"}
-            />
-          </div>
+          <ControlledInput
+            className={s.inputAddress}
+            control={control}
+            label={"Телефон: пример - +375290000000"}
+            name={"phone"}
+          />
+          <ControlledInput
+            className={s.inputAddress}
+            control={control}
+            label={"Примечания"}
+            name={"comments"}
+          />
         </ModalWithContent>
         <ModalWithButton
           onClickSecondaryButton={() => onOpenWindow()}

@@ -29,11 +29,21 @@ export const useClient = () => {
 
     updateDataClient({ filter, id: param.id });
   };
+  const changeComments = (value: string | undefined) => {
+    const filter: ClientTypeFilter = {};
+    if (value) {
+      filter.comments = [value];
+    } else {
+      filter.comments = [""];
+    }
+    updateDataClient({ filter, id: param.id });
+  };
 
   return {
     changeName,
     changeSource,
     changeStatus,
     param,
+    changeComments,
   };
 };

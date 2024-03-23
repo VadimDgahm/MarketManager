@@ -30,6 +30,7 @@ export const ChangeInfoAboutClient = ({
       </Typography>
       {isEditorOpen ? (
         <Input
+          placeholder={"Еще пока что нет коментариев"}
           autoFocus
           onBlur={saveChanged}
           onValueChange={(value) => setValueInput(value)}
@@ -37,7 +38,7 @@ export const ChangeInfoAboutClient = ({
         />
       ) : (
         <Typography onDoubleClick={() => setIsEditorOpen(true)}>
-          {value}
+          {value ? value : "Нет комментариев"}
         </Typography>
       )}
     </div>
@@ -57,11 +58,11 @@ export const ChangeStatus = ({
   const statusObj = collection.find((el) => el.value === status);
   const [value, setValue] = useState("");
 
-  useEffect(()=>{
+  useEffect(() => {
     if (statusObj) {
       setValue(statusObj.location);
     }
-  },[])
+  }, []);
 
   const onChangeStatus = (value: string) => {
     const obj = collection.find((el) => el.location === value);

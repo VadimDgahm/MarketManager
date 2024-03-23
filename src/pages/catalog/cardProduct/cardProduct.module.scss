@@ -1,0 +1,47 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 300px;
+  justify-content: space-between;
+  position: relative;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.removeIcon {
+  cursor: pointer;
+  margin-left: 5px;
+  &:hover {
+    path {
+      fill: var(--color-danger-500);
+    }
+  }
+}
+.contentProduct {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+.editIcon {
+  cursor: pointer;
+  margin-left: 5px;
+  &:hover {
+    path {
+      fill: var(--color-accent-700);
+    }
+  }
+}
+
+.nameProduct {
+  margin-bottom: 10px;
+  width: 80%;
+}
+
+.titleBox {
+  position: absolute;
+  right: -5px;
+  top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
