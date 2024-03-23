@@ -22,6 +22,7 @@ export const TabSwitcher = forwardRef<
 >(({ disable, onValueChange, value, valuesCollection }, _ref) => {
   return (
     <TabSwitcherRadix.Root
+      defaultValue={value}
       className={s.toggleGroup}
       onValueChange={(value) => {
         if (value) {

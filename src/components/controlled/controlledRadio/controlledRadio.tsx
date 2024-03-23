@@ -31,10 +31,10 @@ export const ControlledRadio = <T extends FieldValues>({
     rules,
     shouldUnregister,
   });
-
   return (
     <RadioGroup
       {...rest}
+      defaultValue={defaultValue}
       disabled={disabled}
       errorMessage={error?.message ? "Please, choose a grade" : ""}
       name={name}

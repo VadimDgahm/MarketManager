@@ -28,13 +28,10 @@
 
   width: 16px;
   height: 16px;
-
   background-color: var(--color-dark-900);
   border: 2px solid var(--color-accent-500);
   border-radius: 50%;
-
-  &:active::before,
-  &:focus::before {
+  &[data-state="checked"]::before {
     content: "";
 
     position: absolute;
@@ -46,6 +43,7 @@
     height: 8px;
 
     background-color: var(--color-accent-500);
+
     border-radius: 50%;
   }
 }
@@ -67,7 +65,6 @@
 }
 
 .RadioLabel {
-  //cursor: pointer;
   color: var(--color-light-100);
 }
 

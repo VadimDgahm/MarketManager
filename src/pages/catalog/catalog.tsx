@@ -88,7 +88,9 @@ export const ModalProduct = ({
   product,
   resultFn,
 }: ModalProductProps) => {
-  const [viewProduct, setViewProduct] = useState<string | undefined>("Птица");
+  const [viewProduct, setViewProduct] = useState<string | undefined>(
+    product?.view
+  );
   const { control, handleSubmit, reset } = useForm<FormDataProduct>({
     defaultValues: {
       name: product?.name || "",
@@ -110,7 +112,7 @@ export const ModalProduct = ({
     }
     resultFn(body);
     onOpenWindow(false);
-    reset(dateForm);
+    product ? reset(dateForm) : reset();
   };
 
   return (
@@ -144,6 +146,7 @@ export const ModalProduct = ({
           <div>
             <Typography variant={"body2"}>Тип продукта: </Typography>
             <ControlledRadio
+              defaultValue={product?.type || undefined}
               control={control}
               name={"type"}
               options={[

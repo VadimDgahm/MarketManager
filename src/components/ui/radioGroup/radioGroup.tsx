@@ -1,4 +1,9 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
+import {
+  ComponentPropsWithoutRef,
+  ElementRef,
+  forwardRef,
+  useState,
+} from "react";
 
 import { Typography, TypographyProps } from "@/components/ui/typography";
 import * as RadixRadioGroup from "@radix-ui/react-radio-group";
@@ -34,8 +39,9 @@ export const RadioGroup = forwardRef<
       value,
       ...rest
     },
-    ref,
+    ref
   ) => {
+    const [valueOption, setValue] = useState<string | undefined>(defaultValue);
     return (
       <div className={s.wrapper}>
         <RadixRadioGroup.Root
@@ -49,6 +55,8 @@ export const RadioGroup = forwardRef<
             return (
               <span className={s.radioString} key={index}>
                 <RadixRadioGroup.Item
+                  onClick={() => setValue(option.value)}
+                  checked={option.value === valueOption}
                   className={s.RadioGroupItem}
                   key={index}
                   value={option.value}
@@ -72,5 +80,5 @@ export const RadioGroup = forwardRef<
         </RadixRadioGroup.Root>
       </div>
     );
-  },
+  }
 );

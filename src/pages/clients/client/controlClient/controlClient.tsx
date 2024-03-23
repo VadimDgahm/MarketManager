@@ -72,7 +72,6 @@ export const ChangeStatus = ({
       setValue(value);
     }
   };
-
   return (
     <div className={s.tab}>
       <TabSwitcher
