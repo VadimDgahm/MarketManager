@@ -14,9 +14,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 import s from "./briefcases.module.scss";
+import { BriefcaseType } from "@/services/briefcase/briefcase.type";
 
 export const Briefcases = () => {
   const [isOpen, setOpen] = useState(false);
+  const [createBriefcase] = useCreateBriefcaseMutation();
 
   return (
     <div className={s.briefcase}>
@@ -29,7 +31,11 @@ export const Briefcases = () => {
         <PlusSquareOutline className={s.icon} /> Создать портфель на неделю{" "}
       </Button>
       <TableBriefcases />
-      <ModalCreateBriefcase isOpen={isOpen} onOpenWindow={setOpen} />
+      <ModalBriefcase
+        isOpen={isOpen}
+        onOpenWindow={setOpen}
+        onSubmitBriefcase={(body) => createBriefcase(body)}
+      />
     </div>
   );
 };
@@ -41,30 +47,37 @@ const loginSchema = z.object({
 type ModalCreateBriefcaseProps = {
   isOpen: boolean;
   onOpenWindow: (open: boolean) => void;
+  briefcase?: BriefcaseType;
+  onSubmitBriefcase: (body: FormDataAddBriefcase) => void;
 };
 type FormDataAddBriefcase = {
   name: string;
 };
-const ModalCreateBriefcase = ({
+export const ModalBriefcase = ({
   isOpen,
   onOpenWindow,
+  briefcase,
+  onSubmitBriefcase,
 }: ModalCreateBriefcaseProps) => {
-  const [createBriefcase] = useCreateBriefcaseMutation();
   const { control, handleSubmit, reset } = useForm<FormDataAddBriefcase>({
     defaultValues: {
-      name: "",
+      name: briefcase?.name || "",
     },
     mode: "onSubmit",
     resolver: zodResolver(loginSchema),
   });
   const onSubmitHandler = async (dateForm: FormDataAddBriefcase) => {
-    createBriefcase(dateForm);
-    reset();
+    onSubmitBriefcase(dateForm);
+    briefcase ? reset(dateForm) : reset();
     onOpenWindow(false);
   };
 
   return (
-    <Modal onOpenChange={onOpenWindow} open={isOpen} title={"Создать клиента"}>
+    <Modal
+      onOpenChange={onOpenWindow}
+      open={isOpen}
+      title={briefcase ? "Редактировать портфель" : "Создать портфель"}
+    >
       <form onSubmit={handleSubmit(onSubmitHandler)}>
         <ModalWithContent>
           <ControlledInput
@@ -77,7 +90,7 @@ const ModalCreateBriefcase = ({
         <ModalWithButton
           onClickSecondaryButton={() => onOpenWindow(false)}
           secondaryTitle={"Отменить"}
-          titleButton={"Создать"}
+          titleButton={briefcase ? "Изменить" : "Создать"}
         />
       </form>
     </Modal>

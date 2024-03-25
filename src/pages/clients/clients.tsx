@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { ControlledInput } from "@/components/controlled/controlledInput/controlledInput";
@@ -8,17 +8,75 @@ import Modal from "@/components/ui/modal/modal";
 import ModalWithButton from "@/components/ui/modal/modalWithButton/modalWithButton";
 import ModalWithContent from "@/components/ui/modal/modalWithContent/modalWithContent";
 import { TableClients } from "@/pages/clients/tableClients/tableClients";
-import { useCreateClientMutation } from "@/services/clients/clients.services";
-import { CreateClientBody } from "@/services/clients/clientsServicesType";
+import {
+  useCreateClientMutation,
+  useFindClientsQuery,
+} from "@/services/clients/clients.services";
+import {
+  ClientType,
+  CreateClientBody,
+} from "@/services/clients/clientsServicesType";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 
 import s from "./clients.module.scss";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Input } from "@/components/ui/Input";
+
+import { Pagination } from "@/components/ui/pagination";
 
 export const Clients = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
   const [isOpen, setOpen] = useState(false);
+  const [params, setParams] = useState({ search: "", page: 1, pageSize: 1 });
+  const [clients, setClients] = useState<ClientType[]>([]);
+  const [searchValueInput, setSearchValue] = useState<string>("");
+  const navigate = useNavigate();
+  const [idTime, setIdTime] = useState<any>("");
+  const { data, error, isLoading } = useFindClientsQuery(params);
+  const [page, setPage] = useState<number | string>(1);
+  const [pageSize, setPageSize] = useState<number | string>(10);
 
+  useEffect(() => {
+    const searchValue = queryParams.get("search");
+    setParams({
+      search: searchValue || "",
+      page: +page,
+      pageSize: +pageSize,
+    });
+
+    if (data) {
+      setClients(data.clients);
+    }
+    if (!searchValue) {
+      navigate("");
+    }
+  }, [data, location.search, page, pageSize]);
+
+  // @ts-ignore
+  if (error?.status === 403) {
+    navigate("/activation");
+  }
+  const onChangeValueSearch = (value: string) => {
+    setSearchValue(value);
+    clearTimeout(idTime);
+    const id = setTimeout(() => {
+      queryParams.set("search", value);
+      navigate(`?${queryParams.toString()}`);
+    }, 500);
+    setIdTime(id);
+  };
+  const onChangePageSize = (value: string | number) => {
+    queryParams.set("pageSize", value.toString());
+    setPageSize(value);
+  };
+  const onPageChange = (value: string | number) => {
+    queryParams.set("page", value.toString());
+    setPage(value);
+  };
+  if (isLoading) return <div>....Loading</div>;
   return (
     <div className={s.clientsContainer}>
       <div className={s.button}>
@@ -26,12 +84,29 @@ export const Clients = () => {
           <PersonAddOutline className={s.iconAdd} />
           Создать клиента
         </Button>
+
         <ModalCreateClient
           isOpen={isOpen}
           onOpenWindow={() => setOpen(false)}
         />
       </div>
-      <TableClients />
+      <div className={s.search}>
+        <Input
+          value={searchValueInput}
+          label={"Поиск"}
+          type={"search"}
+          onValueChange={onChangeValueSearch}
+        />
+      </div>
+      <TableClients data={clients} />
+      <Pagination
+        availablePageSizes={[10, 20, 30]}
+        currentPage={+page}
+        pageSize={+pageSize}
+        totalCount={data.totalCount ? data.totalCount : 0}
+        onChangePageSize={onChangePageSize}
+        onPageChange={onPageChange}
+      />
     </div>
   );
 };

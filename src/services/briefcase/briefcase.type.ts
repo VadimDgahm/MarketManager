@@ -13,3 +13,10 @@ export type BriefcaseOrder = {
   orderClient: OrderType[];
   orderId: string;
 };
+export type BriefcaseType = {
+  name: string;
+  id: string;
+  createdDate: string;
+  orders: BriefcaseOrder[];
+  userId: string;
+};

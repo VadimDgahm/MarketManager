@@ -17,7 +17,7 @@ export const BasketClient = ({
   const removePosition = (positionId: string) => {
     if (positionId) {
       const arr = arrProductsForClient.filter(
-        (el) => el.positionId === positionId,
+        (el) => el.positionId !== positionId
       );
 
       setArrProductsForClient(arr);
@@ -48,6 +48,7 @@ export const BasketClient = ({
                     <Table.Cell>{el.quantity}</Table.Cell>
                     <Table.Cell>
                       <TrashOutline
+                        className={s.removeIcon}
                         onClick={() => removePosition(el.positionId)}
                       />
                     </Table.Cell>

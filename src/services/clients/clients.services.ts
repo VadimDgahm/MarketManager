@@ -19,9 +19,11 @@ const clientsServices = baseApi.injectEndpoints({
       }),
       findClients: builder.query<any, any>({
         providesTags: ["Clients"],
-        query: () => {
+        query: ({ search, page, pageSize }) => {
           return {
-            url: "clients",
+            url: `clients?page=${page}&pageSize=${pageSize}${
+              search ? `&search=${search}` : ""
+            }`,
           };
         },
       }),

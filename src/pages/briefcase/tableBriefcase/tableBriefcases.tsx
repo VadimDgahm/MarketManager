@@ -1,15 +1,8 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import { DeleteModal } from "@/components/ui/delete-modal/deleteModal";
 import { Table } from "@/components/ui/table/Table";
-import { CellVariant } from "@/components/ui/table/TableCellVariant/TableCellVariant";
-import {
-  useGetBriefcaseQuery,
-  useRemoveBriefcaseMutation,
-} from "@/services/briefcase/briefcase.services";
+import { useGetBriefcaseQuery } from "@/services/briefcase/briefcase.services";
 
 import s from "./tableBriefcases.module.scss";
+import { BriefcaseRow } from "@/pages/briefcase/tableBriefcase/briefcaseRow/briefcaseRow";
 
 export const TableBriefcases = () => {
   return (
@@ -33,68 +26,15 @@ const ContentTableHead = () => {
 };
 const ContentTableBody = () => {
   const { data, isLoading } = useGetBriefcaseQuery({});
-  const [removeBriefcase] = useRemoveBriefcaseMutation();
-  const [isOpenModal, setIsOpenModal] = useState<boolean[]>([]);
-  const navigate = useNavigate();
 
   if (isLoading) {
     return <div>isLoading</div>;
   }
 
-  const removeBriefcaseHandler = (id: string, index: number) => {
-    removeBriefcase({ id });
-    setIsOpenModal((prev) => {
-      const updatedModalState = [...prev];
-
-      updatedModalState[index] = false;
-
-      return updatedModalState;
-    });
-  };
-
   return (
     <Table.Body>
-      {data?.map((briefcase: BriefcaseType, index: number) => (
-        <Table.Row key={briefcase.id}>
-          <Table.Cell
-            className={s.linkBriefcase}
-            onClick={() => navigate(`/briefcases/${briefcase.id}`)}
-          >
-            {briefcase.name}
-          </Table.Cell>
-          <Table.Cell>{briefcase.createdDate}</Table.Cell>
-          <Table.Cell>
-            <CellVariant.EditAndTrash
-              onClickEdit={() => {}}
-              onClickTrash={() => {
-                setIsOpenModal((prev) => {
-                  const updatedModalState = [...prev];
-
-                  updatedModalState[index] = true;
-
-                  return updatedModalState;
-                });
-              }}
-            />
-            <DeleteModal
-              name={`портфель - ${briefcase.name}`}
-              open={isOpenModal[index]}
-              removeHandler={function () {
-                removeBriefcaseHandler(briefcase.id, index);
-              }}
-              setOpen={(isOpen) =>
-                setIsOpenModal((prev) => {
-                  const updatedModalState = [...prev];
-
-                  updatedModalState[index] = isOpen;
-
-                  return updatedModalState;
-                })
-              }
-              title={"Удалить портфель"}
-            />
-          </Table.Cell>
-        </Table.Row>
+      {data?.map((briefcase: BriefcaseType) => (
+        <BriefcaseRow key={briefcase.id} briefcase={briefcase} />
       ))}
     </Table.Body>
   );

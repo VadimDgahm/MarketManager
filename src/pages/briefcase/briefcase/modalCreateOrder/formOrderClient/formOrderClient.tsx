@@ -5,6 +5,7 @@ import { useFormOrderClient } from "@/pages/briefcase/briefcase/modalCreateOrder
 import { OrderType } from "@/services/briefcase/briefcase.type";
 
 import s from "./formOrderClient.module.scss";
+import { SelectWithSearch } from "@/components/ui/selectWithSearch/selectWithSearch";
 
 type FormOrderClientProps = {
   arrProductsForClient: OrderType[];
@@ -25,20 +26,20 @@ export const FormOrderClient = ({
     setValueWeightSelect,
     valueWeightInput,
     valueWeightSelect,
+    errorForValueWeightInput,
   } = useFormOrderClient({
     arrProductsForClient,
     setArrProductsForClient,
   });
-
+  console.log(arrOptionsProduct);
   return (
     <div>
-      <Select
-        className={s.selectorProduct}
-        defaultValue={idChoiceProduct}
-        onValueChange={(value) => setIdChoiceProduct(value)}
-        options={arrOptionsProduct}
+      <SelectWithSearch
+        onChange={(value) => setIdChoiceProduct(value.value)}
         title={"Выбрать продукт"}
+        options={arrOptionsProduct}
       />
+
       <div className={s.weightBox}>
         <Input
           className={s.inputWeight}
@@ -46,6 +47,7 @@ export const FormOrderClient = ({
           onValueChange={(value) => setValueWeightInput(value)}
           type={"number"}
           value={valueWeightInput}
+          errorMessage={errorForValueWeightInput ? "Заполните поле" : ""}
         />
         <Select
           className={s.selectWeight}
@@ -63,7 +65,8 @@ export const FormOrderClient = ({
         value={comments}
       />
       <Button
-        disabled={!valueWeightInput && !idChoiceProduct}
+        // disabled={!valueWeightInput && !idChoiceProduct}
+        disabled={false}
         onClick={addProductInBasket}
         variant={"tertiary"}
       >

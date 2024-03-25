@@ -29,7 +29,6 @@ export const Select = forwardRef<
       </SelectRadix.ItemText>
     </SelectRadix.Item>
   ));
-
   return (
     <div>
       {title && (

@@ -1,21 +1,27 @@
-
-.basket{
+.basket {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
-
 }
-.titleBasket{
+.titleBasket {
   display: flex;
   margin: 10px 0;
   align-items: center;
 }
 
-.basketIcon{
+.basketIcon {
   margin-right: 2px;
 }
 
-.tableProductsForClient{
+.tableProductsForClient {
   width: 100%;
 }
 
+.removeIcon {
+  cursor: pointer;
+  &:hover {
+    path {
+      fill: var(--color-danger-300);
+    }
+  }
+}

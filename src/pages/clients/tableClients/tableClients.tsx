@@ -8,21 +8,21 @@ import { Telegram } from "@/components/ui/icons/telegramm/telegram";
 import { Viber } from "@/components/ui/icons/viber/viber";
 import { Table } from "@/components/ui/table/Table";
 import { CellVariant } from "@/components/ui/table/TableCellVariant/TableCellVariant";
-import {
-  useFindClientsQuery,
-  useRemoveClientByIdMutation,
-} from "@/services/clients/clients.services";
+import { useRemoveClientByIdMutation } from "@/services/clients/clients.services";
 import { ClientType } from "@/services/clients/clientsServicesType";
 
 import s from "./tableClients.module.scss";
 import { TrashOutline } from "@/components/ui/icons/trash-outline/TrashOutline";
 import { Badge } from "@radix-ui/themes";
 
-export const TableClients = () => {
+type TableClientsProps = {
+  data: ClientType[];
+};
+export const TableClients = ({ data }: TableClientsProps) => {
   return (
     <Table.Root>
       <ContentTableHead />
-      <ContentTableBody />
+      <ContentTableBody data={data} />
     </Table.Root>
   );
 };
@@ -44,17 +44,15 @@ const ContentTableHead = () => {
   );
 };
 
-const ContentTableBody = () => {
+type ContentTableBodyProps = {
+  data: ClientType[];
+};
+const ContentTableBody = ({ data }: ContentTableBodyProps) => {
   const [isOpenModal, setIsOpenModal] = useState<boolean[]>([]);
-  const { data, error } = useFindClientsQuery({});
+
   const [removeClient] = useRemoveClientByIdMutation();
-  console.log(data);
   const navigate = useNavigate();
 
-  // @ts-ignore
-  if (error?.status === 403) {
-    navigate("/activation");
-  }
   const clickHandlerCellName = (id: string) => {
     navigate(`/clients/${id}`);
   };

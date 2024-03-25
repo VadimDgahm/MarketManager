@@ -16,38 +16,44 @@ export const useFormOrderClient = ({
   const [arrOptionsProduct, setArrOptionsProduct] = useState([]);
   const { data: catalog, isLoading } = useGetCatalogQuery({});
   const [idChoiceProduct, setIdChoiceProduct] = useState<string | undefined>(
-    undefined,
+    undefined
   );
+  const [errorForValueWeightInput, setErrorForValueWeightInput] =
+    useState<boolean>(false);
   const [comments, setComments] = useState("");
   const [valueWeightInput, setValueWeightInput] = useState("");
 
   const [valueWeightSelect, setValueWeightSelect] = useState("кг.");
   const addProductInBasket = () => {
     const product = catalog.find(
-      (el: ProductType) => el.id === idChoiceProduct,
+      (el: ProductType) => el.id === idChoiceProduct
     );
 
     if (product) {
-      const body: OrderType = {
-        comments,
-        name: product.name,
-        positionId: uuidv4(),
-        price: product.price,
-        quantity: `${valueWeightInput}${valueWeightSelect}`,
-        reductionName: product.reductionName,
-      };
-
-      setComments("");
-      setValueWeightInput("");
-      setArrProductsForClient([{ ...body }, ...arrProductsForClient]);
+      if (!valueWeightInput) {
+        setErrorForValueWeightInput(true);
+      } else {
+        const body: OrderType = {
+          comments,
+          name: product.name,
+          positionId: uuidv4(),
+          price: product.price,
+          quantity: `${valueWeightInput}${valueWeightSelect}`,
+          reductionName: product.reductionName,
+        };
+        setErrorForValueWeightInput(false);
+        setComments("");
+        setValueWeightInput("");
+        setArrProductsForClient([{ ...body }, ...arrProductsForClient]);
+      }
     }
   };
 
   useEffect(() => {
     if (!isLoading && catalog.length) {
       const options = catalog.map((el: { id: string; name: string }) => ({
-        id: el.id,
-        value: el.name,
+        value: el.id,
+        label: el.name,
       }));
 
       setArrOptionsProduct(options);
@@ -65,5 +71,6 @@ export const useFormOrderClient = ({
     setValueWeightSelect,
     valueWeightInput,
     valueWeightSelect,
+    errorForValueWeightInput,
   };
 };
