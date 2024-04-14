@@ -35,6 +35,7 @@ export const useCreateOrder = ({ onOpenWindow, setResult }: PropsType) => {
         setArrProductsForClient([]);
         setErrorAddress(false);
         setClient(undefined);
+        setAddressId("");
       }
       onOpenWindow(false);
     } else {
