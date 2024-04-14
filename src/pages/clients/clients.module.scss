@@ -26,6 +26,10 @@
   display: flex;
   justify-content: center;
 }
+//.modal {
+//  overflow: auto;
+//  max-height: 500px;
+//}
 .clientAddresses {
   display: flex;
   flex-direction: column;
@@ -43,4 +47,10 @@
 }
 .done {
   color: var(--color-success-300);
+}
+.address {
+  display: flex;
+}
+.inputAddress {
+  margin-right: 10px;
 }

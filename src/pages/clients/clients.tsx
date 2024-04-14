@@ -22,6 +22,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/Input";
 
 import { Pagination } from "@/components/ui/pagination";
+import { Typography } from "@/components/ui/typography";
+import { AddressClient } from "@/services/address/addressServicesType";
 
 export const Clients = () => {
   const location = useLocation();
@@ -125,7 +127,6 @@ type FormDataAddClient = {
   numberStreet: string;
   phone: string;
   source: string;
-  statusAddress: string;
   street: string;
 };
 
@@ -138,6 +139,14 @@ const loginSchema = z.object({
       /^\+375\s?\(?17|25|29|33|44\)?\s?\d{3}-\d{2}-\d{2}$/,
       "Неверный формат номера телефона Беларуси"
     ),
+  city: z.string(),
+  street: z.string(),
+  numberStreet: z.string(),
+  numberApartment: z.string(),
+  buildingSection: z.string(),
+  lobby: z.string(),
+  floor: z.string(),
+  code: z.string(),
 });
 
 export const ModalCreateClient = ({
@@ -150,18 +159,64 @@ export const ModalCreateClient = ({
       name: "",
       phone: "",
       comments: "",
+      city: "",
+      street: "",
+      numberStreet: "",
+      numberApartment: "",
+      buildingSection: "",
+      lobby: "",
+      floor: "",
+      code: "",
     },
     mode: "onSubmit",
     resolver: zodResolver(loginSchema),
   });
   const onSubmitHandler = async (dateForm: FormDataAddClient) => {
-    const { comments, name, phone } = dateForm;
+    const {
+      comments,
+      name,
+      phone,
+      city,
+      code,
+      street,
+      numberStreet,
+      numberApartment,
+      lobby,
+      buildingSection,
+      floor,
+    } = dateForm;
+    const addresses: AddressClient[] = [];
+    // @ts-ignore
+    if (
+      city ||
+      street ||
+      numberStreet ||
+      code ||
+      numberApartment ||
+      lobby ||
+      buildingSection ||
+      floor
+    ) {
+      addresses.push({
+        idAddress: uuidv4(),
+        city,
+        code,
+        street,
+        numberStreet,
+        numberApartment,
+        lobby,
+        buildingSection,
+        floor,
+      });
+    }
+
     const body: CreateClientBody = {
       comments: [comments],
       name,
       phones: [
         { idPhone: uuidv4(), nameUserPhone: "Номер клиента", tel: phone },
       ],
+      addresses,
     };
 
     createClient(body);
@@ -190,6 +245,67 @@ export const ModalCreateClient = ({
             control={control}
             label={"Примечания"}
             name={"comments"}
+          />
+        </ModalWithContent>
+        <ModalWithContent className={s.address}>
+          <Typography>Адресс</Typography>
+        </ModalWithContent>
+        <ModalWithContent className={s.address}>
+          <ControlledInput
+            className={s.inputAddress}
+            control={control}
+            label={"Город"}
+            name={"city"}
+          />
+          <ControlledInput
+            className={s.inputAddress}
+            control={control}
+            label={"-ул. -пр. -пер."}
+            name={"street"}
+          />
+          <ControlledInput
+            className={s.inputAddress}
+            control={control}
+            label={"№ Дом"}
+            name={"numberStreet"}
+            type={"number"}
+          />
+        </ModalWithContent>
+
+        <ModalWithContent className={s.address}>
+          <ControlledInput
+            className={s.inputAddress}
+            control={control}
+            label={"№-кв"}
+            name={"numberApartment"}
+            type={"number"}
+          />
+          <ControlledInput
+            className={s.inputAddress}
+            control={control}
+            label={"Корпус"}
+            name={"buildingSection"}
+            type={"number"}
+          />
+          <ControlledInput
+            className={s.inputAddress}
+            control={control}
+            label={"Подъезд"}
+            name={"lobby"}
+            type={"number"}
+          />
+          <ControlledInput
+            className={s.inputAddress}
+            control={control}
+            label={"Этаж"}
+            name={"floor"}
+            type={"number"}
+          />
+          <ControlledInput
+            className={s.inputAddress}
+            control={control}
+            label={"Домофон"}
+            name={"code"}
           />
         </ModalWithContent>
         <ModalWithButton

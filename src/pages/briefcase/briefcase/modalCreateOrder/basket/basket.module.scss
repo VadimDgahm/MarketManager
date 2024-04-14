@@ -1,8 +1,11 @@
 .basket {
   display: flex;
   flex-direction: column;
+  overflow: auto;
+  max-height: 200px;
   margin: 10px 0;
 }
+
 .titleBasket {
   display: flex;
   margin: 10px 0;

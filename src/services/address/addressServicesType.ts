@@ -5,16 +5,15 @@ export type PhoneClient = {
   tel: string;
 };
 export type AddressClient = {
-  buildingSection?: null | string; // корпус
-  city?: null | string;
-  code?: null | string;
-  floor?: null | string; //  этаж
+  buildingSection?: string; // корпус
+  city?: string;
+  code?: string;
+  floor?: string; //  этаж
   idAddress: string;
-  lobby?: null | string; //  подъзд
-  numberApartment?: null | string;
-  numberStreet?: null | string;
-  statusAddress?: "apartment" | "house" | "job" | null;
-  street?: null | string;
+  lobby?: string; //  подъзд
+  numberApartment?: string;
+  numberStreet?: string;
+  street?: string;
 };
 export type ClientType = {
   addresses: [] | AddressClient[];

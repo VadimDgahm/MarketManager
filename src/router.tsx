@@ -80,8 +80,15 @@ const router = createBrowserRouter([
 ]);
 
 function PrivateRoutes() {
-  const { data } = useCheckAuthQuery();
-
+  const { data, isLoading } = useCheckAuthQuery();
+  if (isLoading) {
+    return (
+      <>
+        ...........................................ИДЕТ АВТОРИЗАЦИЯ
+        ПОДОЖДИТЕ............................
+      </>
+    );
+  }
   if (data?.message === "Пользователь не авторизован") {
     return <Login />;
   }

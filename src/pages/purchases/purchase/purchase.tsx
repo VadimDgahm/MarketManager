@@ -13,6 +13,7 @@ import {
   PORK_VIEW,
   TView,
 } from "@/pages/catalog/catalog";
+import s from "./purchase.module.scss";
 
 import { useEffect, useState } from "react";
 import { optionsView } from "@/pages/catalog/catalog";
@@ -83,28 +84,43 @@ export const Purchase = () => {
         collection={optionsView}
         status={filterView}
       />
-      <Table.Root>
-        <Table.Head>
-          <Table.Row>
-            {catalog
-              .filter((el: ProductType) => el.view === filterView)
-              .map((el: ProductType) => (
-                <Table.Cell key={el.id} variant={"head"}>
-                  {el.name}
-                </Table.Cell>
-              ))}
-          </Table.Row>
-        </Table.Head>
-        <Table.Body>
-          {catalog
-            .filter((el: ProductType) => el.view === filterView)
-            .map((el: ProductType) => (
-              <Table.Cell key={el.id}>
-                {calculateTotalSum(el.name, currencyOrders)}
-              </Table.Cell>
-            ))}
-        </Table.Body>
-      </Table.Root>
+      <div className={s.table}>
+        <Table.Root>
+          <Table.Head>
+            <Table.Row>
+              {catalog
+                .filter((el: ProductType) => el.view === filterView)
+                .map((el: ProductType) => (
+                  <Table.Cell key={el.id} variant={"head"}>
+                    {el.reductionName}
+                  </Table.Cell>
+                ))}
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            <Table.Row>
+              {catalog
+                .filter((el: ProductType) => el.view === filterView)
+                .map((el: ProductType) => (
+                  <Table.Cell key={el.id}>
+                    {calculateTotalSum(el.name, currencyOrders)}
+                  </Table.Cell>
+                ))}
+            </Table.Row>
+            <Table.Row>
+              {catalog
+                .filter((el: ProductType) => el.view === filterView)
+                .map((el: ProductType) => (
+                  <Table.Cell key={el.id}>
+                    {readNumber(el.name, currencyOrders).map((order) => (
+                      <div> {order.quantity}</div>
+                    ))}
+                  </Table.Cell>
+                ))}
+            </Table.Row>
+          </Table.Body>
+        </Table.Root>
+      </div>
     </div>
   );
 };
@@ -152,4 +168,9 @@ const calculateTotalSum = (nameProduct: string, orders: OrderType[]) => {
   });
 
   return `${result.quantity}шт. ${result.totalWeight}кг.`;
+};
+
+const readNumber = (nameProduct: string, orders: OrderType[]) => {
+  const needProductsArr = orders?.filter((el) => el.name === nameProduct);
+  return needProductsArr;
 };

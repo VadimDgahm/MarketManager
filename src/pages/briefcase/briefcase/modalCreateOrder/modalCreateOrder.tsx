@@ -50,7 +50,12 @@ export const ModalCreateOrder = ({
     useState(false);
   const navigate = useNavigate();
   return (
-    <Modal onOpenChange={onOpenWindow} open={isOpen} title={"Создать заказ"}>
+    <Modal
+      className={s.modal}
+      onOpenChange={onOpenWindow}
+      open={isOpen}
+      title={"Создать заказ"}
+    >
       <ModalWithContent>
         <div className={s.button}>
           {!client && (
