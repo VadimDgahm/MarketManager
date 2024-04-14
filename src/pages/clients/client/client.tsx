@@ -48,7 +48,7 @@ export const Client = () => {
             status={data?.source || "неопределен"}
           />
           <Typography className={s.text} variant={"body1"}>
-            Дата последнего заказа: {data.dateLastOrder}
+            Кол-во заказов: {data.order.length}
           </Typography>
           <ChangeStatus
             changeStatus={changeStatus}

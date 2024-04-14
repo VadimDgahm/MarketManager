@@ -49,7 +49,7 @@ export const BriefcaseRow = ({ briefcase }: BriefcaseRowProps) => {
         <DeleteModal
           name={`портфель - ${briefcase.name}`}
           open={isOpenModalRemove}
-          removeHandler={() => removeBriefcase(briefcase.id)}
+          removeHandler={() => removeBriefcase({ id: briefcase.id })}
           setOpen={(isOpen) => setIsOpenModalRemove(isOpen)}
           title={"Удалить портфель"}
         />

@@ -1,5 +1,9 @@
 .footer {
+  padding: 30px;
   flex-shrink: 0;
+  display: flex;
+  justify-content: end;
+  color: var(--color-dark-100);
   min-height: 10%;
   background-color: var(--color-dark-300);
 }

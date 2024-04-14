@@ -10,7 +10,7 @@ type Option = {
 type SelectWithSearchProps = {
   title: string;
   options: Option[];
-  onChange: (value: Option) => void;
+  onChange: (value: any) => void;
 };
 export const SelectWithSearch = ({
   title,
@@ -18,15 +18,15 @@ export const SelectWithSearch = ({
   onChange,
 }: SelectWithSearchProps) => {
   return (
-    <div>
+    <div className={s.content}>
       {title && (
         <Typography className={s.title} variant={"body2"}>
           {title}
         </Typography>
       )}
-      <Select
-        onChange={onChange}
+      <Select<Option>
         placeholder={""}
+        onChange={(newValue) => onChange(newValue)}
         styles={{
           control: (baseStyles) => {
             return {

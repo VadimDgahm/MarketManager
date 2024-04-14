@@ -1,3 +1,5 @@
+import { BriefcaseOrder } from "@/services/briefcase/briefcase.type";
+
 export type PhoneClient = {
   idPhone: string;
   nameUserPhone: string;
@@ -19,7 +21,7 @@ export type ClientType = {
   addresses: [] | AddressClient[];
   comments: string[];
   createdDate: string;
-  dateLastOrder: string;
+  order: BriefcaseOrder[];
   id: string;
   name: string;
   phones: PhoneClient[];
@@ -28,7 +30,7 @@ export type ClientType = {
 };
 export type CreateClientBody = Omit<
   ClientType,
-  "createdDate" | "dateLastOrder" | "id" | "status" | "addresses" | "source"
+  "createdDate" | "order" | "id" | "status" | "addresses" | "source"
 >;
 export type ClientTypeFilter = Partial<
   Pick<ClientType, "comments" | "name" | "source" | "status">

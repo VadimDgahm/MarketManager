@@ -10,23 +10,35 @@ type PropsType = {
 };
 export const useCreateOrder = ({ onOpenWindow, setResult }: PropsType) => {
   const [client, setClient] = useState<ClientType | undefined>(undefined);
-
+  const [dayDelivery, setDayDelivery] = useState("Неважно");
+  const [timeDelivery, setTimeDelivery] = useState("");
   const [arrProductsForClient, setArrProductsForClient] = useState<OrderType[]>(
-    [],
+    []
   );
+  const [addressId, setAddressId] = useState("");
+
+  const [errorAddress, setErrorAddress] = useState(false);
 
   const onSubmitHandler = () => {
-    if (client) {
-      const body = {
-        clientName: client.name,
-        idClient: client.id,
-        orders: arrProductsForClient,
-      };
+    if (addressId) {
+      if (client) {
+        const body = {
+          clientName: client.name,
+          idClient: client.id,
+          timeDelivery: timeDelivery,
+          dayDelivery: dayDelivery,
+          orders: arrProductsForClient,
+          addressId: addressId,
+        };
 
-      setResult(body);
-      setArrProductsForClient([]);
+        setResult(body);
+        setArrProductsForClient([]);
+        setClient(undefined);
+      }
+      onOpenWindow(false);
+    } else {
+      setErrorAddress(true);
     }
-    onOpenWindow(false);
   };
 
   const handleClientChange = (client: ClientType | undefined) => {
@@ -44,5 +56,12 @@ export const useCreateOrder = ({ onOpenWindow, setResult }: PropsType) => {
     handleClientChange,
     onSubmitHandler,
     setArrProductsForClient,
+    setDayDelivery,
+    setTimeDelivery,
+    dayDelivery,
+    timeDelivery,
+    addressId,
+    setAddressId,
+    errorAddress,
   };
 };

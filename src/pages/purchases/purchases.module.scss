@@ -10,14 +10,12 @@
 }
 .clickCell {
   display: flex;
-  align-items: center;
+
   flex-direction: column;
   cursor: pointer;
-
+  transition: 0.3s;
   &:hover {
-    .click {
-      color: var(--color-accent-700);
-    }
+    color: var(--color-accent-700);
   }
 }
 .cell {

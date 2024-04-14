@@ -5,6 +5,10 @@ import { Header } from "@/components/ui/header";
 import { Navigate } from "@/components/ui/navigate/navigate";
 
 import s from "./layout.module.scss";
+import {
+  ForwardButton,
+  GoBackButton,
+} from "@/components/ui/goBackButton/goBackButton";
 
 export const Layout = () => {
   return (
@@ -22,6 +26,12 @@ const Main = () => {
     <main className={s.main}>
       <Navigate />
       <div className={s.content}>
+        <div className={s.buttonNav}>
+          <GoBackButton />
+          ...
+          <ForwardButton />
+        </div>
+
         <Outlet />
       </div>
     </main>

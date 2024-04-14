@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
 import { Table } from "@/components/ui/table/Table";
-import { Typography } from "@/components/ui/typography";
 import { useGetBriefcaseQuery } from "@/services/briefcase/briefcase.services";
 
 import s from "./purchases.module.scss";
@@ -13,7 +12,7 @@ export const Purchases = () => {
   if (isLoading) {
     return <div>Loading</div>;
   }
-
+  const reversData = [...data].reverse();
   return (
     <div className={s.content}>
       <Table.Root className={s.table}>
@@ -23,22 +22,18 @@ export const Purchases = () => {
             <Table.Cell className={s.cell} variant={"head"}>
               Дата создания
             </Table.Cell>
-            <Table.Cell className={s.cell} variant={"head"}>
-              Закупка
-            </Table.Cell>
           </Table.Row>
         </Table.Head>
         <Table.Body>
-          {data.map((el: any) => (
+          {reversData.map((el: any) => (
             <Table.Row key={el.id}>
-              <Table.Cell>{el.name}</Table.Cell>
-              <Table.Cell className={s.cell}>{el.createdDate}</Table.Cell>
               <Table.Cell
                 className={s.clickCell}
                 onClick={() => navigate(`/purchases/${el.id}`)}
               >
-                <Typography className={s.click}> Посмотреть</Typography>
+                {el.name}
               </Table.Cell>
+              <Table.Cell className={s.cell}>{el.createdDate}</Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

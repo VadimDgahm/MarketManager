@@ -1,17 +1,17 @@
 import { useNavigate } from "react-router-dom";
 
 import { LoginForm } from "@/components/auth/sign-in";
-import { SingUpForm } from "@/components/auth/sign-up";
+// import { SingUpForm } from "@/components/auth/sign-up";
 import {
   useLoginMutation,
   useLogoutMutation,
-  useRegistrationMutation,
+  // useRegistrationMutation,
 } from "@/services/auth/auth.services";
 import { LoginData } from "@/services/auth/authServicesType";
 
 export const Login = () => {
   const [login] = useLoginMutation();
-  const [registration] = useRegistrationMutation();
+  // const [registration] = useRegistrationMutation();
   const [logout] = useLogoutMutation();
   const navigate = useNavigate();
   const onSubmitLogin = async ({ email, password }: LoginData) => {
@@ -26,14 +26,7 @@ export const Login = () => {
       console.log(e.response.data?.message);
     }
   };
-  const onSubmitRegistration = async ({ email, password }: LoginData) => {
-    try {
-      await registration({ email, password });
-    } catch (e) {
-      // @ts-ignore
-      console.log(e.response.data?.message);
-    }
-  };
+
   const onSubmitLOGOUT = async () => {
     try {
       await logout();
@@ -47,7 +40,6 @@ export const Login = () => {
     <div>
       <button onClick={onSubmitLOGOUT}>LOGOUT</button>
       <LoginForm onSubmit={onSubmitLogin} />
-      <SingUpForm onSubmit={onSubmitRegistration} />
     </div>
   );
 };

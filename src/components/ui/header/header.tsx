@@ -1,14 +1,22 @@
 import { forwardRef } from "react";
 import s from "./header.module.scss";
-import { NavLink } from "react-router-dom";
+import { Typography } from "@/components/ui/typography";
 
 export type HeaderInfoType = {};
 
 export const Header = forwardRef<HTMLHeadElement, HeaderInfoType>(() => {
   return (
     <div className={s.headerRoot}>
-      <NavLink to={"login"}>Войти</NavLink>
-      <NavLink to={"/"}>Главная</NavLink>
+      <div className={s.logo}>
+        <Typography variant={"body1"}>MMM</Typography>
+        <Typography className={s.size} variant={"caption"}>
+          Meat Market Manager
+        </Typography>
+      </div>
+
+      <div>
+        <span className={s.beta}>beta</span> 0.0.1
+      </div>
     </div>
   );
 });

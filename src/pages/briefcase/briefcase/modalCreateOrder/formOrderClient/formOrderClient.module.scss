@@ -1,15 +1,18 @@
-.selectorProduct{
+.selectorProduct {
   border: 1px solid var(--color-dark-100);
 }
-.weightBox{
-   display: flex;
-   align-items: end;
- }
-.inputWeight input{
-  border: 1px solid var(--color-dark-100);
-  margin: 0;
-}
-.selectWeight{
+.weightBox {
+  display: flex;
+  align-items: end;
   margin-bottom: 10px;
+}
+.inputWeight {
+  margin-right: 10px;
+  input {
+    border: 1px solid var(--color-dark-100);
+    margin: 0;
+  }
+}
+.selectWeight {
   width: 90px;
 }

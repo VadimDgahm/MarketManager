@@ -10,7 +10,7 @@ import s from "./select.module.scss";
 
 export type SelectorPropsType = {
   className?: string;
-  options: { id: string; value: string }[];
+  options: { id: string | number; value: string | number }[];
   title?: string;
   variant?: "default" | "pagination";
 } & SelectRadix.SelectProps;
@@ -22,7 +22,7 @@ export const Select = forwardRef<
     <SelectRadix.Item
       className={s.SelectItem}
       key={i}
-      value={op.id ? op.id : op.toString()}
+      value={op.id ? op.id.toString() : op.toString()}
     >
       <SelectRadix.ItemText>
         {op.value ? op.value : op.toString()}

@@ -12,10 +12,7 @@ import {
   useCreateClientMutation,
   useFindClientsQuery,
 } from "@/services/clients/clients.services";
-import {
-  ClientType,
-  CreateClientBody,
-} from "@/services/clients/clientsServicesType";
+import { CreateClientBody } from "@/services/clients/clientsServicesType";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
@@ -30,8 +27,7 @@ export const Clients = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const [isOpen, setOpen] = useState(false);
-  const [params, setParams] = useState({ search: "", page: 1, pageSize: 1 });
-  const [clients, setClients] = useState<ClientType[]>([]);
+  const [params, setParams] = useState({ search: "", page: 1, pageSize: 10 });
   const [searchValueInput, setSearchValue] = useState<string>("");
   const navigate = useNavigate();
   const [idTime, setIdTime] = useState<any>("");
@@ -46,14 +42,10 @@ export const Clients = () => {
       page: +page,
       pageSize: +pageSize,
     });
-
-    if (data) {
-      setClients(data.clients);
-    }
     if (!searchValue) {
       navigate("");
     }
-  }, [data, location.search, page, pageSize]);
+  }, [location.search, page, pageSize]);
 
   // @ts-ignore
   if (error?.status === 403) {
@@ -76,6 +68,7 @@ export const Clients = () => {
     queryParams.set("page", value.toString());
     setPage(value);
   };
+
   if (isLoading) return <div>....Loading</div>;
   return (
     <div className={s.clientsContainer}>
@@ -98,7 +91,12 @@ export const Clients = () => {
           onValueChange={onChangeValueSearch}
         />
       </div>
-      <TableClients data={clients} />
+      {data.clients.length ? (
+        <TableClients data={data.clients} />
+      ) : (
+        <div className={s.list}>Список пуст</div>
+      )}
+
       <Pagination
         availablePageSizes={[10, 20, 30]}
         currentPage={+page}
@@ -142,7 +140,7 @@ const loginSchema = z.object({
     ),
 });
 
-const ModalCreateClient = ({
+export const ModalCreateClient = ({
   isOpen,
   onOpenWindow,
 }: ModalCreateClientProps) => {

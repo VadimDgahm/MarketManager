@@ -31,7 +31,7 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <div>ГЛАВНАЯ</div>,
+    element: <Clients />,
     path: "/",
   },
   {

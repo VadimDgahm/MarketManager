@@ -19,12 +19,10 @@ export const useChoiceClient = ({ setClient }: PropsType) => {
   const onClickSearchClient = () => {
     setShowTextNotFound(true);
     const regex = new RegExp(value.trim(), "i");
-
     if (value.trim()) {
-      const clientsFound = data.filter(
-        (el: ClientType) =>
-          regex.test(el.name) || regex.test(el.phones[0]?.tel),
-      );
+      const clientsFound = data.clients.filter((el: ClientType) => {
+        return regex.test(el.name) || regex.test(el.phones[0]?.tel);
+      });
 
       setSearchClient(clientsFound);
     } else {

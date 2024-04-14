@@ -23,7 +23,10 @@ const Modal = forwardRef<ElementRef<"div">, ModalProps>(
       <Dialog.Root onOpenChange={onOpenChange} open={open} {...rest}>
         <Dialog.Portal>
           <Dialog.Overlay className={`${s.DialogOverlay}`} />
-          <Dialog.Content className={`${s.DialogContent}`} ref={ref}>
+          <Dialog.Content
+            className={`${rest.className} ${s.DialogContent}`}
+            ref={ref}
+          >
             {title && (
               <ModalTitle
                 className={s.borderTitle}
@@ -36,7 +39,7 @@ const Modal = forwardRef<ElementRef<"div">, ModalProps>(
         </Dialog.Portal>
       </Dialog.Root>
     );
-  },
+  }
 );
 
 export default Modal;

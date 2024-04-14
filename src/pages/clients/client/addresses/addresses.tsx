@@ -46,13 +46,13 @@ export const Addresses = ({ data }: AddressesProps) => {
               return (
                 <div className={s.tab} key={i}>
                   <Typography key={i} variant={"body1"}>
-                    {++i}. {city && `г.${city},`} {street && `ул.${street},`}
-                    {numberStreet && `д.${numberStreet},`}
-                    {buildingSection && `корпус${buildingSection},`}
-                    {numberApartment && `кв.${numberApartment},`}
-                    {lobby && `под.${lobby},`}
-                    {floor && `$этаж.${floor},`}
-                    {code && `код.${code}`}
+                    {++i}. {city && `г.${city},`} {street && `${street},`}
+                    {numberStreet && ` д.${numberStreet},`}
+                    {buildingSection && ` корпус${buildingSection},`}
+                    {numberApartment && ` кв.${numberApartment},`}
+                    {lobby && ` под.${lobby},`}
+                    {floor && ` этаж.${floor},`}
+                    {code && ` код.${code}`}
                   </Typography>
                   <TrashOutline
                     className={s.iconTrash}

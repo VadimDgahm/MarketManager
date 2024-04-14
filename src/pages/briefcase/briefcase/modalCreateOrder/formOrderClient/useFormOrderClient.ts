@@ -37,7 +37,7 @@ export const useFormOrderClient = ({
           comments,
           name: product.name,
           positionId: uuidv4(),
-          price: product.price,
+          view: product.view,
           quantity: `${valueWeightInput}${valueWeightSelect}`,
           reductionName: product.reductionName,
         };

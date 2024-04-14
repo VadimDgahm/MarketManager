@@ -20,8 +20,22 @@ import s from "./catalog.module.scss";
 import { CardProduct } from "@/pages/catalog/cardProduct/cardProduct";
 import { ProductType } from "@/services/catalog/catalog-servicesType";
 
+export const CHICKEN_VIEW = "Птица";
+export const BEEF_VIEW = "Говядина";
+export const PORK_VIEW = "Свинина";
+export const RABBIT_VIEW = "Кролик";
+export const TURKEY_VIEW = "Индейка";
+export type TView = "Птица" | "Говядина" | "Свинина" | "Кролик" | "Индейка";
+export const optionsView = [
+  { location: "0", value: BEEF_VIEW },
+  { location: "1", value: PORK_VIEW },
+  { location: "2", value: CHICKEN_VIEW },
+  { location: "3", value: RABBIT_VIEW },
+  { location: "5", value: TURKEY_VIEW },
+];
 export const Catalog = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [filterView, setFilterView] = useState<string>(CHICKEN_VIEW);
   const [createProduct] = useCreateProductMutation();
   const { data, isLoading } = useGetCatalogQuery({});
   if (isLoading) {
@@ -42,11 +56,20 @@ export const Catalog = () => {
             Добавить продукт
           </Button>
         </div>
+        <div>
+          <ChangeStatus
+            changeStatus={(value) => setFilterView(value)}
+            collection={optionsView}
+            status={filterView}
+          />
+        </div>
         <div className={s.cards}>
           {!data.length && <div>Список пуст</div>}
-          {data.map((product: ProductType) => (
-            <CardProduct key={product.id} product={product} />
-          ))}
+          {data
+            .filter((product: ProductType) => product.view === filterView)
+            .map((product: ProductType) => (
+              <CardProduct key={product.id} product={product} />
+            ))}
         </div>
         <ModalProduct
           resultFn={(body) => createProduct(body)}
@@ -65,7 +88,6 @@ export const loginSchemaProduct = z.object({
     .string()
     .min(3, "Минимум 3 символа")
     .max(3000, "Слишком большое название"),
-  price: z.string().regex(/^\d+\.\d+$/, "Цена должна быть на примере - 11.0 "),
   reductionName: z.string().optional(),
   type: z.string(),
 });
@@ -78,7 +100,6 @@ export type ModalProductProps = {
 };
 export type FormDataProduct = {
   name: string;
-  price: string;
   reductionName: string;
   type: "Готовый" | "Сырьевой";
 };
@@ -94,7 +115,6 @@ export const ModalProduct = ({
   const { control, handleSubmit, reset } = useForm<FormDataProduct>({
     defaultValues: {
       name: product?.name || "",
-      price: product?.price || "",
       reductionName: product?.reductionName || "",
       type: product?.type || "Сырьевой",
     },
@@ -117,6 +137,7 @@ export const ModalProduct = ({
 
   return (
     <Modal
+      className={s.form}
       onOpenChange={onOpenWindow}
       open={isOpen}
       title={product ? "Редактировать" : "Создать продукт"}
@@ -136,12 +157,6 @@ export const ModalProduct = ({
             label={"Сокращение"}
             name={"reductionName"}
           />
-          <ControlledInput
-            className={s.input}
-            control={control}
-            label={"Цена"}
-            name={"price"}
-          />
 
           <div>
             <Typography variant={"body2"}>Тип продукта: </Typography>
@@ -158,11 +173,7 @@ export const ModalProduct = ({
         </ModalWithContent>
         <ChangeStatus
           changeStatus={(value) => setViewProduct(value)}
-          collection={[
-            { location: "0", value: "Говядина" },
-            { location: "1", value: "Свинина" },
-            { location: "2", value: "Птица" },
-          ]}
+          collection={optionsView}
           status={viewProduct}
         />
         <ModalWithButton

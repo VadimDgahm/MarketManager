@@ -56,7 +56,7 @@ export const FormForAddress = ({
       },
       mode: "onSubmit",
       resolver: zodResolver(loginSchema),
-    },
+    }
   );
   const onSubmitHandler = (dateForm: FormDataAddClientForAddress) => {
     createAddress({ idClient, ...dateForm });
@@ -77,7 +77,7 @@ export const FormForAddress = ({
           <ControlledInput
             className={s.inputAddress}
             control={control}
-            label={"Улица"}
+            label={"-ул. -пр. -пер."}
             name={"street"}
           />
           <ControlledInput

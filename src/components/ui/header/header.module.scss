@@ -10,3 +10,22 @@
   padding: 0.75rem 10px;
   background-color: var(--color-dark-300);
 }
+.link {
+  text-decoration: none;
+}
+.beta {
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: var(--color-firm-300);
+}
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 30px;
+  padding: 5px 15px;
+  background-color: var(--color-firm-700);
+}
+.size {
+  font-size: 10px;
+}

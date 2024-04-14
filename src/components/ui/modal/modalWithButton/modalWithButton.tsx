@@ -10,6 +10,7 @@ type ModalWithButtonProps = {
   onClickSecondaryButton?: () => void;
   secondaryTitle?: string;
   titleButton: string;
+  disabled?: boolean;
 };
 const ModalWithButton: FC<ModalWithButtonProps> = ({
   className,
@@ -17,6 +18,7 @@ const ModalWithButton: FC<ModalWithButtonProps> = ({
   onClickSecondaryButton,
   secondaryTitle = "Отмена",
   titleButton,
+  disabled = false,
 }) => {
   return (
     <div className={`${s.content} ${className}`}>
@@ -33,6 +35,7 @@ const ModalWithButton: FC<ModalWithButtonProps> = ({
       )}
       <div>
         <Button
+          disabled={disabled}
           className={s.button}
           onClick={onClickPrimaryButton}
           type={"submit"}

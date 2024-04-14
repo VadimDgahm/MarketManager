@@ -1,3 +1,21 @@
-.table{
+.table {
   width: 100%;
+}
+.clientAddresses {
+  display: flex;
+  flex-direction: column;
+}
+.red {
+  color: red;
+}
+.address {
+  cursor: pointer;
+  color: var(--color-dark-100);
+  transition: 0.3s;
+  &:hover {
+    color: var(--color-light-100);
+  }
+}
+.done {
+  color: var(--color-success-300);
 }

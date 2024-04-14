@@ -1,0 +1,18 @@
+.text {
+  transition: 0.3s;
+}
+.content {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+
+  &:hover {
+    svg path {
+      fill: var(--color-accent-500);
+    }
+    .text {
+      color: var(--color-accent-500);
+    }
+  }
+}

@@ -27,12 +27,14 @@ export const ChoiceClientComponent = ({
 
   if (client) {
     return (
-      <div className={s.clientName}>
-        <Typography variant={"body2"}>Клиент - {client?.name}</Typography>
-        <div onClick={cancelClient}>
-          <Close width={18} />
+      <>
+        <div className={s.clientName}>
+          <Typography variant={"body2"}>Клиент - {client?.name}</Typography>
+          <div onClick={cancelClient}>
+            <Close width={18} />
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -55,6 +57,7 @@ export const ChoiceClientComponent = ({
               return (
                 <TableRowClient
                   key={el.id}
+                  id={el.id}
                   name={el.name}
                   onClick={() => choiceClient(el)}
                   phone={el.phones[0]?.tel}

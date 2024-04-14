@@ -66,7 +66,6 @@ const ContentTableBody = ({ data }: ContentTableBodyProps) => {
       return updatedModalState;
     });
   };
-
   return (
     <Table.Body>
       {data?.map((client: ClientType, index: number) => (
@@ -103,7 +102,9 @@ const ContentTableBody = ({ data }: ContentTableBodyProps) => {
             {client.source === "неопределен" && <div>{client.source}</div>}
           </Table.Cell>
           <Table.Cell>
-            {!client.dateLastOrder ? "нет заказа" : client.dateLastOrder}
+            {client.order.length === 0
+              ? "нет заказа"
+              : client.order[client.order.length - 1].createdDate}
           </Table.Cell>
           <Table.Cell>
             {client.comments.length && client.comments[0]}
