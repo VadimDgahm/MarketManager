@@ -37,7 +37,6 @@ export const ChoiceClientComponent = ({
       </>
     );
   }
-
   return (
     <>
       <div className={s.inputWithButtonBox}>
@@ -52,8 +51,8 @@ export const ChoiceClientComponent = ({
         </Button>
       </div>
       <div>
-        {foundClients.length
-          ? foundClients.map((el: ClientType) => {
+        {foundClients.clients.length
+          ? foundClients.clients.map((el: ClientType) => {
               return (
                 <TableRowClient
                   key={el.id}

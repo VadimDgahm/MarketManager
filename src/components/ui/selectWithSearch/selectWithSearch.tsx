@@ -25,6 +25,7 @@ export const SelectWithSearch = ({
         </Typography>
       )}
       <Select<Option>
+        autoFocus={false}
         placeholder={""}
         onChange={(newValue) => onChange(newValue)}
         styles={{

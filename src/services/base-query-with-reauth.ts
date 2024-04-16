@@ -7,7 +7,7 @@ import type {
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { Mutex } from "async-mutex";
 
-export const API_URL = "https://api-market-manager.vercel.app/";
+export const API_URL = "http://localhost:5000"; //"https://api-market-manager.vercel.app/";
 const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,

@@ -24,6 +24,11 @@ import { Input } from "@/components/ui/Input";
 import { Pagination } from "@/components/ui/pagination";
 import { Typography } from "@/components/ui/typography";
 import { AddressClient } from "@/services/address/addressServicesType";
+import { ChangeStatus } from "@/pages/clients/client/controlClient/controlClient";
+import {
+  collectionSource,
+  collectionStatus,
+} from "@/pages/clients/client/collection";
 
 export const Clients = () => {
   const location = useLocation();
@@ -171,6 +176,14 @@ export const ModalCreateClient = ({
     mode: "onSubmit",
     resolver: zodResolver(loginSchema),
   });
+  const [status, setStatus] = useState("новый");
+  const [source, setSource] = useState("неопределен");
+  const changeStatus = (value: string) => {
+    setStatus(value);
+  };
+  const changeSource = (value: string) => {
+    setSource(value);
+  };
   const onSubmitHandler = async (dateForm: FormDataAddClient) => {
     const {
       comments,
@@ -217,6 +230,8 @@ export const ModalCreateClient = ({
         { idPhone: uuidv4(), nameUserPhone: "Номер клиента", tel: phone },
       ],
       addresses,
+      status,
+      source,
     };
 
     createClient(body);
@@ -225,7 +240,12 @@ export const ModalCreateClient = ({
   };
 
   return (
-    <Modal onOpenChange={onOpenWindow} open={isOpen} title={"Создать клиента"}>
+    <Modal
+      className={s.modal}
+      onOpenChange={onOpenWindow}
+      open={isOpen}
+      title={"Создать клиента"}
+    >
       <form onSubmit={handleSubmit(onSubmitHandler)}>
         <ModalWithContent>
           <ControlledInput
@@ -306,6 +326,18 @@ export const ModalCreateClient = ({
             control={control}
             label={"Домофон"}
             name={"code"}
+          />
+        </ModalWithContent>
+        <ModalWithContent>
+          <ChangeStatus
+            changeStatus={changeSource}
+            collection={collectionSource}
+            status={source}
+          />
+          <ChangeStatus
+            changeStatus={changeStatus}
+            collection={collectionStatus}
+            status={status}
           />
         </ModalWithContent>
         <ModalWithButton

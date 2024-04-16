@@ -30,6 +30,7 @@ export const TableOrders = ({ orders, idBriefcase }: TableOrdersProps) => {
       <Table.Head>
         <Table.Row>
           <Table.Cell variant={"head"}>№</Table.Cell>
+          <Table.Cell variant={"head"}>Источник</Table.Cell>
           <Table.Cell variant={"head"}>Имя</Table.Cell>
           <Table.Cell variant={"head"}>Номер телефона</Table.Cell>
           <Table.Cell variant={"head"}>Адрес</Table.Cell>
@@ -72,6 +73,7 @@ const TableRawOrder = ({ index, order, idBriefcase }: TableRawOrderProps) => {
   return (
     <Table.Row key={order.orderId}>
       <Table.Cell>{++index}</Table.Cell>
+      <Table.Cell>{client?.source}</Table.Cell>
       <Table.Cell>{order.clientName}</Table.Cell>
       <Table.Cell>{client?.phones[0].tel}</Table.Cell>
       <Table.Cell>
@@ -87,7 +89,9 @@ const TableRawOrder = ({ index, order, idBriefcase }: TableRawOrderProps) => {
         ))}
       </Table.Cell>
       <Table.Cell>
-        <div>{`${order.dayDelivery ? order.dayDelivery : ""}`}</div>
+        <div>{`${
+          order.dayDelivery !== "Неважно" || "" ? order.dayDelivery : ""
+        }`}</div>
         <div>{`${order.timeDelivery ? order.timeDelivery : ""}`}</div>
       </Table.Cell>
       <Table.Cell>

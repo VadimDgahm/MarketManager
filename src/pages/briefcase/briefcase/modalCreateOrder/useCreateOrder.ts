@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { OrderClientType } from "@/pages/briefcase/briefcase/modalCreateOrder/modalCreateOrder";
 import { OrderType } from "@/services/briefcase/briefcase.type";
@@ -18,7 +18,11 @@ export const useCreateOrder = ({ onOpenWindow, setResult }: PropsType) => {
   const [addressId, setAddressId] = useState("");
 
   const [errorAddress, setErrorAddress] = useState(false);
-
+  useEffect(() => {
+    if (client) {
+      setAddressId(client.addresses[0].idAddress);
+    }
+  }, [client]);
   const onSubmitHandler = () => {
     if (addressId) {
       if (client) {

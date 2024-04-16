@@ -5,6 +5,10 @@ export type PhoneClient = {
   nameUserPhone: string;
   tel: string;
 };
+export type ResponseClients = {
+  clients: ClientType[];
+  totalCount: number;
+};
 export type AddressClient = {
   buildingSection?: null | string; // корпус
   city?: null | string;
@@ -28,10 +32,7 @@ export type ClientType = {
   source: string;
   status: string;
 };
-export type CreateClientBody = Omit<
-  ClientType,
-  "createdDate" | "order" | "id" | "status" | "source"
->;
+export type CreateClientBody = Omit<ClientType, "createdDate" | "order" | "id">;
 export type ClientTypeFilter = Partial<
   Pick<ClientType, "comments" | "name" | "source" | "status">
 >;

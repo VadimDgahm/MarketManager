@@ -46,9 +46,20 @@ export const ModalCreateOrder = ({
     errorAddress,
   } = useCreateOrder({ onOpenWindow, setResult });
 
+  const onClickHandlerClose = () => {
+    setAddressId("");
+    setDayDelivery("Неважно");
+    setTimeDelivery("");
+    setArrProductsForClient([]);
+    handleClientChange(undefined);
+    onOpenWindow(false);
+  };
   const [isOpenCreateClientWindow, seIsOpenCreateClientWindow] =
     useState(false);
   const navigate = useNavigate();
+  const openWindowCreateClient = () => {
+    seIsOpenCreateClientWindow(true);
+  };
   return (
     <Modal
       className={s.modal}
@@ -59,10 +70,7 @@ export const ModalCreateOrder = ({
       <ModalWithContent>
         <div className={s.button}>
           {!client && (
-            <Button
-              onClick={() => seIsOpenCreateClientWindow(true)}
-              variant={"secondary"}
-            >
+            <Button onClick={openWindowCreateClient} variant={"secondary"}>
               <PersonAddOutline />
             </Button>
           )}
@@ -134,7 +142,7 @@ export const ModalCreateOrder = ({
       <ModalWithButton
         disabled={!client?.addresses.length}
         onClickPrimaryButton={onSubmitHandler}
-        onClickSecondaryButton={() => onOpenWindow(false)}
+        onClickSecondaryButton={onClickHandlerClose}
         secondaryTitle={"Отменить"}
         titleButton={"Создать"}
       />
