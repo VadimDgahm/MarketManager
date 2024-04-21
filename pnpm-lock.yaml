@@ -53,6 +53,9 @@ dependencies:
   react-hook-form:
     specifier: ^7.49.3
     version: 7.49.3(react@18.2.0)
+  react-html-table-to-excel:
+    specifier: ^2.0.0
+    version: 2.0.0(react@18.2.0)
   react-loader-spinner:
     specifier: ^6.1.6
     version: 6.1.6(react-dom@18.2.0)(react@18.2.0)
@@ -8630,6 +8633,15 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
     dependencies:
+      react: 18.2.0
+    dev: false
+
+  /react-html-table-to-excel@2.0.0(react@18.2.0):
+    resolution: {integrity: sha512-afvcCtQWZPfen3D+UFu9YMHleQqpVm3manmiWaxr0wv76hx+BkQ0/nkOI1UyQs29pzAUWtZDiD9Eu/MqsDOEJw==}
+    peerDependencies:
+      react: ^15.x.x
+    dependencies:
+      prop-types: 15.8.1
       react: 18.2.0
     dev: false
 

@@ -19,31 +19,27 @@ export const useCreateOrder = ({ onOpenWindow, setResult }: PropsType) => {
 
   const [errorAddress, setErrorAddress] = useState(false);
   useEffect(() => {
-    if (client) {
+    if (client && client.addresses.length) {
       setAddressId(client.addresses[0].idAddress);
     }
   }, [client]);
   const onSubmitHandler = () => {
-    if (addressId) {
-      if (client) {
-        const body = {
-          clientName: client.name,
-          idClient: client.id,
-          timeDelivery: timeDelivery,
-          dayDelivery: dayDelivery,
-          orders: arrProductsForClient,
-          addressId: addressId,
-        };
+    if (client) {
+      const body = {
+        clientName: client.name,
+        idClient: client.id,
+        timeDelivery: timeDelivery,
+        dayDelivery: dayDelivery,
+        orders: arrProductsForClient,
+        addressId: addressId,
+      };
 
-        setResult(body);
-        setArrProductsForClient([]);
-        setErrorAddress(false);
-        setClient(undefined);
-        setAddressId("");
-      }
+      setResult(body);
+      setArrProductsForClient([]);
+      setErrorAddress(false);
+      setClient(undefined);
+      setAddressId("");
       onOpenWindow(false);
-    } else {
-      setErrorAddress(true);
     }
   };
 

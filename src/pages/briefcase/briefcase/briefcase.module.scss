@@ -8,7 +8,17 @@
 .briefcase {
   padding: 10px 20px;
 }
-
+.btnDownload {
+  cursor: pointer;
+  padding: 10px;
+  color: black;
+  border-radius: 10px;
+  margin-left: 10px;
+  transition: 0.3s;
+  &:hover {
+    background-color: grey;
+  }
+}
 .headerTitle {
   width: 100%;
   font-size: 30px;
@@ -24,7 +34,6 @@
 
 .button {
   margin-bottom: 10px;
-
 }
 
 .tableTextEmpty {
@@ -34,7 +43,3 @@
 .icon {
   margin-right: 5px;
 }
-
-
-
-

@@ -1,5 +1,4 @@
 import { Input } from "@/components/ui/Input";
-import { Button } from "@/components/ui/button";
 import { Close } from "@/components/ui/icons/close/Close";
 import { Typography } from "@/components/ui/typography";
 import { useChoiceClient } from "@/pages/briefcase/briefcase/choiceClient/useChoiceClient";
@@ -16,14 +15,8 @@ export const ChoiceClientComponent = ({
   client,
   setClient,
 }: ChoiceClientComponentProps) => {
-  const {
-    cancelClient,
-    choiceClient,
-    foundClients,
-    onChangeInput,
-    onClickSearchClient,
-    showTextNotFound,
-  } = useChoiceClient({ setClient });
+  const { cancelClient, choiceClient, foundClients, onChangeInput } =
+    useChoiceClient({ setClient });
 
   if (client) {
     return (
@@ -46,26 +39,23 @@ export const ChoiceClientComponent = ({
           onValueChange={onChangeInput}
           type={"search"}
         />
-        <Button onClick={onClickSearchClient} variant={"tertiary"}>
-          Поиск
-        </Button>
       </div>
       <div>
-        {foundClients.clients.length
-          ? foundClients.clients.map((el: ClientType) => {
-              return (
-                <TableRowClient
-                  key={el.id}
-                  id={el.id}
-                  name={el.name}
-                  onClick={() => choiceClient(el)}
-                  phone={el.phones[0]?.tel}
-                />
-              );
-            })
-          : showTextNotFound && (
-              <Typography variant={"subtitle2"}>Не найдено</Typography>
-            )}
+        {foundClients?.clients.length ? (
+          foundClients.clients.map((el: ClientType) => {
+            return (
+              <TableRowClient
+                key={el.id}
+                id={el.id}
+                name={el.name}
+                onClick={() => choiceClient(el)}
+                phone={el.phones[0]?.tel}
+              />
+            );
+          })
+        ) : (
+          <Typography variant={"subtitle2"}>Не найдено</Typography>
+        )}
       </div>
     </>
   );

@@ -10,14 +10,13 @@ type PropsType = {
   setClient: (client: ClientType | undefined) => void;
 };
 export const useChoiceClient = ({ setClient }: PropsType) => {
+  const [value, setValue] = useState("");
+  const { data } = useFindClientsQuery({ search: value, page: 1, pageSize: 5 });
   const [foundClients, setSearchClient] = useState<ResponseClients>({
     clients: [],
     totalCount: 0,
   });
-  const [showTextNotFound, setShowTextNotFound] = useState(false);
-  const [value, setValue] = useState("");
   const [idTime, setIdTime] = useState<any>();
-  const { data } = useFindClientsQuery({ search: value });
 
   const onChangeInput = (value: string) => {
     setValue(value);
@@ -29,11 +28,6 @@ export const useChoiceClient = ({ setClient }: PropsType) => {
     }, 300);
     setIdTime(id);
   }, [value, data]);
-  const onClickSearchClient = () => {
-    setShowTextNotFound(true);
-
-    setSearchClient(data);
-  };
   const choiceClient = (clientObj: ClientType) => {
     setClient(clientObj);
   };
@@ -46,7 +40,5 @@ export const useChoiceClient = ({ setClient }: PropsType) => {
     choiceClient,
     foundClients,
     onChangeInput,
-    onClickSearchClient,
-    showTextNotFound,
   };
 };

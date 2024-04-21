@@ -26,7 +26,7 @@ type TableOrdersProps = {
 };
 export const TableOrders = ({ orders, idBriefcase }: TableOrdersProps) => {
   return (
-    <Table.Root className={s.table}>
+    <Table.Root className={s.table} id={"orders-table"}>
       <Table.Head>
         <Table.Row>
           <Table.Cell variant={"head"}>№</Table.Cell>
@@ -83,9 +83,9 @@ const TableRawOrder = ({ index, order, idBriefcase }: TableRawOrderProps) => {
       </Table.Cell>
       <Table.Cell>
         {order.orderClient.map((el) => (
-          <span key={el.positionId}>{`${el.reductionName} ${el.quantity} ${
-            el.comments && `(${el.comments})`
-          }`}</span>
+          <span className={s.position} key={el.positionId}>{`${el.quantity}${
+            el.reductionName
+          }${el.comments && `(${el.comments})`}  `}</span>
         ))}
       </Table.Cell>
       <Table.Cell>
@@ -156,18 +156,18 @@ const EditOrderClient = ({
       open={isOpen}
       title={"Редактировать заказ"}
     >
-      {client?.addresses.map((address, i) => (
-        <Typography
-          className={`${s.address} ${
-            addressId === address.idAddress ? s.done : s.red
-          }`}
-          variant={"body2"}
-          onClick={() => setAddressId(address.idAddress)}
-        >
-          {++i}.{address?.street} {address.numberStreet}
-        </Typography>
-      ))}
       <ModalWithContent>
+        {client?.addresses.map((address, i) => (
+          <Typography
+            className={`${s.address} ${
+              addressId === address.idAddress ? s.done : s.red
+            }`}
+            variant={"body2"}
+            onClick={() => setAddressId(address.idAddress)}
+          >
+            {++i}.{address?.street} {address.numberStreet}
+          </Typography>
+        ))}
         <div className={s.clientName}>
           <Typography variant={"body2"}>
             Клиент - {order?.clientName}

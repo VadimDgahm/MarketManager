@@ -32,6 +32,11 @@ export const FormOrderClient = ({
   });
   return (
     <div>
+      <SelectWithSearch
+        onChange={(value) => setIdChoiceProduct(value.value)}
+        title={"Выбрать продукт"}
+        options={arrOptionsProduct}
+      />
       <div className={s.weightBox}>
         <Input
           className={s.inputWeight}
@@ -50,12 +55,6 @@ export const FormOrderClient = ({
           ]}
         />
       </div>
-
-      <SelectWithSearch
-        onChange={(value) => setIdChoiceProduct(value.value)}
-        title={"Выбрать продукт"}
-        options={arrOptionsProduct}
-      />
       <Input
         className={s.comment}
         label={"Комментрии к продукту"}

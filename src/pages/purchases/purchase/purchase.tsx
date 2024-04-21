@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
-
+// @ts-ignore
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { Table } from "@/components/ui/table/Table";
 import { Typography } from "@/components/ui/typography";
 import { useGetBriefcaseByIdQuery } from "@/services/briefcase/briefcase.services";
@@ -85,7 +86,15 @@ export const Purchase = () => {
         status={filterView}
       />
       <div className={s.table}>
-        <Table.Root>
+        <ReactHTMLTableToExcel
+          id="test-table-xls-button-purchase"
+          className={s.btnDownload}
+          table="purchaseOrder"
+          filename={`Таблица заказов ${data.name}-${filterView}`}
+          sheet="лист1"
+          buttonText="Скачать как XLS"
+        />
+        <Table.Root id={"purchaseOrder"}>
           <Table.Head>
             <Table.Row>
               {catalog
@@ -171,6 +180,5 @@ const calculateTotalSum = (nameProduct: string, orders: OrderType[]) => {
 };
 
 const readNumber = (nameProduct: string, orders: OrderType[]) => {
-  const needProductsArr = orders?.filter((el) => el.name === nameProduct);
-  return needProductsArr;
+  return orders?.filter((el) => el.name === nameProduct);
 };

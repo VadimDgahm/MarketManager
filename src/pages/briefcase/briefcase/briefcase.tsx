@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-
+// @ts-ignore
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { Button } from "@/components/ui/button";
 import { PlusSquareOutline } from "@/components/ui/icons/plus-square-outline/PlusSquareOutline";
 import { Typography } from "@/components/ui/typography";
@@ -53,7 +54,17 @@ export const Briefcase = () => {
               Таблица пуста
             </Typography>
           ) : (
-            <TableOrders orders={data.orders} idBriefcase={params.id} />
+            <>
+              <ReactHTMLTableToExcel
+                id="test-table-xls-button"
+                className={s.btnDownload}
+                table="orders-table"
+                filename={`Таблица заказов ${data.name}`}
+                sheet="лист1"
+                buttonText="Скачать как XLS"
+              />
+              <TableOrders orders={data.orders} idBriefcase={params.id} />
+            </>
           )}
         </div>
       </div>

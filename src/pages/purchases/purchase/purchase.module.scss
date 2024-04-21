@@ -2,3 +2,15 @@
   max-width: 1400px;
   overflow: auto;
 }
+
+.btnDownload {
+  cursor: pointer;
+  padding: 10px;
+  color: black;
+  border-radius: 10px;
+  margin-left: 10px;
+  transition: 0.3s;
+  &:hover {
+    background-color: grey;
+  }
+}
