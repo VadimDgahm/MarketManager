@@ -39,6 +39,8 @@ export const useCreateOrder = ({ onOpenWindow, setResult }: PropsType) => {
       setErrorAddress(false);
       setClient(undefined);
       setAddressId("");
+      setDayDelivery("Неважно");
+      setTimeDelivery("");
       onOpenWindow(false);
     }
   };
