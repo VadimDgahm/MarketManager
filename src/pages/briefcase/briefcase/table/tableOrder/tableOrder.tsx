@@ -59,7 +59,7 @@ type TableRawOrderProps = {
   idBriefcase: string | undefined;
 };
 const TableRawOrder = ({ index, order, idBriefcase }: TableRawOrderProps) => {
-  const { data: client } = useGetClientByIdQuery({
+  const { data: client, isLoading } = useGetClientByIdQuery({
     id: order.clientId,
   });
   const [removeOrder] = useRemoveOrderMutation();
@@ -70,22 +70,38 @@ const TableRawOrder = ({ index, order, idBriefcase }: TableRawOrderProps) => {
     removeOrder({ orderId, id: idBriefcase });
     setIsOpenModal(false);
   };
+  if (isLoading) {
+    return;
+  }
   return (
-    <Table.Row key={order.orderId}>
+    <Table.Row className={s.table} key={order.orderId}>
       <Table.Cell>{++index}</Table.Cell>
       <Table.Cell>{client?.source}</Table.Cell>
       <Table.Cell>{order.clientName}</Table.Cell>
-      <Table.Cell>{client?.phones[0].tel}</Table.Cell>
+      <Table.Cell>{client?.phones[0]?.tel}</Table.Cell>
       <Table.Cell>
         {client?.addresses
           .filter((address) => order.addressId === address.idAddress)
-          .map((address) => `${address.street} ${address.numberStreet}`)}
+          .map((address) => (
+            <>
+              {address.city && `${address.city},`}{" "}
+              {address.street && `${address.street},`}
+              {address.numberStreet && ` д.${address.numberStreet},`}
+              {address.buildingSection && ` корпус${address.buildingSection},`}
+              {address.numberApartment && ` кв.${address.numberApartment},`}
+              {address.lobby && ` под.${address.lobby},`}
+              {address.floor && ` этаж.${address.floor},`}
+              {address.code && ` код.${address.code}`}
+            </>
+          ))}
       </Table.Cell>
-      <Table.Cell>
-        {order.orderClient.map((el) => (
-          <span className={s.position} key={el.positionId}>{`${el.quantity}${
-            el.reductionName
-          }${el.comments && `(${el.comments})`}  `}</span>
+      <Table.Cell className={s.cellPosition}>
+        {order.orderClient?.map((el) => (
+          <span className={s.position} key={el.positionId}>
+            {`${el.quantity}${el.reductionName}${
+              el.comments && `(${el.comments})`
+            }  _ _`}
+          </span>
         ))}
       </Table.Cell>
       <Table.Cell>

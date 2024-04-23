@@ -44,7 +44,7 @@ export const Addresses = ({ data }: AddressesProps) => {
               } = el;
 
               return (
-                <div className={s.tab} key={i}>
+                <div key={i}>
                   <Typography key={i} variant={"body1"}>
                     {++i}. {city && `г.${city},`} {street && `${street},`}
                     {numberStreet && ` д.${numberStreet},`}

@@ -11,7 +11,11 @@ type PropsType = {
 };
 export const useChoiceClient = ({ setClient }: PropsType) => {
   const [value, setValue] = useState("");
-  const { data } = useFindClientsQuery({ search: value, page: 1, pageSize: 5 });
+  const { data, isLoading } = useFindClientsQuery({
+    search: value,
+    page: 1,
+    pageSize: 5,
+  });
   const [foundClients, setSearchClient] = useState<ResponseClients>({
     clients: [],
     totalCount: 0,
@@ -36,6 +40,7 @@ export const useChoiceClient = ({ setClient }: PropsType) => {
   };
 
   return {
+    isLoading,
     cancelClient,
     choiceClient,
     foundClients,

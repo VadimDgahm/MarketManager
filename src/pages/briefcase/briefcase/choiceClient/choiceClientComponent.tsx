@@ -15,9 +15,12 @@ export const ChoiceClientComponent = ({
   client,
   setClient,
 }: ChoiceClientComponentProps) => {
-  const { cancelClient, choiceClient, foundClients, onChangeInput } =
+  const { cancelClient, choiceClient, foundClients, onChangeInput, isLoading } =
     useChoiceClient({ setClient });
 
+  if (isLoading) {
+    return null;
+  }
   if (client) {
     return (
       <>
@@ -41,7 +44,7 @@ export const ChoiceClientComponent = ({
         />
       </div>
       <div>
-        {foundClients?.clients.length ? (
+        {foundClients?.clients?.length ? (
           foundClients.clients.map((el: ClientType) => {
             return (
               <TableRowClient

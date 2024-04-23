@@ -138,12 +138,7 @@ type FormDataAddClient = {
 const loginSchema = z.object({
   comments: z.string().optional(),
   name: z.string().min(3, "Минимум 3 символа").max(3000, "Слишком большое имя"),
-  phone: z
-    .string()
-    .regex(
-      /^\+375\s?\(?17|25|29|33|44\)?\s?\d{3}-\d{2}-\d{2}$/,
-      "Неверный формат номера телефона Беларуси"
-    ),
+  phone: z.string(),
   city: z.string(),
   street: z.string(),
   numberStreet: z.string(),
