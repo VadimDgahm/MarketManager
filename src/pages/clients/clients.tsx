@@ -98,7 +98,7 @@ export const Clients = () => {
           onValueChange={onChangeValueSearch}
         />
       </div>
-      {data.clients.length ? (
+      {data.clients?.length ? (
         <TableClients data={data.clients} />
       ) : (
         <div className={s.list}>Список пуст</div>
@@ -252,7 +252,7 @@ export const ModalCreateClient = ({
           <ControlledInput
             className={s.inputAddress}
             control={control}
-            label={"Телефон: пример - +375290000000"}
+            label={"Телефон"}
             name={"phone"}
           />
           <ControlledInput
