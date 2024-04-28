@@ -19,6 +19,7 @@ import { TabSwitcher } from "@/components/ui/tabSwitcher";
 import { Input } from "@/components/ui/Input";
 import ModalWithButton from "@/components/ui/modal/modalWithButton/modalWithButton";
 import { ClientType } from "@/services/clients/clientsServicesType";
+import { FullAddress } from "@/pages/utils/addresses";
 
 type TableOrdersProps = {
   orders: BriefcaseOrder[];
@@ -30,7 +31,8 @@ export const TableOrders = ({ orders, idBriefcase }: TableOrdersProps) => {
       <Table.Head>
         <Table.Row>
           <Table.Cell variant={"head"}>№</Table.Cell>
-          <Table.Cell variant={"head"}>Источник</Table.Cell>
+          <Table.Cell variant={"head"}></Table.Cell>
+          <Table.Cell variant={"head"}></Table.Cell>
           <Table.Cell variant={"head"}>Имя</Table.Cell>
           <Table.Cell variant={"head"}>Номер телефона</Table.Cell>
           <Table.Cell variant={"head"}>Адрес</Table.Cell>
@@ -74,63 +76,67 @@ const TableRawOrder = ({ index, order, idBriefcase }: TableRawOrderProps) => {
     return;
   }
   return (
-    <Table.Row className={s.table} key={order.orderId}>
-      <Table.Cell>{++index}</Table.Cell>
-      <Table.Cell>{client?.source}</Table.Cell>
-      <Table.Cell>{order.clientName}</Table.Cell>
-      <Table.Cell>{client?.phones[0]?.tel}</Table.Cell>
-      <Table.Cell>
-        {client?.addresses
-          .filter((address) => order.addressId === address.idAddress)
-          .map((address) => (
-            <>
-              {address.city && `${address.city},`}{" "}
-              {address.street && `${address.street},`}
-              {address.numberStreet && ` д.${address.numberStreet},`}
-              {address.buildingSection && ` корпус${address.buildingSection},`}
-              {address.numberApartment && ` кв.${address.numberApartment},`}
-              {address.lobby && ` под.${address.lobby},`}
-              {address.floor && ` этаж.${address.floor},`}
-              {address.code && ` код.${address.code}`}
-            </>
+    <>
+      <Table.Row className={s.table} key={order.orderId}>
+        <Table.Cell>{++index}</Table.Cell>
+        <Table.Cell>{client?.source?.substring(0, 4)}.</Table.Cell>
+        <Table.Cell>{client?.status.substring(0, 6)}.</Table.Cell>
+        <Table.Cell>{order.clientName}</Table.Cell>
+        <Table.Cell>{client?.phones[0]?.tel}</Table.Cell>
+        <Table.Cell>
+          {client?.addresses
+            .filter((address) => order.addressId === address.idAddress)
+            .map((address) => (
+              <FullAddress address={address} />
+            ))}
+        </Table.Cell>
+        <Table.Cell className={s.cellPosition}>
+          {order.orderClient?.map((el) => (
+            <span className={s.position} key={el.positionId}>
+              {`${el.quantity}${el.reductionName}${
+                el.comments && `(${el.comments})`
+              }  _ _`}
+            </span>
           ))}
-      </Table.Cell>
-      <Table.Cell className={s.cellPosition}>
-        {order.orderClient?.map((el) => (
-          <span className={s.position} key={el.positionId}>
-            {`${el.quantity}${el.reductionName}${
-              el.comments && `(${el.comments})`
-            }  _ _`}
-          </span>
-        ))}
-      </Table.Cell>
-      <Table.Cell>
-        <div>{`${
-          order.dayDelivery !== "Неважно" || "" ? order.dayDelivery : ""
-        }`}</div>
-        <div>{`${order.timeDelivery ? order.timeDelivery : ""}`}</div>
-      </Table.Cell>
-      <Table.Cell>
-        <CellVariant.EditAndTrash
-          onClickEdit={() => setIsOpenEditModal(true)}
-          onClickTrash={() => setIsOpenModal(true)}
-        />
-        <DeleteModal
-          name={`заказ - ${order.clientName}`}
-          open={isOpenModal}
-          removeHandler={() => removeOrderHandler(order.orderId)}
-          setOpen={setIsOpenModal}
-          title={"Удаление заказа"}
-        />
-        <EditOrderClient
-          isOpen={isOpenEditModal}
-          onOpenWindow={setIsOpenEditModal}
-          order={order}
-          idBriefcase={idBriefcase}
-          client={client}
-        />
-      </Table.Cell>
-    </Table.Row>
+        </Table.Cell>
+        <Table.Cell>
+          <div>{`${
+            order.dayDelivery !== "Неважно" || "" ? order.dayDelivery : ""
+          }`}</div>
+          <div>{`${order.timeDelivery ? order.timeDelivery : ""}`}</div>
+        </Table.Cell>
+        <Table.Cell>
+          <CellVariant.EditAndTrash
+            onClickEdit={() => setIsOpenEditModal(true)}
+            onClickTrash={() => setIsOpenModal(true)}
+          />
+          <DeleteModal
+            name={`заказ - ${order.clientName}`}
+            open={isOpenModal}
+            removeHandler={() => removeOrderHandler(order.orderId)}
+            setOpen={setIsOpenModal}
+            title={"Удаление заказа"}
+          />
+          <EditOrderClient
+            isOpen={isOpenEditModal}
+            onOpenWindow={setIsOpenEditModal}
+            order={order}
+            idBriefcase={idBriefcase}
+            client={client}
+          />
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell />
+        <Table.Cell />
+        <Table.Cell />
+        <Table.Cell />
+        <Table.Cell />
+        <Table.Cell />
+        <Table.Cell />
+        <Table.Cell />
+      </Table.Row>
+    </>
   );
 };
 

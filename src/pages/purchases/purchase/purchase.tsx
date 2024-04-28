@@ -176,7 +176,7 @@ const calculateTotalSum = (nameProduct: string, orders: OrderType[]) => {
     }
   });
 
-  return `${result.quantity}шт. ${result.totalWeight}кг.`;
+  return `${result.quantity}шт. ${result.totalWeight.toFixed(2)}кг.`;
 };
 
 const readNumber = (nameProduct: string, orders: OrderType[]) => {

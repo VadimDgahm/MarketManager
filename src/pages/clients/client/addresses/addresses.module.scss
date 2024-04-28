@@ -36,3 +36,16 @@
     }
   }
 }
+.addressData {
+  display: flex;
+  justify-content: space-between;
+}
+.iconEdit {
+  margin-left: 10px;
+  cursor: pointer;
+  &:hover {
+    path {
+      fill: var(--color-info-300);
+    }
+  }
+}

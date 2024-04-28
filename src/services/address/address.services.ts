@@ -23,9 +23,22 @@ const addressServices = baseApi.injectEndpoints({
           };
         },
       }),
+      updateAddress: builder.mutation<any, any>({
+        invalidatesTags: ["Clients"],
+        query: ({ idClient, ...body }) => {
+          return {
+            body,
+            method: "PUT",
+            url: `address/${idClient}`,
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useCreateAddressMutation, useRemoveAddressMutation } =
-  addressServices;
+export const {
+  useCreateAddressMutation,
+  useRemoveAddressMutation,
+  useUpdateAddressMutation,
+} = addressServices;

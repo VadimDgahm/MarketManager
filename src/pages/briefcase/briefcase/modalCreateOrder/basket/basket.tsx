@@ -38,6 +38,7 @@ export const BasketClient = ({
                 <Table.Cell variant={"head"}>Наименование</Table.Cell>
                 <Table.Cell variant={"head"}>Кол-во</Table.Cell>
                 <Table.Cell variant={"head"}></Table.Cell>
+                <Table.Cell variant={"head"}></Table.Cell>
               </Table.Row>
             </Table.Head>
             <Table.Body>
@@ -45,6 +46,7 @@ export const BasketClient = ({
                 <Table.Row key={i}>
                   <Table.Cell>{el.name}</Table.Cell>
                   <Table.Cell>{el.quantity}</Table.Cell>
+                  <Table.Cell>{el.comments}</Table.Cell>
                   <Table.Cell>
                     <TrashOutline
                       className={s.removeIcon}

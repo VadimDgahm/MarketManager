@@ -22,7 +22,6 @@ export const ChangeInfoAboutClient = ({
     setIsEditorOpen(false);
     changeValue(valueInput);
   };
-
   return (
     <div className={s.content}>
       <Typography className={s.title} variant={"h3"}>
@@ -38,7 +37,7 @@ export const ChangeInfoAboutClient = ({
         />
       ) : (
         <Typography onDoubleClick={() => setIsEditorOpen(true)}>
-          {value ? value : "Нет комментариев"}
+          {value?.trim() ? value : "Нет информации"}
         </Typography>
       )}
     </div>

@@ -4,18 +4,22 @@ import { ControlledInput } from "@/components/controlled/controlledInput/control
 import Modal from "@/components/ui/modal/modal";
 import ModalWithButton from "@/components/ui/modal/modalWithButton/modalWithButton";
 import ModalWithContent from "@/components/ui/modal/modalWithContent/modalWithContent";
-import { useCreateAddressMutation } from "@/services/address/address.services";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 import s from "./formForAddress.module.scss";
+import { AddressClient } from "@/services/clients/clientsServicesType";
 
 type ModalCreateAddressProps = {
   idClient: string | undefined;
   isOpen: boolean;
   onOpenWindow: () => void;
+  onChangeHandler: (
+    data: FormDataAddClientForAddress & { idClient: string | undefined }
+  ) => void;
+  data?: AddressClient;
 };
-type FormDataAddClientForAddress = {
+export type FormDataAddClientForAddress = {
   buildingSection: string;
   city: string;
   code: string;
@@ -40,27 +44,31 @@ export const FormForAddress = ({
   idClient,
   isOpen,
   onOpenWindow,
+  onChangeHandler,
+  data,
 }: ModalCreateAddressProps) => {
-  const [createAddress] = useCreateAddressMutation();
   const { control, handleSubmit, reset } = useForm<FormDataAddClientForAddress>(
     {
       defaultValues: {
-        buildingSection: "",
-        city: "",
-        code: "",
-        floor: "",
-        lobby: "",
-        numberApartment: "",
-        numberStreet: "",
-        street: "",
+        buildingSection: data?.buildingSection || "",
+        city: data?.city || "",
+        code: data?.code || "",
+        floor: data?.floor || "",
+        lobby: data?.lobby || "",
+        numberApartment: data?.numberApartment || "",
+        numberStreet: data?.numberStreet || "",
+        street: data?.street || "",
       },
       mode: "onSubmit",
       resolver: zodResolver(loginSchema),
     }
   );
   const onSubmitHandler = (dateForm: FormDataAddClientForAddress) => {
-    createAddress({ idClient, ...dateForm });
     onOpenWindow();
+    onChangeHandler({ idClient, ...dateForm });
+    if (data) {
+      reset(dateForm);
+    }
     reset();
   };
 

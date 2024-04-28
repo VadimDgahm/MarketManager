@@ -16,6 +16,7 @@ import {
 import clsx from "clsx";
 
 import s from "./TableCellVariant.module.scss";
+import { FullAddress } from "@/pages/utils/addresses";
 
 type StarsProps = {
   numberStar?: number;
@@ -46,7 +47,7 @@ const Stars: FC<StarsProps> = ({
             key={n}
             width={16}
           />
-        ),
+        )
       )}
     </div>
   );
@@ -189,7 +190,7 @@ const Addresses = ({ className, data, ...rest }: AddressesProps) => {
 
     return (
       <div className={classNames} {...rest}>
-        <div>{`${firstAddresses.street} ${firstAddresses.numberStreet}`}</div>
+        <FullAddress address={firstAddresses} />
       </div>
     );
   }
