@@ -32,7 +32,7 @@ const briefcaseService = baseApi.injectEndpoints({
         },
       }),
       getBriefcaseById: builder.query<any, any>({
-        providesTags: ["Briefcase"],
+        providesTags: ["Briefcase", "Clients"],
         query: ({ id }) => {
           return {
             url: `briefcase/${id}`,

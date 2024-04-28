@@ -1,6 +1,8 @@
 import { Table } from "@/components/ui/table/Table";
-import { BriefcaseOrder } from "@/services/briefcase/briefcase.type";
-import { useGetClientByIdQuery } from "@/services/clients/clients.services";
+import {
+  BriefcaseOrder,
+  ClientDataBriefcase,
+} from "@/services/briefcase/briefcase.type";
 
 import s from "./tableOrder.module.scss";
 import { CellVariant } from "@/components/ui/table/TableCellVariant/TableCellVariant";
@@ -18,7 +20,6 @@ import { BasketClient } from "@/pages/briefcase/briefcase/modalCreateOrder/baske
 import { TabSwitcher } from "@/components/ui/tabSwitcher";
 import { Input } from "@/components/ui/Input";
 import ModalWithButton from "@/components/ui/modal/modalWithButton/modalWithButton";
-import { ClientType } from "@/services/clients/clientsServicesType";
 import { FullAddress } from "@/pages/utils/addresses";
 
 type TableOrdersProps = {
@@ -61,9 +62,7 @@ type TableRawOrderProps = {
   idBriefcase: string | undefined;
 };
 const TableRawOrder = ({ index, order, idBriefcase }: TableRawOrderProps) => {
-  const { data: client, isLoading } = useGetClientByIdQuery({
-    id: order.clientId,
-  });
+  const client = order.dataClient;
   const [removeOrder] = useRemoveOrderMutation();
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false);
@@ -72,9 +71,7 @@ const TableRawOrder = ({ index, order, idBriefcase }: TableRawOrderProps) => {
     removeOrder({ orderId, id: idBriefcase });
     setIsOpenModal(false);
   };
-  if (isLoading) {
-    return;
-  }
+
   return (
     <>
       <Table.Row className={s.table} key={order.orderId}>
@@ -145,7 +142,7 @@ type TEditOrderClient = {
   onOpenWindow: (value: boolean) => void;
   order: BriefcaseOrder;
   idBriefcase: string | undefined;
-  client: ClientType | undefined;
+  client: ClientDataBriefcase | undefined;
 };
 const EditOrderClient = ({
   onOpenWindow,

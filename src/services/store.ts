@@ -3,7 +3,9 @@ import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(baseApi.middleware);
+    return getDefaultMiddleware({ serializableCheck: false }).concat(
+      baseApi.middleware
+    );
   },
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,

@@ -26,10 +26,10 @@ export const Briefcase = () => {
   if (isLoading) {
     return <div>isLoading</div>;
   }
+
   const createOrder = (body: OrderClientType) => {
     createOrderForClient({ body, id: params.id });
   };
-
   return (
     <div className={s.briefcase}>
       <Typography className={s.headerTitle} variant={"h1"}>
@@ -49,7 +49,7 @@ export const Briefcase = () => {
           >
             <PlusSquareOutline className={s.icon} /> Создать заказ
           </Button>
-          {!data.orders.length ? (
+          {!data.orders?.length ? (
             <Typography className={s.tableTextEmpty} variant={"body1"}>
               Таблица пуста
             </Typography>
