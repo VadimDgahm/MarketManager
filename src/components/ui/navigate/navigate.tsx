@@ -31,6 +31,10 @@ export const Navigate = () => {
         name={"Закупки"}
         url={"purchases"}
       />
+       <IconLink
+        name={"Маршруты"}
+        url={"routes"}
+      />
     </nav>
   );
 };

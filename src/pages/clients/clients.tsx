@@ -77,6 +77,7 @@ export const Clients = () => {
   };
 
   if (isLoading) return <div>....Loading</div>;
+  if(!data.clients) return null
   return (
     <div className={s.clientsContainer}>
       <div className={s.button}>

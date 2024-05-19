@@ -45,7 +45,7 @@ export const ChoiceClientComponent = ({
       </div>
       <div>
         {foundClients?.clients?.length ? (
-          foundClients.clients.map((el: ClientType) => {
+          foundClients?.clients.map((el: ClientType) => {
             return (
               <TableRowClient
                 key={el.id}

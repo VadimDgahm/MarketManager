@@ -17,6 +17,7 @@ import { Purchases } from "@/pages/purchases/purchases";
 
 import { Login } from "@/pages/login/login";
 import { useCheckAuthQuery } from "@/services/auth/auth.services";
+import { RoutesPage } from "./pages/routesPage/routesPage";
 
 const publicRoutes: RouteObject[] = [
   {
@@ -57,6 +58,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <Briefcase />,
     path: "/briefcases/:id",
+  },
+  {
+    element: <RoutesPage />,
+    path: "/routes",
   },
   {
     element: <Catalog />,

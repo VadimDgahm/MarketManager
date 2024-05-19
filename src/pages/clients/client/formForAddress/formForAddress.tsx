@@ -110,7 +110,6 @@ export const FormForAddress = ({
             control={control}
             label={"Корпус"}
             name={"buildingSection"}
-            type={"number"}
           />
           <ControlledInput
             className={s.inputAddress}
