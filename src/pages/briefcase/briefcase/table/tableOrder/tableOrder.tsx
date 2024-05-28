@@ -21,6 +21,7 @@ import { TabSwitcher } from "@/components/ui/tabSwitcher";
 import { Input } from "@/components/ui/Input";
 import ModalWithButton from "@/components/ui/modal/modalWithButton/modalWithButton";
 import { FullAddress } from "@/pages/utils/addresses";
+import {DeliveryRouteEditModal} from "@/components/ui/deliveryRouteEditModal/deliveryRouteEditModal";
 
 type TableOrdersProps = {
   orders: BriefcaseOrder[];
@@ -38,6 +39,7 @@ export const TableOrders = ({ orders, idBriefcase }: TableOrdersProps) => {
           <Table.Cell variant={"head"}>Номер телефона</Table.Cell>
           <Table.Cell variant={"head"}>Адрес</Table.Cell>
           <Table.Cell variant={"head"}>Заказ</Table.Cell>
+          <Table.Cell variant={"head"}>Маршрут</Table.Cell>
           <Table.Cell variant={"head"}>Время</Table.Cell>
           <Table.Cell variant={"head"}></Table.Cell>
         </Table.Row>
@@ -66,6 +68,7 @@ const TableRawOrder = ({ index, order, idBriefcase }: TableRawOrderProps) => {
   const [removeOrder] = useRemoveOrderMutation();
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false);
+  const [isOpenDeliveryRouteModal, setIsOpenDeliveryRouteModal] = useState<boolean>(false);
 
   const removeOrderHandler = (orderId: string) => {
     removeOrder({ orderId, id: idBriefcase });
@@ -95,6 +98,13 @@ const TableRawOrder = ({ index, order, idBriefcase }: TableRawOrderProps) => {
               }  _ _`}
             </span>
           ))}
+        </Table.Cell>
+        <Table.Cell>
+          {`${order.deliveryRoute ? order.deliveryRoute.name : ""}`}
+          <CellVariant.Edit onClickEdit={() =>setIsOpenDeliveryRouteModal(true)}/>
+          <DeliveryRouteEditModal open={isOpenDeliveryRouteModal} idBriefcase={idBriefcase}
+                                  order={order} title={"Изменить маршрут"}
+                                  setOpen={setIsOpenDeliveryRouteModal}/>
         </Table.Cell>
         <Table.Cell>
           <div>{`${

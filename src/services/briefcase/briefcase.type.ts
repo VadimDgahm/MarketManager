@@ -11,6 +11,10 @@ export type OrderType = {
   reductionName: string;
   view: string;
 };
+export type OrderDeliveryRouteType = {
+  _id: string;
+  name: string;
+};
 export type ClientDataBriefcase = {
   status: string;
   source: string;
@@ -27,6 +31,7 @@ export type BriefcaseOrder = {
   orderId: string;
   timeDelivery: string;
   dayDelivery: string;
+  deliveryRoute: OrderDeliveryRouteType | null
 };
 export type BriefcaseType = {
   name: string;
