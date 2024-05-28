@@ -198,6 +198,30 @@ const Addresses = ({ className, data, ...rest }: AddressesProps) => {
   return <div>Нет данных</div>;
 };
 
+type EditProps = {
+  onClickEdit?: () => void;
+  title?: string;
+} & ComponentProps<"div">;
+const Edit: FC<EditProps> = ({
+                               className,
+                               onClickEdit,
+                               title = "",
+                               ...rest
+                             }) => {
+  const classNames = clsx(className, s.cell);
+  const classNamesIcon = clsx(s.icon, s.indentation);
+
+  return (
+    <div className={classNames} {...rest}>
+      <div className={s.indentation}>
+        <Typography variant={"body2"}>{title}</Typography>
+      </div>
+
+      <EditOutline className={classNamesIcon} onClick={onClickEdit}/>
+    </div>
+  );
+};
+
 export const CellVariant = {
   Addresses,
   EditAndTrash,
@@ -206,4 +230,5 @@ export const CellVariant = {
   Stars,
   WithImage,
   WithSort,
+  Edit,
 };
