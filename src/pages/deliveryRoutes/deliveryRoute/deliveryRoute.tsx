@@ -1,5 +1,6 @@
 import {useParams} from "react-router-dom";
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
+// @ts-ignore
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import {Typography} from "@/components/ui/typography";
 import s from "@/pages/briefcase/briefcase/briefcase.module.scss";
 import {useGetRouteByIdQuery} from "@/services/deliveryRoutes/deliveryRoute.services";
