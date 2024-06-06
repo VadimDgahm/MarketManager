@@ -35,7 +35,7 @@ export const DeliveryRoute = () => {
                 sheet="лист1"
                 buttonText="Скачать как XLS"
               />
-              <TableDeliveryRouteOrder orders={data.orders}/>
+              <TableDeliveryRouteOrder data={data}/>
             </>
           )}
         </div>

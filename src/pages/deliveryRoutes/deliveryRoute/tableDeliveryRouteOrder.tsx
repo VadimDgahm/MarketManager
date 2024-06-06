@@ -1,89 +1,106 @@
-import {Table} from "@/components/ui/table/Table";
-import {BriefcaseOrder} from "@/services/briefcase/briefcase.type";
-import s from "@/pages/briefcase/briefcase/table/tableOrder/tableOrder.module.scss";
+import s from "./deliveryRoute.module.scss";
 import {FullAddress} from "@/pages/utils/addresses";
+import {useState} from "react";
+import {arrayMove, List} from "react-movable";
+import {Button} from "@/components/ui/button";
+import {DeliveryRouteResponseType} from "@/services/deliveryRoutes/deliveryRoute.type";
+import {useSortRouteMutation} from "@/services/deliveryRoutes/deliveryRoute.services";
+import {CellVariant} from "@/components/ui/table/TableCellVariant/TableCellVariant";
+import {DeliveryRouteEditModal} from "@/components/ui/deliveryRouteEditModal/deliveryRouteEditModal";
 
 type TableOrdersProps = {
-  orders: BriefcaseOrder[];
-};
-export const TableDeliveryRouteOrder = ({orders}: TableOrdersProps) => {
-  return (
-    <Table.Root className={s.table} id={"orders-table"}>
-      <Table.Head>
-        <Table.Row>
-          <Table.Cell variant={"head"}>№</Table.Cell>
-          <Table.Cell variant={"head"}></Table.Cell>
-          <Table.Cell variant={"head"}>Имя</Table.Cell>
-          <Table.Cell variant={"head"}>Номер телефона</Table.Cell>
-          <Table.Cell variant={"head"}>Адрес</Table.Cell>
-          <Table.Cell variant={"head"}>Заказ</Table.Cell>
-          <Table.Cell variant={"head"}>Маршрут</Table.Cell>
-          <Table.Cell variant={"head"}>Время</Table.Cell>
-        </Table.Row>
-      </Table.Head>
-      <Table.Body>
-        {orders.map((el, i) => (
-          <TableRawOrder
-            key={el.orderId}
-            index={i}
-            order={el}
-          />
-        ))}
-      </Table.Body>
-    </Table.Root>
-  );
+  data: DeliveryRouteResponseType;
 };
 
-type TableRawOrderProps = {
-  index: number;
-  order: BriefcaseOrder;
-};
-const TableRawOrder = ({index, order}: TableRawOrderProps) => {
-  const client = order.dataClient;
+export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
+  const [items, setItems] = useState(structuredClone(data.orders));
+  const [sortRoute, {isLoading}] = useSortRouteMutation();
+  const [isOpenDeliveryRouteModal, setIsOpenDeliveryRouteModal] = useState<boolean>(false);
+  const [selectedOrder, setSelectedOrder] = useState(data.orders[0]);
+
+  function saveSortOrder() {
+    const result: DeliveryRouteResponseType = structuredClone(data);
+
+    for (const briefcase of result.briefcases) {
+      for (const orderId of briefcase.orderIds) {
+        items.forEach((item, index) => {
+          if (item.orderId === orderId.orderId) {
+            orderId.sort = index + 1;
+          }
+        });
+      }
+    }
+
+    // @ts-ignore
+    delete result.orders;
+    sortRoute(result);
+
+    if (!isLoading) {
+      alert('Данные измененны!')
+    }
+  }
 
   return (
     <>
-      <Table.Row className={s.table} key={order.orderId}>
-        <Table.Cell>{++index}</Table.Cell>
-        <Table.Cell>{client?.source?.substring(0, 4)}.</Table.Cell>
-        <Table.Cell>{order.clientName}</Table.Cell>
-        <Table.Cell>{client?.phones[0]?.tel}</Table.Cell>
-        <Table.Cell>
-          {client?.addresses
-            .filter((address) => order.addressId === address.idAddress)
+      <Button className={s.save} variant={"primary"} onClick={() => saveSortOrder()}>Сохранить изменения</Button>
+
+      <List
+        values={items}
+        onChange={({oldIndex, newIndex}) =>
+          setItems(arrayMove(items, oldIndex, newIndex))
+        }
+        renderList={({children, props}) => <table id={"orders-table"} className={s.table}>
+          <thead className={s.head}>
+          <tr>
+            <th>№</th>
+            <th></th>
+            <th>Имя</th>
+            <th>Номер телефона</th>
+            <th>Адрес</th>
+            <th>Заказ</th>
+            <th>Маршрут</th>
+            <th>Время</th>
+          </tr>
+          </thead>
+          <tbody {...props}>{children}</tbody>
+        </table>
+        }
+        renderItem={({value, index, isDragged, props}) => <tr className={isDragged ? s.drag : s.item} {...props}>
+          <th>{
+            // @ts-ignore
+            ++index
+          }</th>
+          <th>{value.dataClient?.source?.substring(0, 4)}.</th>
+          <th>{value.clientName}</th>
+          <th>{value.dataClient?.phones[0]?.tel}</th>
+          <th>{value.dataClient?.addresses
+            .filter((address) => value.addressId === address.idAddress)
             .map((address) => (
               <FullAddress address={address}/>
             ))}
-        </Table.Cell>
-        <Table.Cell className={s.cellPosition}>
-          {order.orderClient?.map((el) => (
-            <span className={s.position} key={el.positionId}>
+          </th>
+          <th>
+            {value.orderClient?.map((el) => (
+              <span className={s.position} key={el.positionId}>
               {`${el.quantity}${el.reductionName}${
                 el.comments && `(${el.comments})`
               }  _ _`}
             </span>
-          ))}
-        </Table.Cell>
-        <Table.Cell>
-          {`${order.deliveryRoute ? order.deliveryRoute.name : ""}`}
-        </Table.Cell>
-        <Table.Cell>
-          <div>{`${
-            order.dayDelivery !== "Неважно" || "" ? order.dayDelivery : ""
-          }`}</div>
-          <div>{`${order.timeDelivery ? order.timeDelivery : ""}`}</div>
-        </Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell/>
-        <Table.Cell/>
-        <Table.Cell/>
-        <Table.Cell/>
-        <Table.Cell/>
-        <Table.Cell/>
-        <Table.Cell/>
-        <Table.Cell/>
-      </Table.Row>
+            ))}
+          </th>
+          <th> {`${value.deliveryRoute ? value.deliveryRoute.name : ""}`}
+            <CellVariant.Edit role="button" onClickEdit={() => {setIsOpenDeliveryRouteModal(true); setSelectedOrder(value);}}/>
+          </th>
+          <th>
+            <div>{`${value.dayDelivery !== "Неважно" || "" ? value.dayDelivery : ""}`}</div>
+            <div>{`${value.timeDelivery ? value.timeDelivery : ""}`}</div>
+          </th>
+
+        </tr>}
+      />
+      <DeliveryRouteEditModal  open={isOpenDeliveryRouteModal} idBriefcase={selectedOrder.briefcaseId}
+                               order={selectedOrder} title={"Изменить маршрут"}
+                               setOpen={setIsOpenDeliveryRouteModal}/>
     </>
-  );
-};
+  )
+}

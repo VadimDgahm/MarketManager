@@ -22,14 +22,63 @@ import { Input } from "@/components/ui/Input";
 import ModalWithButton from "@/components/ui/modal/modalWithButton/modalWithButton";
 import { FullAddress } from "@/pages/utils/addresses";
 import {DeliveryRouteEditModal} from "@/components/ui/deliveryRouteEditModal/deliveryRouteEditModal";
+import {Button} from "@/components/ui/button";
 
 type TableOrdersProps = {
   orders: BriefcaseOrder[];
   idBriefcase: string | undefined;
 };
 export const TableOrders = ({ orders, idBriefcase }: TableOrdersProps) => {
+  const [ASC, DESC] = ['asc', 'desc'];
+  const [sortOrders, setSortOrders] = useState(structuredClone(orders));
+  const [typeSort, setTypeSort] = useState(ASC);
+
+
+  const sortByAddress = () => {
+    const sort = (a: BriefcaseOrder, b: BriefcaseOrder) => {
+      const a_address = a.dataClient?.addresses.filter((address: any) => a.addressId === address.idAddress).map(address => {
+        return address.city?.trim() + ' ' + address.street?.trim();
+      })[0];
+      const b_address = b.dataClient?.addresses.filter((address: any) => b.addressId === address.idAddress).map(address => {
+        return address.city?.trim() + ' ' + address.street?.trim();
+      })[0];
+
+      if (typeSort === ASC) {
+        setTypeSort(DESC);
+        return a_address?.toLowerCase() > b_address?.toLowerCase() ? 1 : -1;
+      } else {
+        setTypeSort(ASC);
+        return a_address?.toLowerCase() < b_address?.toLowerCase() ? 1 : -1;
+      }
+    }
+
+    setSortOrders([...sortOrders.sort(sort)]);
+  }
+
+  const sortByDeliveryRoute = () => {
+    const sort = (a: BriefcaseOrder, b: BriefcaseOrder) => {
+      const a_deliveryRoute = a.deliveryRoute ? a.deliveryRoute.name : '';
+      const b_deliveryRoute = b.deliveryRoute ? b.deliveryRoute .name : '';
+      
+      if (typeSort === ASC) {
+        setTypeSort(DESC);
+        return a_deliveryRoute?.toLowerCase() > b_deliveryRoute?.toLowerCase() ? 1 : -1;
+      } else {
+        setTypeSort(ASC);
+        return a_deliveryRoute?.toLowerCase() < b_deliveryRoute?.toLowerCase() ? 1 : -1;
+      }
+    }
+
+    setSortOrders([...sortOrders.sort(sort)]);
+    console.log(sortOrders);
+  }
+
   return (
-    <Table.Root className={s.table} id={"orders-table"}>
+    <>
+      <Button className={s.sort} variant={"secondary"} onClick={() => sortByAddress()}>Сортировать по адресу</Button>
+      <Button variant={"secondary"} onClick={() => sortByDeliveryRoute()}>Сортировать по маршруту</Button>
+
+      <Table.Root className={s.table} id={"orders-table"}>
       <Table.Head>
         <Table.Row>
           <Table.Cell variant={"head"}>№</Table.Cell>
@@ -45,7 +94,7 @@ export const TableOrders = ({ orders, idBriefcase }: TableOrdersProps) => {
         </Table.Row>
       </Table.Head>
       <Table.Body>
-        {orders.map((el, i) => (
+        {sortOrders.map((el, i) => (
           <TableRawOrder
             key={el.orderId}
             index={i}
@@ -55,6 +104,7 @@ export const TableOrders = ({ orders, idBriefcase }: TableOrdersProps) => {
         ))}
       </Table.Body>
     </Table.Root>
+    </>
   );
 };
 
