@@ -17,7 +17,7 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
   const [sortRoute, {isLoading}] = useSortRouteMutation();
   const [isOpenDeliveryRouteModal, setIsOpenDeliveryRouteModal] = useState<boolean>(false);
   const [selectedOrder, setSelectedOrder] = useState(data.orders[0]);
-
+  console.log(data);
   function saveSortOrder() {
     const result: DeliveryRouteResponseType = structuredClone(data);
 
