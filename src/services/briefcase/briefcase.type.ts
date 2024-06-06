@@ -32,6 +32,8 @@ export type BriefcaseOrder = {
   timeDelivery: string;
   dayDelivery: string;
   deliveryRoute: OrderDeliveryRouteType | null
+  sort?: number,
+  briefcaseId? : string
 };
 export type BriefcaseType = {
   name: string;

@@ -48,6 +48,16 @@ const deliveryRouteService = baseApi.injectEndpoints({
           };
         },
       }),
+      sortRoute: builder.mutation<any, any>({
+        invalidatesTags: ["DeliveryRoutes"],
+        query: (body) => {
+          return {
+            body,
+            method: "PUT",
+            url: `deliveryRoute/sort/${body._id}`,
+          };
+        },
+      }),
     };
   },
 });
@@ -57,5 +67,6 @@ export const {
   useGetRouteQuery,
   useGetRouteByIdQuery,
   useRemoveRouteMutation,
-  useUpdateRouteMutation
+  useUpdateRouteMutation,
+  useSortRouteMutation
 } = deliveryRouteService;

@@ -32,6 +32,11 @@ export const DeliveryRouteEditModal = ({
     if (oldDeliveryRouteId === deliveryRoute._id) {
       alert("Заказ уже в маршруте: " + deliveryRoute.name + " !!!");
     } else {
+      if (order?.deliveryRoute?._id) {
+        order.deliveryRoute._id = deliveryRoute._id;
+        order.deliveryRoute.name = deliveryRoute.name;
+      }
+
       typeof oldDeliveryRouteId === "string" ? deliveryRoute.oldDeliveryRouteId = oldDeliveryRouteId : '';
       updateOrderDeliveryRoute({id: idBriefcase, orderId: order.orderId, body: deliveryRoute});
       setOpen(false)

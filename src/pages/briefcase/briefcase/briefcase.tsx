@@ -1,15 +1,15 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import {useState} from "react";
+import {useParams} from "react-router-dom";
 // @ts-ignore
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
-import { Button } from "@/components/ui/button";
-import { PlusSquareOutline } from "@/components/ui/icons/plus-square-outline/PlusSquareOutline";
-import { Typography } from "@/components/ui/typography";
+import {Button} from "@/components/ui/button";
+import {PlusSquareOutline} from "@/components/ui/icons/plus-square-outline/PlusSquareOutline";
+import {Typography} from "@/components/ui/typography";
 import {
   ModalCreateOrder,
   OrderClientType,
 } from "@/pages/briefcase/briefcase/modalCreateOrder/modalCreateOrder";
-import { TableOrders } from "@/pages/briefcase/briefcase/table/tableOrder/tableOrder";
+import {TableOrders} from "@/pages/briefcase/briefcase/table/tableOrder/tableOrder";
 import {
   useCreateOrderClientMutation,
   useGetBriefcaseByIdQuery,
@@ -20,7 +20,7 @@ import s from "./briefcase.module.scss";
 export const Briefcase = () => {
   const params = useParams();
   const [isOpen, setOpen] = useState(false);
-  const { data, isLoading } = useGetBriefcaseByIdQuery({ id: params.id });
+  const {data, isLoading} = useGetBriefcaseByIdQuery({id: params.id});
   const [createOrderForClient] = useCreateOrderClientMutation();
 
   if (isLoading) {
@@ -28,8 +28,9 @@ export const Briefcase = () => {
   }
 
   const createOrder = (body: OrderClientType) => {
-    createOrderForClient({ body, id: params.id });
+    createOrderForClient({body, id: params.id});
   };
+
   return (
     <div className={s.briefcase}>
       <Typography className={s.headerTitle} variant={"h1"}>
@@ -47,7 +48,7 @@ export const Briefcase = () => {
             onClick={() => setOpen(true)}
             variant={"secondary"}
           >
-            <PlusSquareOutline className={s.icon} /> Создать заказ
+            <PlusSquareOutline className={s.icon}/> Создать заказ
           </Button>
           {!data.orders?.length ? (
             <Typography className={s.tableTextEmpty} variant={"body1"}>
@@ -63,7 +64,7 @@ export const Briefcase = () => {
                 sheet="лист1"
                 buttonText="Скачать как XLS"
               />
-              <TableOrders orders={data.orders} idBriefcase={params.id} />
+              <TableOrders orders={data.orders} idBriefcase={params.id}/>
             </>
           )}
         </div>
