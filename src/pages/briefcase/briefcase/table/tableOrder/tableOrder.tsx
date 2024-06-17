@@ -33,6 +33,9 @@ export const TableOrders = ({ orders, idBriefcase }: TableOrdersProps) => {
   const [sortOrders, setSortOrders] = useState(structuredClone(orders));
   const [typeSort, setTypeSort] = useState(ASC);
 
+  if (orders.length !== sortOrders.length) {
+    setSortOrders(orders);
+  }
 
   const sortByAddress = () => {
     const sort = (a: BriefcaseOrder, b: BriefcaseOrder) => {

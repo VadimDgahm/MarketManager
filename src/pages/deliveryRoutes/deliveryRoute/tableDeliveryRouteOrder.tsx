@@ -22,13 +22,18 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
     const result: DeliveryRouteResponseType = structuredClone(data);
 
     for (const briefcase of result.briefcases) {
+      const orderIds: {orderId: string, sort: number}[] = [];
+
       for (const orderId of briefcase.orderIds) {
         items.forEach((item, index) => {
-          if (item.orderId === orderId.orderId) {
+          if(item.deliveryRoute?._id === result._id && item.orderId === orderId.orderId) {
+            orderIds.push(orderId)
             orderId.sort = index + 1;
           }
         });
       }
+
+      briefcase.orderIds = orderIds;
     }
 
     // @ts-ignore
