@@ -27,7 +27,12 @@ export const SelectWithSearch = ({
       <Select<Option>
         autoFocus={false}
         placeholder={""}
-        onChange={(newValue) => onChange(newValue)}
+        onChange={(newValue) => {
+            onChange(newValue)
+            // @ts-ignore
+            document.getElementById("react-select-2-input").blur();
+          }
+        }
         styles={{
           control: (baseStyles) => {
             return {
