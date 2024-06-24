@@ -77,6 +77,16 @@ const briefcaseService = baseApi.injectEndpoints({
           };
         },
       }),
+      updateOrderDeliveryRoute: builder.mutation<any, any>({
+        invalidatesTags: ["Briefcase"],
+        query: ({ id, orderId, body }) => {
+          return {
+            body,
+            method: "PUT",
+            url: `briefcase/${id}/orders/${orderId}/deliveryRoute`,
+          };
+        },
+      }),
     };
   },
 });
@@ -90,4 +100,5 @@ export const {
   useRemoveOrderMutation,
   useChangeBriefcaseMutation,
   useUpdateOrderClientMutation,
+  useUpdateOrderDeliveryRouteMutation,
 } = briefcaseService;

@@ -17,7 +17,8 @@ import { Purchases } from "@/pages/purchases/purchases";
 
 import { Login } from "@/pages/login/login";
 import { useCheckAuthQuery } from "@/services/auth/auth.services";
-import { RoutesPage } from "./pages/routesPage/routesPage";
+import {DeliveryRoutes} from "@/pages/deliveryRoutes/deliveryRoutes";
+import {DeliveryRoute} from "@/pages/deliveryRoutes/deliveryRoute/deliveryRoute";
 
 const publicRoutes: RouteObject[] = [
   {
@@ -60,8 +61,12 @@ const privateRoutes: RouteObject[] = [
     path: "/briefcases/:id",
   },
   {
-    element: <RoutesPage />,
-    path: "/routes",
+    element: <DeliveryRoutes />,
+    path: "/deliveryRoutes",
+  },
+  {
+    element: <DeliveryRoute />,
+    path: "/deliveryRoutes/:id",
   },
   {
     element: <Catalog />,

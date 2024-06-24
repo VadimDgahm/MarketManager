@@ -27,6 +27,7 @@ export const SelectWithSearch = ({
       <Select<Option>
         autoFocus={false}
         placeholder={""}
+        blurInputOnSelect={true}
         onChange={(newValue) => onChange(newValue)}
         styles={{
           control: (baseStyles) => {
