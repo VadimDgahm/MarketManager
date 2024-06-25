@@ -33,7 +33,8 @@ export type BriefcaseOrder = {
   dayDelivery: string;
   deliveryRoute: OrderDeliveryRouteType | null
   sort?: number,
-  briefcaseId? : string
+  briefcaseId? : string,
+  time?: string
 };
 export type BriefcaseType = {
   name: string;
