@@ -1,6 +1,6 @@
 import s from "./deliveryRoute.module.scss";
 import {FullAddress} from "@/pages/utils/addresses";
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {arrayMove, List} from "react-movable";
 import {Button} from "@/components/ui/button";
 import {DeliveryRouteResponseType} from "@/services/deliveryRoutes/deliveryRoute.type";
@@ -14,21 +14,24 @@ type TableOrdersProps = {
 
 export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
   const [items, setItems] = useState(structuredClone(data.orders));
-  const [sortRoute, {isLoading}] = useSortRouteMutation();
+  const valueRef = useRef(items);
+  const [sortRoute] = useSortRouteMutation();
   const [isOpenDeliveryRouteModal, setIsOpenDeliveryRouteModal] = useState<boolean>(false);
   const [selectedOrder, setSelectedOrder] = useState(data.orders[0]);
-  console.log(data);
+  const [flag, setFlag] = useState(false);
+  console.log('DATA',data);
   function saveSortOrder() {
     const result: DeliveryRouteResponseType = structuredClone(data);
 
     for (const briefcase of result.briefcases) {
-      const orderIds: {orderId: string, sort: number}[] = [];
+      const orderIds: {orderId: string, sort: number, time: string}[] = [];
 
       for (const orderId of briefcase.orderIds) {
-        items.forEach((item, index) => {
+        valueRef.current.forEach((item, index) => {
           if(item.deliveryRoute?._id === result._id && item.orderId === orderId.orderId) {
             orderIds.push(orderId)
             orderId.sort = index + 1;
+            orderId.time = item.time ?? '';
           }
         });
       }
@@ -39,10 +42,6 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
     // @ts-ignore
     delete result.orders;
     sortRoute(result);
-
-    if (!isLoading) {
-      alert('Данные измененны!')
-    }
   }
 
   return (
@@ -51,9 +50,12 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
 
       <List
         values={items}
-        onChange={({oldIndex, newIndex}) =>
-          setItems(arrayMove(items, oldIndex, newIndex))
-        }
+        onChange={({oldIndex, newIndex}) => {
+          const newResult = arrayMove(items, oldIndex, newIndex);
+          valueRef.current = newResult
+          setItems(newResult);
+          saveSortOrder()
+        }}
         renderList={({children, props}) => <table id={"orders-table"} className={s.table}>
           <thead className={s.head}>
           <tr>
@@ -61,6 +63,7 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
             <th></th>
             <th>Имя</th>
             <th>Номер телефона</th>
+            <th>Время доставки</th>
             <th>Адрес</th>
             <th>Заказ</th>
             <th>Маршрут</th>
@@ -78,10 +81,20 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
           <th>{value.dataClient?.source?.substring(0, 4)}.</th>
           <th>{value.clientName}</th>
           <th>{value.dataClient?.phones[0]?.tel}</th>
+          <th>
+            <span className={s.hideTime}>{value.time ?? ''}</span>
+            <input  className={s.inputTime} id={'input-time-' + index} value={value.time ?? ''} onChange={
+              (e) => {
+                value.time = e.target.value;
+                setFlag(!flag);
+                saveSortOrder();
+              }
+            }/>
+          </th>
           <th>{value.dataClient?.addresses
             .filter((address) => value.addressId === address.idAddress)
-            .map((address) => (
-              <FullAddress address={address}/>
+            .map((address, index) => (
+              <FullAddress address={address} key={'adr' + index}/>
             ))}
           </th>
           <th>
