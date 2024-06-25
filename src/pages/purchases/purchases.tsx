@@ -25,7 +25,7 @@ export const Purchases = () => {
           </Table.Row>
         </Table.Head>
         <Table.Body>
-          {reversData.map((el: any) => (
+          {reversData.reverse().map((el: any) => (
             <Table.Row key={el.id}>
               <Table.Cell
                 className={s.clickCell}

@@ -7,7 +7,7 @@ import {
 import s from "./tableOrder.module.scss";
 import { CellVariant } from "@/components/ui/table/TableCellVariant/TableCellVariant";
 import { DeleteModal } from "@/components/ui/delete-modal/deleteModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useRemoveOrderMutation,
   useUpdateOrderClientMutation,
@@ -23,63 +23,64 @@ import ModalWithButton from "@/components/ui/modal/modalWithButton/modalWithButt
 import { FullAddress } from "@/pages/utils/addresses";
 import {DeliveryRouteEditModal} from "@/components/ui/deliveryRouteEditModal/deliveryRouteEditModal";
 import {Button} from "@/components/ui/button";
+import { useLocation, useNavigate } from "react-router-dom";
+import { addressSortOrders, deliverySortOrders } from "@/pages/utils/sortOrders";
 
 type TableOrdersProps = {
   orders: BriefcaseOrder[];
   idBriefcase: string | undefined;
 };
+
+const ASC = "asc"
+const DESC = 'desc'
+
+type TSort = 'asc' | 'desc'
+
 export const TableOrders = ({ orders, idBriefcase }: TableOrdersProps) => {
-  const [ASC, DESC] = ['asc', 'desc'];
-  const [sortOrders, setSortOrders] = useState(structuredClone(orders));
-  const [typeSort, setTypeSort] = useState(ASC);
+  const [typeSort,setTypeSort] = useState<TSort>()
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const navigate = useNavigate()
+  const [sortOrders, setSortOrders] = useState<BriefcaseOrder[]>(orders)
 
-  if (orders.length !== sortOrders.length) {
-    setSortOrders(orders);
+  useEffect(() => {
+    const deliverySort = queryParams.get("deliverySort");
+    const addressSort = queryParams.get('addressSort')
+    const copyOrders =  [...sortOrders]
+    if(deliverySort){
+      const sortedOrders = copyOrders.sort((a,b) => deliverySortOrders(a,b,deliverySort))
+      setSortOrders(sortedOrders)
+    }
+    else if(addressSort){
+      const sortedOrders = copyOrders.sort((a,b) => addressSortOrders(a,b,addressSort))
+      setSortOrders(sortedOrders)
+    }
+    else{
+      setSortOrders(orders)
+    }
+  }, [ typeSort])
+
+
+  const deliverySortHandler = () => {
+    queryParams.delete('addressSort')
+    setTypeSort(typeSort === ASC ? DESC : ASC)
+    const deliverySort = queryParams.get("deliverySort");
+    queryParams.set('deliverySort', deliverySort === DESC ? ASC : DESC)
+    navigate(`?${queryParams.toString()}`);
   }
 
-  const sortByAddress = () => {
-    const sort = (a: BriefcaseOrder, b: BriefcaseOrder) => {
-      const a_address = a.dataClient?.addresses.filter((address: any) => a.addressId === address.idAddress).map(address => {
-        return address.city?.trim() + ' ' + address.street?.trim();
-      })[0];
-      const b_address = b.dataClient?.addresses.filter((address: any) => b.addressId === address.idAddress).map(address => {
-        return address.city?.trim() + ' ' + address.street?.trim();
-      })[0];
-
-      if (typeSort === ASC) {
-        setTypeSort(DESC);
-        return a_address?.toLowerCase() > b_address?.toLowerCase() ? 1 : -1;
-      } else {
-        setTypeSort(ASC);
-        return a_address?.toLowerCase() < b_address?.toLowerCase() ? 1 : -1;
-      }
-    }
-
-    setSortOrders([...sortOrders.sort(sort)]);
-  }
-
-  const sortByDeliveryRoute = () => {
-    const sort = (a: BriefcaseOrder, b: BriefcaseOrder) => {
-      const a_deliveryRoute = a.deliveryRoute ? a.deliveryRoute.name : '';
-      const b_deliveryRoute = b.deliveryRoute ? b.deliveryRoute .name : '';
-      
-      if (typeSort === ASC) {
-        setTypeSort(DESC);
-        return a_deliveryRoute?.toLowerCase() > b_deliveryRoute?.toLowerCase() ? 1 : -1;
-      } else {
-        setTypeSort(ASC);
-        return a_deliveryRoute?.toLowerCase() < b_deliveryRoute?.toLowerCase() ? 1 : -1;
-      }
-    }
-
-    setSortOrders([...sortOrders.sort(sort)]);
-    console.log(sortOrders);
+  const addressSortHandler = () => {
+    setTypeSort(typeSort === ASC ? DESC : ASC)
+    queryParams.delete('deliverySort')
+    const addressSort = queryParams.get('addressSort')
+    queryParams.set('addressSort', addressSort === DESC ? ASC : DESC)
+    navigate(`?${queryParams.toString()}`);
   }
 
   return (
     <>
-      <Button className={s.sort} variant={"secondary"} onClick={() => sortByAddress()}>Сортировать по адресу</Button>
-      <Button variant={"secondary"} onClick={() => sortByDeliveryRoute()}>Сортировать по маршруту</Button>
+      <Button className={s.sort} variant={"secondary"} onClick={addressSortHandler}>Сортировать по адресу</Button>
+      <Button variant={"secondary"} onClick={deliverySortHandler}>Сортировать по маршруту</Button>
 
       <Table.Root className={s.table} id={"orders-table"}>
       <Table.Head>

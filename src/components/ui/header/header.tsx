@@ -15,7 +15,7 @@ export const Header = forwardRef<HTMLHeadElement, HeaderInfoType>(() => {
       </div>
 
       <div>
-        <span className={s.beta}>beta</span> 0.1.0
+        <span className={s.beta}>beta</span> 0.1.1
       </div>
     </div>
   );
