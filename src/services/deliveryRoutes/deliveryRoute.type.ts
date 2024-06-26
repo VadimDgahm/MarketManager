@@ -17,5 +17,5 @@ export type DeliveryRouteResponseType = {
 
 export type BriefcasesDeliveryRouteType = {
   id: string,
-  orderIds: {orderId: string, sort: number}[]
+  orderIds: {orderId: string, sort: number, time: string}[]
 }
