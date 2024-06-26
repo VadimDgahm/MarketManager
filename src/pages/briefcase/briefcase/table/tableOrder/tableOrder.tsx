@@ -46,7 +46,7 @@ export const TableOrders = ({ orders, idBriefcase }: TableOrdersProps) => {
   useEffect(() => {
     const deliverySort = queryParams.get("deliverySort");
     const addressSort = queryParams.get('addressSort')
-    const copyOrders =  [...sortOrders]
+    const copyOrders =  [...structuredClone(orders)]
     if(deliverySort){
       const sortedOrders = copyOrders.sort((a,b) => deliverySortOrders(a,b,deliverySort))
       setSortOrders(sortedOrders)
