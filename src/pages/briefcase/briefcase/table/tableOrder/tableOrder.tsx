@@ -58,7 +58,7 @@ export const TableOrders = ({ orders, idBriefcase }: TableOrdersProps) => {
     else{
       setSortOrders(orders)
     }
-  }, [ typeSort])
+  }, [ typeSort, orders])
 
 
   const deliverySortHandler = () => {

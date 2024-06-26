@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 // @ts-ignore
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import {Button} from "@/components/ui/button";
@@ -19,10 +19,15 @@ import s from "./briefcase.module.scss";
 
 export const Briefcase = () => {
   const params = useParams();
+  const navigate = useNavigate()
   const [isOpen, setOpen] = useState(false);
   const {data, isLoading} = useGetBriefcaseByIdQuery({id: params.id});
   const [createOrderForClient] = useCreateOrderClientMutation();
 
+  const onOpenWindowHandler = (isOpen: boolean) => {
+    setOpen(isOpen)
+    navigate('')
+  }
   if (isLoading) {
     return <div>isLoading</div>;
   }
@@ -71,7 +76,7 @@ export const Briefcase = () => {
       </div>
       <ModalCreateOrder
         isOpen={isOpen}
-        onOpenWindow={setOpen}
+        onOpenWindow={onOpenWindowHandler}
         setResult={createOrder}
       />
     </div>
