@@ -56,7 +56,7 @@ export const TableOrders = ({ orders, idBriefcase }: TableOrdersProps) => {
       setSortOrders(sortedOrders)
     }
     else{
-      setSortOrders(orders)
+      setSortOrders(structuredClone(orders))
     }
   }, [ typeSort, orders])
 
