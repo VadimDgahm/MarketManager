@@ -25,7 +25,7 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
 
     for (const briefcase of result.briefcases) {
       const orderIds: {orderId: string, sort: number, time: string}[] = [];
-
+      console.log('REF',valueRef.current);
       for (const orderId of briefcase.orderIds) {
         valueRef.current.forEach((item, index) => {
           if(item.deliveryRoute?._id === result._id && item.orderId === orderId.orderId) {
@@ -41,6 +41,7 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
 
     // @ts-ignore
     delete result.orders;
+    console.log('RESULT',result);
     sortRoute(result);
   }
 
