@@ -1,11 +1,7 @@
-import { useParams } from "react-router-dom";
 // @ts-ignore
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { Table } from "@/components/ui/table/Table";
-import { Typography } from "@/components/ui/typography";
-import { useGetBriefcaseByIdQuery } from "@/services/briefcase/briefcase.services";
-import { BriefcaseOrder, OrderType } from "@/services/briefcase/briefcase.type";
-import { useGetCatalogQuery } from "@/services/catalog/catalog.services";
+import { BriefcaseOrder, BriefcaseType, OrderType } from "@/services/briefcase/briefcase.type";
 import {
   BEEF_VIEW,
   CHICKEN_VIEW,
@@ -28,10 +24,12 @@ interface TOrders<T> {
   ordersWitRabbit: T[];
   ordersWithChicken: T[];
 }
-export const Purchase = () => {
-  const param = useParams();
-  const { data: catalog, isLoading: loadingCatalog } = useGetCatalogQuery({});
-  const { data, isLoading } = useGetBriefcaseByIdQuery({ id: param.id });
+type TPurchase = {
+  data: BriefcaseType
+  catalog: ProductType[]
+  dataOrders: BriefcaseOrder[]
+}
+export const Purchase = ({data, catalog, dataOrders}: TPurchase) => {
   const [currencyOrders, setCurrencyOrders] = useState<OrderType[]>([]);
   const [filterView, setFilterView] = useState<TView>(CHICKEN_VIEW);
   const [orders, setOrder] = useState<TOrders<OrderType>>({
@@ -43,16 +41,12 @@ export const Purchase = () => {
   });
 
   useEffect(() => {
-    if (data) {
-      const ordersObj = createPurchases(data.orders);
+    if (dataOrders) {
+      const ordersObj = createPurchases(dataOrders);
       setOrder(ordersObj);
       setCurrencyOrders(ordersObj.ordersWithChicken);
     }
-  }, [data]);
-
-  if (isLoading || loadingCatalog) {
-    return <div>Loading</div>;
-  }
+  }, [dataOrders]);
 
   const onChangeView = (value: string) => {
     switch (value) {
@@ -79,7 +73,6 @@ export const Purchase = () => {
   };
   return (
     <div>
-      <Typography variant={"large"}>{data.name}</Typography>
       <ChangeStatus
         changeStatus={(value) => onChangeView(value)}
         collection={optionsView}
