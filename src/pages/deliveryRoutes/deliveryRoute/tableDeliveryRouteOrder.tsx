@@ -80,8 +80,8 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
             ++index
           }</th>
           <th>{value.dataClient?.source?.substring(0, 4)}.</th>
-          <th>{value.clientName}</th>
-          <th>{value.dataClient?.phones[0]?.tel}</th>
+          <th role="button">{value.clientName}</th>
+          <th role="button">{value.dataClient?.phones[0]?.tel}</th>
           <th>
             <span className={s.hideTime}>{value.time ?? ''}</span>
             <input  className={s.inputTime} id={'input-time-' + index} value={value.time ?? ''} onChange={
