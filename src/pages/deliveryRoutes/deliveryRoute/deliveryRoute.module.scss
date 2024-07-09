@@ -47,3 +47,24 @@
 .hideTime {
   display: none;
 }
+
+.copy:hover {
+  cursor: pointer;
+  color: var(--color-accent-300);
+}
+
+.copy:active {
+  cursor: pointer;
+  color: var(--color-accent-900);
+}
+
+.popupCopy{
+  display: none;
+  position: fixed;
+  border-radius: 20px;
+  z-index: 1000;
+  background: var(--color-info-900);
+  padding: 5px 20px;
+  top: 50px;
+  right: 48%;
+}
