@@ -34,6 +34,7 @@ export const useFormOrderClient = ({
         setErrorForValueWeightInput(true);
       } else {
         const body: OrderType = {
+          productId: product._id,
           comments,
           name: product.name,
           positionId: uuidv4(),

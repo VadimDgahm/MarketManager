@@ -36,6 +36,9 @@ export const DeliveryRouteRow = ({deliveryRoute, btnHandler, btnName}: DeliveryR
       </Table.Cell>
       <Table.Cell>{deliveryRoute.createdDate}</Table.Cell>
       <Table.Cell>
+        <Button onClick={() => navigate(`/invoices/${deliveryRoute._id}`)}>{"Счет - " + deliveryRoute.name}</Button>
+      </Table.Cell>
+      <Table.Cell>
         <CellVariant.EditAndTrash
           onClickEdit={() => setIsOpenEdit(true)}
           onClickTrash={() => setIsOpenModalRemove(true)}
