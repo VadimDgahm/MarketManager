@@ -1,6 +1,6 @@
 import s from "./deliveryRoute.module.scss";
 import {FullAddress} from "@/pages/utils/addresses";
-import {useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import {arrayMove, List} from "react-movable";
 import {Button} from "@/components/ui/button";
 import {DeliveryRouteResponseType} from "@/services/deliveryRoutes/deliveryRoute.type";
@@ -45,6 +45,21 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
     sortRoute(result);
   }
 
+  async function copyText(e:  React.MouseEvent<HTMLTableHeaderCellElement, MouseEvent>) {
+    // @ts-ignore
+    const text = e.target.innerText;
+
+    await navigator.clipboard.writeText(text);
+
+    const copyPopup = document.getElementById("copy-popup");
+    // @ts-ignore
+    copyPopup.innerText = 'Скопировано: ' + text;
+    // @ts-ignore
+    copyPopup.style.display = "block";
+    // @ts-ignore
+    setTimeout(() => copyPopup.style.display = "none", 800);
+  }
+
   return (
     <>
       <Button className={s.save} variant={"primary"} onClick={() => saveSortOrder()}>Сохранить изменения</Button>
@@ -80,8 +95,8 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
             ++index
           }</th>
           <th>{value.dataClient?.source?.substring(0, 4)}.</th>
-          <th>{value.clientName}</th>
-          <th>{value.dataClient?.phones[0]?.tel}</th>
+          <th className={s.copy} role={"button"} onClick={copyText}>{value.clientName}</th>
+          <th className={s.copy} role={"button"} onClick={copyText}>{value.dataClient?.phones[0]?.tel}</th>
           <th>
             <span className={s.hideTime}>{value.time ?? ''}</span>
             <input  className={s.inputTime} id={'input-time-' + index} value={value.time ?? ''} onChange={
@@ -120,6 +135,7 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
       <DeliveryRouteEditModal  open={isOpenDeliveryRouteModal} idBriefcase={selectedOrder.briefcaseId}
                                order={selectedOrder} title={"Изменить маршрут"}
                                setOpen={setIsOpenDeliveryRouteModal}/>
+      <div className={s.popupCopy} id={"copy-popup"}></div>
     </>
   )
 }

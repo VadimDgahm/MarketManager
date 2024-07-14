@@ -118,6 +118,7 @@ type TableRawOrderProps = {
   idBriefcase: string | undefined;
 };
 const TableRawOrder = ({ index, order, idBriefcase }: TableRawOrderProps) => {
+  const navigate = useNavigate()
   const client = order.dataClient;
   const [removeOrder] = useRemoveOrderMutation();
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
@@ -135,7 +136,11 @@ const TableRawOrder = ({ index, order, idBriefcase }: TableRawOrderProps) => {
         <Table.Cell>{++index}</Table.Cell>
         <Table.Cell>{client?.source?.substring(0, 4)}.</Table.Cell>
         <Table.Cell>{client?.status.substring(0, 6)}.</Table.Cell>
-        <Table.Cell>{order.clientName}</Table.Cell>
+        <Table.Cell
+        className={s.linkClient}
+         onClick={() => navigate(`/clients/${order.clientId}`)}>
+          {order.clientName}
+          </Table.Cell>
         <Table.Cell>{client?.phones[0]?.tel}</Table.Cell>
         <Table.Cell>
           {client?.addresses
@@ -186,8 +191,11 @@ const TableRawOrder = ({ index, order, idBriefcase }: TableRawOrderProps) => {
             client={client}
           />
         </Table.Cell>
+ 
       </Table.Row>
       <Table.Row>
+        <Table.Cell />
+        <Table.Cell />
         <Table.Cell />
         <Table.Cell />
         <Table.Cell />

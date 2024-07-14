@@ -12,7 +12,6 @@ import { Catalog } from "@/pages/catalog/catalog";
 import { Client } from "@/pages/clients/client/client";
 import { Clients } from "@/pages/clients/clients";
 import { Layout } from "@/pages/layout/layout";
-import { Purchase } from "@/pages/purchases/purchase/purchase";
 import { Purchases } from "@/pages/purchases/purchases";
 
 import { Login } from "@/pages/login/login";
@@ -21,6 +20,8 @@ import {DeliveryRoutes} from "@/pages/deliveryRoutes/deliveryRoutes";
 import {DeliveryRoute} from "@/pages/deliveryRoutes/deliveryRoute/deliveryRoute";
 import {TableInvoiceDR} from "@/pages/invoices/tableInvoiceDR";
 import {Receipt} from "@/pages/receipt/receipt";
+import { PurchasesSortWithDelivery } from "./pages/purchases/purchasesSortWithDelivery/PurchasesSortWithDelivery";
+
 
 const publicRoutes: RouteObject[] = [
   {
@@ -47,7 +48,7 @@ const privateRoutes: RouteObject[] = [
     path: "/purchases",
   },
   {
-    element: <Purchase />,
+    element: <PurchasesSortWithDelivery />,
     path: "/purchases/:id",
   },
   {
