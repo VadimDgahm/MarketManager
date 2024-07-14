@@ -4,6 +4,7 @@ import {
 } from "@/services/clients/clientsServicesType";
 
 export type OrderType = {
+  productId: string;
   comments: string;
   name: string;
   positionId: string;
@@ -34,8 +35,27 @@ export type BriefcaseOrder = {
   deliveryRoute: OrderDeliveryRouteType | null
   sort?: number,
   briefcaseId? : string,
-  time?: string
+  time?: string,
+  invoiceOrderItems?: OrderItemsResponse[],
+  totalAmount?: number,
+  discount?: number,
+  priceDelivery?: number,
+  finalTotalAmount?: number,
 };
+
+export type OrderItemsRequest = {
+  productId: string;
+  weight: number;
+  units:string;
+}
+
+export type OrderItemsResponse = {
+  productPrice: number;
+  amount: number;
+  name: string
+
+} & OrderItemsRequest;
+
 export type BriefcaseType = {
   name: string;
   id: string;

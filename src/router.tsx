@@ -19,6 +19,8 @@ import { Login } from "@/pages/login/login";
 import { useCheckAuthQuery } from "@/services/auth/auth.services";
 import {DeliveryRoutes} from "@/pages/deliveryRoutes/deliveryRoutes";
 import {DeliveryRoute} from "@/pages/deliveryRoutes/deliveryRoute/deliveryRoute";
+import {TableInvoiceDR} from "@/pages/invoices/tableInvoiceDR";
+import {Receipt} from "@/pages/receipt/receipt";
 
 const publicRoutes: RouteObject[] = [
   {
@@ -63,6 +65,14 @@ const privateRoutes: RouteObject[] = [
   {
     element: <DeliveryRoutes />,
     path: "/deliveryRoutes",
+  },
+  {
+    element: <TableInvoiceDR />,
+    path: "/invoices/:id",
+  },
+  {
+    element: <Receipt />,
+    path: "/invoices/receipt/:briefcase/:order"
   },
   {
     element: <DeliveryRoute />,

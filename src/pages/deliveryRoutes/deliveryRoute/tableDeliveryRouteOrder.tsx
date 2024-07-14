@@ -19,13 +19,13 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
   const [isOpenDeliveryRouteModal, setIsOpenDeliveryRouteModal] = useState<boolean>(false);
   const [selectedOrder, setSelectedOrder] = useState(data.orders[0]);
   const [flag, setFlag] = useState(false);
-  console.log('DATA',data);
+
   function saveSortOrder() {
     const result: DeliveryRouteResponseType = structuredClone(data);
 
     for (const briefcase of result.briefcases) {
       const orderIds: {orderId: string, sort: number, time: string}[] = [];
-      console.log('REF',valueRef.current);
+
       for (const orderId of briefcase.orderIds) {
         valueRef.current.forEach((item, index) => {
           if(item.deliveryRoute?._id === result._id && item.orderId === orderId.orderId) {
@@ -41,7 +41,7 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
 
     // @ts-ignore
     delete result.orders;
-    console.log('RESULT',result);
+
     sortRoute(result);
   }
 

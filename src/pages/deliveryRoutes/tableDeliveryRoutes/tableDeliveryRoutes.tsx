@@ -29,6 +29,7 @@ const ContentTableHead = ({isSetButton}: ContentTableHeadProps) => {
         <Table.Cell variant={"head"}>Название маршрута</Table.Cell>
         <Table.Cell variant={"head"}>Дата создания</Table.Cell>
         <Table.Cell variant={"head"}></Table.Cell>
+        <Table.Cell variant={"head"}></Table.Cell>
         {isSetButton ? <Table.Cell variant={"head"}></Table.Cell> : ''}
       </Table.Row>
     </Table.Head>

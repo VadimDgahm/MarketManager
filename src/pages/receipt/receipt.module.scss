@@ -1,0 +1,97 @@
+.body{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #E1E1E1;
+  margin: 0;
+  color: #662418;
+}
+
+.header{
+  text-align: center;
+  background-color: #E1E1E1;
+}
+
+.pageTitle{
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.order{
+  width: 50%;
+  margin: 20px auto;
+
+  p {
+    margin: 0;
+  }
+}
+
+.tableOrder {
+  border-collapse: collapse;
+  width: 100%;
+
+}
+.tableOrder {
+  tr, td, th {
+    border: 2px black solid;
+    padding: 0 2px;
+  }
+
+  thead td{
+    background-color: #E1E1E1;
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
+.tdText{
+  text-align: center;
+}
+
+.submit-btn{
+  display: block;
+  width: 160px;
+  margin: 20px auto;
+  text-align: center;
+  text-decoration: none;
+  padding: 5px 5px;
+  background-color: #662418;
+  color: white;
+}
+
+.resultPrice{
+  text-align: right;
+}
+
+.thankText{
+  text-align: center;
+  margin-top: 40px;
+}
+
+.discount-wrapper{
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.text-price{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+@media(max-width: 460px) {
+  .order{
+    width: 95%;
+  }
+  .tableOrder {
+    font-size: 12px;
+  }
+  .thankText{
+    font-weight: bold;
+    font-size: 16px;
+  }
+}
