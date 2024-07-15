@@ -28,6 +28,11 @@
   }
 }
 
+.comments {
+  color: var(--color-danger-500);
+  font-size: 14px;
+}
+
 .mydict div {
   display: flex;
   flex-wrap: wrap;

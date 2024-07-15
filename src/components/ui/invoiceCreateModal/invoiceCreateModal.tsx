@@ -15,6 +15,7 @@ type PropsType = {
 
 type OrderItems = {
   productId: string;
+  positionId: string;
   weight: number;
   units:string;
 }
@@ -58,12 +59,13 @@ export const InvoiceCreateModal = ({
               <div className={s.inputContainer} key={index + item.productId}>
                 <label className={s.label}>{item.name}</label>
                 <div className={s.control}>
-                  <input className={s.input} name={item.name} defaultValue={
+                  <input className={s.input} name={item.name} data-positionid={item.positionId} defaultValue={
                     //@ts-ignore
                     item.weight
                   } step="0.01" data-productid={item.productId}  type={"number"}  min={0} required={true}/>
                   <label>{order.orderClient[index].quantity}</label>
                 </div>
+                <label className={s.comments}>{item.comments}</label>
               </div>
             )
           })}
@@ -109,10 +111,11 @@ export const InvoiceCreateModal = ({
             // @ts-ignore
             [...form.elements].forEach((element) => {
               const productId = element.dataset.productid;
+              const positionId = element.dataset.positionid;
               const { value, name } = element;
               const units = name === 'Яйцо Кур' || name === 'Яйцо Инд' ? 'дес.': 'кг.';
 
-              invoice.orderItems.push({ productId: productId, weight: +(+value).toFixed(2), units});
+              invoice.orderItems.push({ productId, weight: +(+value).toFixed(2), units, positionId});
             });
 
             createInvoice(invoice);
