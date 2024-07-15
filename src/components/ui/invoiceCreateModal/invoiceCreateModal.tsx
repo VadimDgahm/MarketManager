@@ -58,10 +58,7 @@ export const InvoiceCreateModal = ({
               <div className={s.inputContainer} key={index + item.productId}>
                 <label className={s.label}>{item.name}</label>
                 <div className={s.control}>
-                  <input className={s.input} data-units={
-                    //@ts-ignore
-                    item.quantity ? item.quantity.slice(-3) : item.units
-                  } name={item.name} defaultValue={
+                  <input className={s.input} name={item.name} defaultValue={
                     //@ts-ignore
                     item.weight
                   } step="0.01" data-productid={item.productId}  type={"number"}  min={0} required={true}/>
@@ -111,9 +108,9 @@ export const InvoiceCreateModal = ({
 
             // @ts-ignore
             [...form.elements].forEach((element) => {
-              const units = element.dataset.units;
               const productId = element.dataset.productid;
-              const { value } = element
+              const { value, name } = element;
+              const units = name === 'Яйцо Кур' || name === 'Яйцо Инд' ? 'дес.': 'кг.';
 
               invoice.orderItems.push({ productId: productId, weight: +(+value).toFixed(2), units});
             });
