@@ -1,0 +1,11 @@
+.btnDownload {
+  cursor: pointer;
+  padding: 10px;
+  color: black;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+  &:hover {
+    background-color: grey;
+  }
+}
