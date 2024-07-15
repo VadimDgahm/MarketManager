@@ -12,16 +12,19 @@ export type OrderType = {
   reductionName: string;
   view: string;
 };
+
 export type OrderDeliveryRouteType = {
   _id: string;
   name: string;
 };
+
 export type ClientDataBriefcase = {
   status: string;
   source: string;
   phones: PhoneClient[];
   addresses: AddressClient[];
 };
+
 export type BriefcaseOrder = {
   dataClient: ClientDataBriefcase;
   addressId: string;
@@ -43,6 +46,7 @@ export type BriefcaseOrder = {
   finalTotalAmount?: number,
 };
 
+
 export type OrderItemsRequest = {
   productId: string;
   weight: number;
@@ -56,6 +60,7 @@ export type OrderItemsResponse = {
 
 } & OrderItemsRequest;
 
+
 export type BriefcaseType = {
   name: string;
   id: string;
@@ -63,3 +68,4 @@ export type BriefcaseType = {
   orders: BriefcaseOrder[];
   userId: string;
 };
+

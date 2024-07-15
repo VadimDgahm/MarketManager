@@ -25,6 +25,13 @@
   min-width: 400px;
 }
 
+.linkClient{
+  transition: .4s;
+  cursor: pointer;
+  &:hover{
+    color: rgb(154, 141, 224);
+  }
+}
 .sort {
   margin: 0 10px;
 }
