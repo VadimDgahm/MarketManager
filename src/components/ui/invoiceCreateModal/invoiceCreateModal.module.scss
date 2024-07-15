@@ -3,6 +3,11 @@
   width: 140px;
 }
 
+.modalContent {
+  max-height: 70vh;
+  overflow: auto;
+}
+
 .input {
   color: black;
   height: 35px;
@@ -26,8 +31,7 @@
 .mydict div {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 2rem;
-  margin-bottom: 25px;
+  margin: 35px 25px 10px;
 }
 
 .mydict div label {

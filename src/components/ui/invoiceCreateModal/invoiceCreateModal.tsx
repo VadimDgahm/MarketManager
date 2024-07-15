@@ -51,7 +51,7 @@ export const InvoiceCreateModal = ({
 
   return (
     <Modal onOpenChange={setOpen} open={open} title={title + ' - ' + order.clientName}>
-      <ModalWithContent>
+      <ModalWithContent className={s.modalContent}>
         <form className={s.form} id={"invoice-form"}>
           {orderItems.map((item, index) => {
             return (
@@ -74,25 +74,25 @@ export const InvoiceCreateModal = ({
 
         <label className={s.label}>Доставка</label>
         <input className={s.input} type={"number"}  min={0} step="0.01" value={priceDelivery} onChange={changePriceDelivery}/>
-
-        <div className={s.mydict}>
-          <div>
-            <label>
-              <input type="radio" name="discount" defaultChecked={!order.discount ||  order.discount == 0} value={0} onChange={changeDiscount}/>
-              <span>Нет скидки</span>
-            </label>
-            <label>
-              <input type="radio" name="discount" defaultChecked={order.discount === 5} value={5} onChange={changeDiscount}/>
-              <span>5%</span>
-            </label>
-            <label>
-              <input type="radio" name="discount" defaultChecked={order.discount === 10} value={10} onChange={changeDiscount}/>
-              <span>10%</span>
-            </label>
-          </div>
-        </div>
-
       </ModalWithContent>
+
+      <div className={s.mydict}>
+        <div>
+          <label>
+            <input type="radio" name="discount" defaultChecked={!order.discount ||  order.discount == 0} value={0} onChange={changeDiscount}/>
+            <span>Нет скидки</span>
+          </label>
+          <label>
+            <input type="radio" name="discount" defaultChecked={order.discount === 5} value={5} onChange={changeDiscount}/>
+            <span>5%</span>
+          </label>
+          <label>
+            <input type="radio" name="discount" defaultChecked={order.discount === 10} value={10} onChange={changeDiscount}/>
+            <span>10%</span>
+          </label>
+        </div>
+      </div>
+
       <ModalWithButton
         onClickPrimaryButton={() => {
           const form = document.getElementById('invoice-form');
