@@ -7,10 +7,15 @@ import s from "@/pages/briefcase/briefcase/table/tableOrder/tableOrder.module.sc
 import {Button} from "@/components/ui/button";
 import {InvoiceCreateModal} from "@/components/ui/invoiceCreateModal/invoiceCreateModal";
 import {Typography} from "@/components/ui/typography";
+import {Loader} from "@/components/ui/loader/loader";
 
 export const TableInvoiceDR = () => {
   const params = useParams();
-  const {data} = useGetInvoicesByIdQuery({id: params.id});
+  const {data, isLoading} = useGetInvoicesByIdQuery({id: params.id});
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
