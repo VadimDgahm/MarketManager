@@ -73,6 +73,7 @@ const TableRawOrder = ({ index, order }: TableRawOrderProps) => {
   const [isOpenInvoice, setOpenInvoice] = useState(false);
   const navigate = useNavigate();
 
+  const color = order.invoiceOrderItems ? '--color-success-900' : '--color-accent-700';
 
   return (
     <>
@@ -90,7 +91,7 @@ const TableRawOrder = ({ index, order }: TableRawOrderProps) => {
           ))}
         </Table.Cell>
         <Table.Cell className={s.cellPosition}>
-          <Button variant={"link"} onClick={() => setOpenInvoice(true)}>
+          <Button variant={"link"} style={{color:`var(${color})`}} onClick={() => setOpenInvoice(true)}>
             {order.orderClient?.map((el) => (
               <span className={s.position} key={el.positionId}>
                 {`${el.quantity}${el.reductionName}${
@@ -103,7 +104,7 @@ const TableRawOrder = ({ index, order }: TableRawOrderProps) => {
         </Table.Cell>
         <Table.Cell>{order.finalTotalAmount ?? "не сформ."}</Table.Cell>
         <Table.Cell>
-          {order.finalTotalAmount ? <Button variant={"link"} onClick={() => {
+          {order.finalTotalAmount ? <Button variant={"link"} style={{color:`var(${color})`}} onClick={() => {
             navigate(`/invoices/receipt/${order.briefcaseId}/${order.orderId}`)}}>Чек</Button> : ''}
         </Table.Cell>
       </Table.Row>
