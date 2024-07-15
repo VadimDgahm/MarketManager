@@ -29,6 +29,7 @@ import {
   collectionSource,
   collectionStatus,
 } from "@/pages/clients/client/collection";
+import {Loader} from "@/components/ui/loader/loader";
 
 export const Clients = () => {
   const location = useLocation();
@@ -76,7 +77,8 @@ export const Clients = () => {
     setPage(value);
   };
 
-  if (isLoading) return <div>....Loading</div>;
+  if (isLoading) return <Loader />;
+
   if(!data.clients) return null
   return (
     <div className={s.clientsContainer}>

@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import { optionsView } from "@/pages/catalog/catalog";
 import { ChangeStatus } from "@/pages/clients/client/controlClient/controlClient";
 import { ProductType } from "@/services/catalog/catalog-servicesType";
+import {Loader} from "@/components/ui/loader/loader";
 
 interface TOrders<T> {
   ordersWitPork: T[];
@@ -51,7 +52,7 @@ export const Purchase = () => {
   }, [data]);
 
   if (isLoading || loadingCatalog) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
 
   const onChangeView = (value: string) => {
