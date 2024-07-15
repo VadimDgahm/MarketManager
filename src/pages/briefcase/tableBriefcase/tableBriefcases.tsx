@@ -3,6 +3,7 @@ import { useGetBriefcaseQuery } from "@/services/briefcase/briefcase.services";
 
 import s from "./tableBriefcases.module.scss";
 import { BriefcaseRow } from "@/pages/briefcase/tableBriefcase/briefcaseRow/briefcaseRow";
+import {Loader} from "@/components/ui/loader/loader";
 
 export const TableBriefcases = () => {
   return (
@@ -28,7 +29,7 @@ const ContentTableBody = () => {
   const { data, isLoading } = useGetBriefcaseQuery({});
 
   if (isLoading) {
-    return <div>isLoading</div>;
+    return <Loader />;
   }
 
   return (

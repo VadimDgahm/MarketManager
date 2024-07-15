@@ -6,6 +6,7 @@ import { TableRowClient } from "@/pages/briefcase/briefcase/table/tableRowClient
 import { ClientType } from "@/services/clients/clientsServicesType";
 
 import s from "./choiceClient.module.scss";
+import {Loader} from "@/components/ui/loader/loader";
 
 type ChoiceClientComponentProps = {
   client: ClientType | undefined;
@@ -19,8 +20,9 @@ export const ChoiceClientComponent = ({
     useChoiceClient({ setClient });
 
   if (isLoading) {
-    return null;
+    return <Loader />;
   }
+
   if (client) {
     return (
       <>

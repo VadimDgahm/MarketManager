@@ -14,8 +14,8 @@ import {
   useCreateOrderClientMutation,
   useGetBriefcaseByIdQuery,
 } from "@/services/briefcase/briefcase.services";
-
 import s from "./briefcase.module.scss";
+import {Loader} from "@/components/ui/loader/loader";
 
 export const Briefcase = () => {
   const params = useParams();
@@ -29,7 +29,7 @@ export const Briefcase = () => {
     navigate('')
   }
   if (isLoading) {
-    return <div>isLoading</div>;
+    return <Loader />;
   }
 
   const createOrder = (body: OrderClientType) => {

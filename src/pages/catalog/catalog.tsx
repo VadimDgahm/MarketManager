@@ -19,6 +19,7 @@ import { z } from "zod";
 import s from "./catalog.module.scss";
 import { CardProduct } from "@/pages/catalog/cardProduct/cardProduct";
 import { ProductType } from "@/services/catalog/catalog-servicesType";
+import {Loader} from "@/components/ui/loader/loader";
 
 export const CHICKEN_VIEW = "Птица";
 export const BEEF_VIEW = "Говядина";
@@ -38,9 +39,11 @@ export const Catalog = () => {
   const [filterView, setFilterView] = useState<string>(CHICKEN_VIEW);
   const [createProduct] = useCreateProductMutation();
   const { data, isLoading } = useGetCatalogQuery({});
+
   if (isLoading) {
-    return <div>IsLoading</div>;
+    return <Loader />;
   }
+
   return (
     <div className={s.catalogContainer}>
       <Typography className={s.titlePage} variant={"large"}>

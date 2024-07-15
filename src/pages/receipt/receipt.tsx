@@ -4,6 +4,7 @@ import logo from '../../img/logo.jpg';
 import {useGetOrderInvoiceByIdQuery} from "@/services/invoices/invoices.services";
 import {Table} from "@/components/ui/table/Table";
 import {BriefcaseOrder} from "@/services/briefcase/briefcase.type";
+import {Loader} from "@/components/ui/loader/loader";
 
 export const Receipt = () => {
   const params = useParams();
@@ -16,7 +17,7 @@ export const Receipt = () => {
   const {data, isLoading} = useGetOrderInvoiceByIdQuery(options);
 
   if (isLoading) {
-    return (<div>LOOOODDIIIANNGGG</div>);
+    return <Loader/>;
   }
 
   const order: BriefcaseOrder = data;

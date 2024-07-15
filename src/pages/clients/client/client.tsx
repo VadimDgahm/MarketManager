@@ -14,13 +14,15 @@ import { useClient } from "@/pages/clients/client/useClient";
 import { useGetClientByIdQuery } from "@/services/clients/clients.services";
 
 import s from "./client.module.scss";
+import {Loader} from "@/components/ui/loader/loader";
 
 export const Client = () => {
   const { changeName, changeSource, changeStatus, param, changeComments } =
     useClient();
   const { data, isLoading } = useGetClientByIdQuery({ id: param.id });
+
   if (isLoading || !data) {
-    return <div>isLoading</div>;
+    return <Loader />;
   } else {
     return (
       <div className={s.card}>

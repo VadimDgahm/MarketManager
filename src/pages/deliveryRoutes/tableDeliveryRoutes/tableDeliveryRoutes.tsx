@@ -3,6 +3,7 @@ import s from "@/pages/briefcase/briefcases.module.scss";
 import {useGetRouteQuery} from "@/services/deliveryRoutes/deliveryRoute.services";
 import {DeliveryRouteRow} from "@/pages/deliveryRoutes/tableDeliveryRoutes/deliveryRouteRow/deliveryRouteRow";
 import {editDRType} from "@/components/ui/deliveryRouteEditModal/deliveryRouteEditModal";
+import {Loader} from "@/components/ui/loader/loader";
 
 export type TableDeliveryRoutesProps = {
   btnHandler?: (deliveryId: editDRType) => void;
@@ -39,7 +40,7 @@ const ContentTableBody = ({btnHandler, btnName}: TableDeliveryRoutesProps) => {
   const {data, isLoading} = useGetRouteQuery({});
 
   if (isLoading) {
-    return <div>isLoading</div>;
+    return <Loader />;
   }
 
   return (

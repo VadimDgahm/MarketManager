@@ -5,13 +5,14 @@ import {Typography} from "@/components/ui/typography";
 import s from "@/pages/briefcase/briefcase/briefcase.module.scss";
 import {useGetRouteByIdQuery} from "@/services/deliveryRoutes/deliveryRoute.services";
 import {TableDeliveryRouteOrder} from "@/pages/deliveryRoutes/deliveryRoute/tableDeliveryRouteOrder";
+import {Loader} from "@/components/ui/loader/loader";
 
 export const DeliveryRoute = () => {
   const params = useParams();
   const {data, isLoading} = useGetRouteByIdQuery({id: params.id});
 
   if (isLoading) {
-    return <div>isLoading</div>;
+    return <Loader />;
   }
 
   return (

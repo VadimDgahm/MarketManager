@@ -4,13 +4,14 @@ import { Table } from "@/components/ui/table/Table";
 import { useGetBriefcaseQuery } from "@/services/briefcase/briefcase.services";
 
 import s from "./purchases.module.scss";
+import {Loader} from "@/components/ui/loader/loader";
 
 export const Purchases = () => {
   const { data, isLoading } = useGetBriefcaseQuery({});
   const navigate = useNavigate();
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
   const reversData = [...data].reverse();
   return (
