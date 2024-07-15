@@ -15,6 +15,7 @@ type PropsType = {
 
 type OrderItems = {
   productId: string;
+  positionId: string;
   weight: number;
   units:string;
 }
@@ -51,22 +52,20 @@ export const InvoiceCreateModal = ({
 
   return (
     <Modal onOpenChange={setOpen} open={open} title={title + ' - ' + order.clientName}>
-      <ModalWithContent>
+      <ModalWithContent className={s.modalContent}>
         <form className={s.form} id={"invoice-form"}>
           {orderItems.map((item, index) => {
             return (
               <div className={s.inputContainer} key={index + item.productId}>
                 <label className={s.label}>{item.name}</label>
                 <div className={s.control}>
-                  <input className={s.input} data-units={
-                    //@ts-ignore
-                    item.quantity ? item.quantity.slice(-3) : item.units
-                  } name={item.name} defaultValue={
+                  <input className={s.input} name={item.name} data-positionid={item.positionId} defaultValue={
                     //@ts-ignore
                     item.weight
                   } step="0.01" data-productid={item.productId}  type={"number"}  min={0} required={true}/>
                   <label>{order.orderClient[index].quantity}</label>
                 </div>
+                <label className={s.comments}>{item.comments}</label>
               </div>
             )
           })}
@@ -74,25 +73,25 @@ export const InvoiceCreateModal = ({
 
         <label className={s.label}>Доставка</label>
         <input className={s.input} type={"number"}  min={0} step="0.01" value={priceDelivery} onChange={changePriceDelivery}/>
-
-        <div className={s.mydict}>
-          <div>
-            <label>
-              <input type="radio" name="discount" defaultChecked={!order.discount ||  order.discount == 0} value={0} onChange={changeDiscount}/>
-              <span>Нет скидки</span>
-            </label>
-            <label>
-              <input type="radio" name="discount" defaultChecked={order.discount === 5} value={5} onChange={changeDiscount}/>
-              <span>5%</span>
-            </label>
-            <label>
-              <input type="radio" name="discount" defaultChecked={order.discount === 10} value={10} onChange={changeDiscount}/>
-              <span>10%</span>
-            </label>
-          </div>
-        </div>
-
       </ModalWithContent>
+
+      <div className={s.mydict}>
+        <div>
+          <label>
+            <input type="radio" name="discount" defaultChecked={!order.discount ||  order.discount == 0} value={0} onChange={changeDiscount}/>
+            <span>Нет скидки</span>
+          </label>
+          <label>
+            <input type="radio" name="discount" defaultChecked={order.discount === 5} value={5} onChange={changeDiscount}/>
+            <span>5%</span>
+          </label>
+          <label>
+            <input type="radio" name="discount" defaultChecked={order.discount === 10} value={10} onChange={changeDiscount}/>
+            <span>10%</span>
+          </label>
+        </div>
+      </div>
+
       <ModalWithButton
         onClickPrimaryButton={() => {
           const form = document.getElementById('invoice-form');
@@ -111,11 +110,12 @@ export const InvoiceCreateModal = ({
 
             // @ts-ignore
             [...form.elements].forEach((element) => {
-              const units = element.dataset.units;
               const productId = element.dataset.productid;
-              const { value } = element
+              const positionId = element.dataset.positionid;
+              const { value, name } = element;
+              const units = name === 'Яйцо Кур' || name === 'Яйцо Инд' ? 'дес.': 'кг.';
 
-              invoice.orderItems.push({ productId: productId, weight: +(+value).toFixed(2), units});
+              invoice.orderItems.push({ productId, weight: +(+value).toFixed(2), units, positionId});
             });
 
             createInvoice(invoice);

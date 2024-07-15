@@ -49,6 +49,8 @@ export type BriefcaseOrder = {
 
 export type OrderItemsRequest = {
   productId: string;
+  positionId: string;
+  comments: string;
   weight: number;
   units:string;
 }
