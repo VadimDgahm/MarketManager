@@ -23,6 +23,11 @@
 .cellPosition {
   max-width: 600px;
   min-width: 400px;
+
+  button {
+    display: block;
+    text-align: left;
+  }
 }
 
 .linkClient{
