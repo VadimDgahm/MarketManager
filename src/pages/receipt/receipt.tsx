@@ -22,8 +22,6 @@ export const Receipt = () => {
 
   const order: BriefcaseOrder = data;
 
-  document.getElementById("footer")?.setAttribute('style', 'display:none;');
-
   return (
     <>
       <div className={s.body}>
