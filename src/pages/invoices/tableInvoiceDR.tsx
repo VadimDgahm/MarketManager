@@ -45,7 +45,6 @@ export const TableInvoiceDR = () => {
             <Table.Cell className={s.cellHide} variant={"head"}>Адрес</Table.Cell>
             <Table.Cell variant={"head"}>Заказ</Table.Cell>
             <Table.Cell variant={"head"}>Сумма, руб.</Table.Cell>
-            <Table.Cell className={s.cellHide} variant={"head"}>Чек</Table.Cell>
           </Table.Row>
         </Table.Head>
         <Table.Body>
@@ -77,7 +76,7 @@ const TableRawOrder = ({ index, order }: TableRawOrderProps) => {
 
   return (
     <>
-      <Table.Row className={s.table} key={order.orderId}>
+      <Table.Row className={s.table} key={order.orderId} style={{color:color}}>
         <Table.Cell>{++index}</Table.Cell>
         <Table.Cell>{client?.source?.substring(0, 4)}.</Table.Cell>
         <Table.Cell>{order.clientName}</Table.Cell>
@@ -103,10 +102,10 @@ const TableRawOrder = ({ index, order }: TableRawOrderProps) => {
           </Button>
           <InvoiceCreateModal open={isOpenInvoice} title={"Формирование счета"} setOpen={setOpenInvoice} order={order}/>
         </Table.Cell>
-        <Table.Cell>{order.finalTotalAmount ?? "не сформ."}</Table.Cell>
-        <Table.Cell className={s.cellHide}>
-          {order.finalTotalAmount ? <Button variant={"link"} style={{color:`var(${color})`}} onClick={() => {
-            navigate(`/invoices/receipt/${order.briefcaseId}/${order.orderId}`)}}>Чек</Button> : ''}
+        <Table.Cell>
+          {order.finalTotalAmount ? <Button variant={"link"}  style={{color:color}} onClick={() => {
+            navigate(`/invoices/receipt/${order.briefcaseId}/${order.orderId}`)}}>{order.finalTotalAmount}</Button> : "не сформ."
+          }
         </Table.Cell>
       </Table.Row>
       <Table.Row>
