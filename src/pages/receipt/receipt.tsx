@@ -26,7 +26,7 @@ export const Receipt = () => {
     <>
       <div className={s.body}>
         <header className={s.header}>
-          <img src={logo} width="230px"/>
+          <img src={logo} width="230px" alt={"logo"}/>
         </header>
         <main>
           <h3 className={s.pageTitle}>Ваш заказ</h3>
