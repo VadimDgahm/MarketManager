@@ -79,7 +79,7 @@ const TableRawOrder = ({ index, order }: TableRawOrderProps) => {
       <Table.Row className={s.table} key={order.orderId} style={{color:color}}>
         <Table.Cell>{++index}</Table.Cell>
         <Table.Cell>{client?.source?.substring(0, 4)}.</Table.Cell>
-        <Table.Cell>{order.clientName}</Table.Cell>
+        <Table.Cell className={s.cellName}>{order.clientName}</Table.Cell>
         <Table.Cell>{client?.phones[0]?.tel}</Table.Cell>
         <Table.Cell className={s.cellHide}>{order.time}</Table.Cell>
         <Table.Cell className={s.cellHide}>
@@ -103,8 +103,8 @@ const TableRawOrder = ({ index, order }: TableRawOrderProps) => {
           <InvoiceCreateModal open={isOpenInvoice} title={"Формирование счета"} setOpen={setOpenInvoice} order={order}/>
         </Table.Cell>
         <Table.Cell>
-          {order.finalTotalAmount ? <Button variant={"link"}  style={{color:color}} onClick={() => {
-            navigate(`/invoices/receipt/${order.briefcaseId}/${order.orderId}`)}}>{order.finalTotalAmount}</Button> : "не сформ."
+          {order.finalTotalAmount ? <Button variant={"link"} style={{color:color}} onClick={() => {
+            navigate(`/invoices/receipt/${order.briefcaseId}/${order.orderId}`)}}>{order.finalTotalAmount}</Button> : "---"
           }
         </Table.Cell>
       </Table.Row>
