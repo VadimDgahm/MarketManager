@@ -1,7 +1,11 @@
 
 .modalContent {
-  max-height: 65vh;
+  max-height: 50vh;
   overflow: auto;
+}
+
+.modal {
+  margin: 30px 0;
 }
 
 .modalContent::-webkit-scrollbar {
