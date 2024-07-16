@@ -9,3 +9,79 @@
     background-color: grey;
   }
 }
+
+.table {
+  width: 100%;
+
+  tbody tr td {
+    padding: 5px 2px;
+  }
+}
+.clientAddresses {
+  display: flex;
+  flex-direction: column;
+}
+.red {
+  color: red;
+}
+.address {
+  cursor: pointer;
+  color: var(--color-dark-100);
+  transition: 0.3s;
+  &:hover {
+    color: var(--color-light-100);
+  }
+}
+
+.done {
+  color: var(--color-success-300);
+}
+.cellPosition {
+  max-width: 600px;
+  min-width: 400px;
+
+  button {
+    display: block;
+    text-align: left;
+  }
+}
+
+.linkClient{
+  transition: .4s;
+  cursor: pointer;
+  &:hover{
+    color: rgb(154, 141, 224);
+  }
+}
+.sort {
+  margin: 0 10px;
+}
+
+.iconBasket {
+  display: none;
+}
+
+@media(max-width: 900px) {
+  .position {
+    display: none;
+  }
+
+  .iconBasket {
+    display: block;
+  }
+
+  .cellHide {
+    display: none;
+  }
+
+  .btnOrder {
+    padding: 0;
+  }
+
+  .cellPosition {
+    width: 25px;
+
+    max-width: unset;
+    min-width: unset;
+  }
+}

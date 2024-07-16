@@ -10,6 +10,14 @@ import s from "./navigate.module.scss";
 export const Navigate = () => {
   return (
     <nav className={s.navigate}>
+      <NavLinks />
+    </nav>
+  );
+};
+
+export const NavLinks = () => {
+  return (
+    <>
       <IconLink
         icon={<PersonOutline className={s.icon} />}
         name={"Клиенты"}
@@ -30,14 +38,15 @@ export const Navigate = () => {
         name={"Закупки"}
         url={"purchases"}
       />
-       <IconLink
-         icon={<Expand className={s.icon} />}
+      <IconLink
+        icon={<Expand className={s.icon} />}
         name={"Маршруты"}
         url={"deliveryRoutes"}
       />
-    </nav>
+    </>
   );
-};
+}
+
 
 type IconLink = {
   icon?: ReactNode;
@@ -47,14 +56,14 @@ type IconLink = {
 export const IconLink = ({ icon, name, url }: IconLink) => {
   return (
     <div className={s.boxLink}>
-      {icon}
+
       <NavLink
         className={({ isActive }) =>
           [s.link, isActive ? s.active : ""].join(" ")
         }
         to={`/${url}`}
       >
-        {name}
+        {icon}{name}
       </NavLink>
     </div>
   );
