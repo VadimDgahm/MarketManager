@@ -32,6 +32,8 @@ export const Briefcase = () => {
     return <Loader />;
   }
 
+  console.log('TIME SERVE: ',data?.tt);
+
   const createOrder = (body: OrderClientType) => {
     createOrderForClient({body, id: params.id});
   };
