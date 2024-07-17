@@ -1,7 +1,24 @@
 
 .modalContent {
-  max-height: 70vh;
+  max-height: 60vh;
   overflow: auto;
+}
+
+.modal {
+  margin: 30px 0;
+  max-height: 90vh;
+}
+
+.modalContent::-webkit-scrollbar {
+  width: 12px;
+}
+
+.modalContent::-webkit-scrollbar-track {
+  background: var(--color-accent-100);
+}
+
+.modalContent::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent-900);
 }
 
 .input {
@@ -32,6 +49,23 @@
   display: flex;
   flex-wrap: wrap;
   margin: 35px 25px 10px;
+
+  label span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: var(--color-accent-900);
+    padding: 0.375em 1.5em;
+    position: relative;
+    margin-left: .0625em;
+    box-shadow: 0 0 0 0.0625em #b5bfd9;
+    letter-spacing: .05em;
+    color: #fff;
+    text-align: center;
+    transition: background-color .5s ease;
+    height: 100%;
+  }
 }
 
 .mydict div label {
@@ -53,22 +87,7 @@
   background-color: var(--color-accent-700);
 }
 
-label span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  background-color: var(--color-accent-900);
-  padding: 0.375em 1.5em;
-  position: relative;
-  margin-left: .0625em;
-  box-shadow: 0 0 0 0.0625em #b5bfd9;
-  letter-spacing: .05em;
-  color: #fff;
-  text-align: center;
-  transition: background-color .5s ease;
-  height: 100%;
-}
+
 
 label:first-child span {
   border-radius: .375em 0 0 .375em;
