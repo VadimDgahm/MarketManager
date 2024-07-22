@@ -51,7 +51,7 @@ export const InvoiceCreateModal = ({
   }
 
   return (
-    <Modal className={s.modal} onOpenChange={setOpen} open={open} title={title + ' - ' + order.clientName}>
+    <Modal onOpenChange={setOpen} open={open} title={title + ' - ' + order.clientName}>
       <ModalWithContent className={s.modalContent}>
         <form className={s.form} id={"invoice-form"}>
           {orderItems.map((item, index) => {

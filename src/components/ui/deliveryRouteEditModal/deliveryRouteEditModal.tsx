@@ -3,6 +3,7 @@ import ModalWithContent from "@/components/ui/modal/modalWithContent/modalWithCo
 import {TableDeliveryRoutes} from "@/pages/deliveryRoutes/tableDeliveryRoutes/tableDeliveryRoutes";
 import {useUpdateOrderDeliveryRouteMutation} from "@/services/briefcase/briefcase.services";
 import {BriefcaseOrder} from "@/services/briefcase/briefcase.type";
+import s from './deliveryRouteEditModal.module.scss';
 
 
 type PropsType = {
@@ -45,7 +46,7 @@ export const DeliveryRouteEditModal = ({
 
   return (
     <Modal onOpenChange={setOpen} open={open} title={title}>
-      <ModalWithContent>
+      <ModalWithContent className={s.content}>
         <TableDeliveryRoutes btnHandler={editDR}
                              btnName={"Добавить к маршруту"}/>
       </ModalWithContent>
