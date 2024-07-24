@@ -69,10 +69,7 @@ export const Receipt = () => {
                 <>
                   <p className={s.resultPrice}>Общая сумма заказа: <b>{order.totalAmount} руб.</b></p>
                   <p className={s.resultPrice}>Скидка: <b>{order.discount}%</b></p>
-                  <p className={s.resultPrice}>К оплате: <b>{
-                    // @ts-ignore
-                    order.finalTotalAmount.toFixed(2)
-                  }</b>
+                  <p className={s.resultPrice}>К оплате: <b>{order.finalTotalAmount?.toFixed(2)} руб.</b>
                   </p>
                 </>
               ) : (
