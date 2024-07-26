@@ -24,7 +24,7 @@ export const TableInvoiceDR = () => {
   return (
     <>
       <Typography variant={"h1"}>Счет маршрута: {data?.name}</Typography>
-      <Typography variant={"h1"}>Общая сумма маршрута: <span style={{color:'#2f68cc'}}>{data?.drTotalAmount.toFixed(2)} руб.</span></Typography>
+      <Typography variant={"h1"}>Общая сумма маршрута: <span style={{color:'#2f68cc'}}>{data?.drTotalAmount} руб.</span></Typography>
       <ReactHTMLTableToExcel
         id="test-table-xls-button"
         className={s.btnDownload}
