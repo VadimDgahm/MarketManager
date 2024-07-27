@@ -36,7 +36,7 @@ export const TableInvoiceDR = () => {
         '\n💰: ' + order.finalTotalAmount + ' руб.';
     });
 
-    const title = '**Счет маршрута: ' + data?.name + '\nОбщая сумма маршрута: ' + getDrTotalAmount() + ' руб.**\n\n\n';
+    const title = 'Счет маршрута: ' + data?.name + '\nОбщая сумма маршрута: **' + getDrTotalAmount() + ' руб.**\n\n\n';
 
     await navigator.clipboard.writeText(title + copyText.join('\n\n\n') + '\n\n\n' + title);
 
