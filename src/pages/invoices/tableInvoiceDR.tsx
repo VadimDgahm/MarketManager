@@ -38,7 +38,7 @@ export const TableInvoiceDR = () => {
 
     const title = 'Счет маршрута: ' + data?.name + '\nОбщая сумма маршрута: **' + getDrTotalAmount() + ' руб.**\n\n\n';
 
-    await navigator.clipboard.writeText(title + copyText.join('\n\n\n') + '\n\n\n' + title);
+    await navigator.clipboard.writeText(title + copyText.join('\n\n') + '\n\n\n' + title);
 
     toast.success("Счет скопирован как текст!");
   }
