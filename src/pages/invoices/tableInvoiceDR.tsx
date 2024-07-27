@@ -99,7 +99,7 @@ const TableRawOrder = ({ index, order }: TableRawOrderProps) => {
   const [isOpenInvoice, setOpenInvoice] = useState(false);
   const navigate = useNavigate();
 
-  const color = order.invoiceOrderItems ? 'var(--color-success-900)' : 'var(--color-accent-700)';
+  const color = order?.invoiceOrderItems && order?.invoiceOrderItems.length === order.orderClient.length ? 'var(--color-success-900)' : 'var(--color-accent-700)';
 
   return (
     <>
