@@ -7,6 +7,8 @@ import {DeliveryRouteResponseType} from "@/services/deliveryRoutes/deliveryRoute
 import {useSortRouteMutation} from "@/services/deliveryRoutes/deliveryRoute.services";
 import {CellVariant} from "@/components/ui/table/TableCellVariant/TableCellVariant";
 import {DeliveryRouteEditModal} from "@/components/ui/deliveryRouteEditModal/deliveryRouteEditModal";
+import {ToastComponent} from "@/components/ui/ToastComponent/ToastComponent";
+import {toast} from "react-toastify";
 
 type TableOrdersProps = {
   data: DeliveryRouteResponseType;
@@ -51,19 +53,13 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
 
     await navigator.clipboard.writeText(text);
 
-    const copyPopup = document.getElementById("copy-popup");
-    // @ts-ignore
-    copyPopup.innerText = 'Скопировано: ' + text;
-    // @ts-ignore
-    copyPopup.style.display = "block";
-    // @ts-ignore
-    setTimeout(() => copyPopup.style.display = "none", 800);
+    toast.success("Скопировано: " + text);
   }
 
   return (
     <>
       <Button className={s.save} variant={"primary"} onClick={() => saveSortOrder()}>Сохранить изменения</Button>
-
+      <ToastComponent/>
       <List
         values={items}
         onChange={({oldIndex, newIndex}) => {

@@ -12,6 +12,8 @@ import {FullAddress} from "@/pages/utils/addresses";
 // @ts-ignore
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import {Basket} from "@/components/ui/icons/basket/basket";
+import {toast} from "react-toastify";
+import {ToastComponent} from "@/components/ui/ToastComponent/ToastComponent";
 
 export const TableInvoiceDR = () => {
   const params = useParams();
@@ -21,10 +23,35 @@ export const TableInvoiceDR = () => {
     return <Loader />;
   }
 
+  async function copyText() {
+    const copyText = data?.orders.map((order: BriefcaseOrder, index: number) => {
+      const textAddress = getOrderAddresses(order);
+      const textItem = getOrderClient(order);
+
+      return  '№' + ++index + ' | ' + order.dataClient?.source?.substring(0, 4) + ' | 👤' + order.clientName +
+        '\n☎️: `' + order.dataClient?.phones[0]?.tel + '`' +
+        '\n🕘: ' + order.time +
+        '\n🏠: `' + textAddress + '`' +
+        '\n🥩: ' + textItem +
+        '\n💰: ' + order.finalTotalAmount + ' руб.';
+    });
+
+    const title = '**Счет маршрута: ' + data?.name + '\nОбщая сумма маршрута: ' + getDrTotalAmount() + ' руб.**\n\n\n';
+
+    await navigator.clipboard.writeText(title + copyText.join('\n\n\n') + '\n\n\n' + title);
+
+    toast.success("Счет скопирован как текст!");
+  }
+
+  function getDrTotalAmount () {
+    return data?.drTotalAmount ? data.drTotalAmount.toFixed(2) : ''
+  }
+
   return (
     <>
+      <ToastComponent/>
       <Typography variant={"h1"}>Счет маршрута: {data?.name}</Typography>
-      <Typography variant={"h1"}>Общая сумма маршрута: <span style={{color:'#2f68cc'}}>{data?.drTotalAmount ? data.drTotalAmount.toFixed(2) : ''} руб.</span></Typography>
+      <Typography variant={"h1"}>Общая сумма маршрута: <span style={{color:'#2f68cc'}}>{getDrTotalAmount()} руб.</span></Typography>
       <ReactHTMLTableToExcel
         id="test-table-xls-button"
         className={s.btnDownload}
@@ -33,7 +60,7 @@ export const TableInvoiceDR = () => {
         sheet="лист1"
         buttonText="Скачать как XLS"
       />
-
+      <Button variant={"link"} onClick={copyText}>Скопировать как текст</Button>
       <Table.Root className={s.table}  id={"invoice-orders-table"}>
         <Table.Head>
           <Table.Row>
@@ -121,3 +148,27 @@ const TableRawOrder = ({ index, order }: TableRawOrderProps) => {
     </>
   );
 };
+
+function getOrderAddresses(order: BriefcaseOrder) {
+  const address =  order.dataClient?.addresses
+    .filter((address) => order.addressId === address.idAddress)[0];
+
+  return [
+    address.city && address.city + ",",
+    address.street && address.street,
+    address.numberStreet && `д.${address.numberStreet}`,
+    address.buildingSection && `корпус ${address.buildingSection}`,
+    address.numberApartment && `кв.${address.numberApartment}`,
+    address.lobby && `под.${address.lobby}`,
+    address.floor && `этаж ${address.floor}`,
+    address.code && `код ${address.code}`
+  ].join(' ');
+}
+
+function getOrderClient(order: BriefcaseOrder) {
+  return order.orderClient?.map((el) =>
+    `${el.quantity}${el.reductionName}${
+      el.comments && `(${el.comments})`
+    }  _ _`
+  );
+}
