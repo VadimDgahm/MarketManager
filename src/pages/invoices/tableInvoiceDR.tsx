@@ -98,8 +98,13 @@ const TableRawOrder = ({ index, order }: TableRawOrderProps) => {
   const client = order.dataClient;
   const [isOpenInvoice, setOpenInvoice] = useState(false);
   const navigate = useNavigate();
+  let color = '';
 
-  const color = order?.invoiceOrderItems && order?.invoiceOrderItems.length === order.orderClient.length ? 'var(--color-success-900)' : 'var(--color-accent-700)';
+  if (order.markOrder) {
+    color = 'var(--color-danger-300)';
+  } else {
+    color = order?.invoiceOrderItems && order?.invoiceOrderItems.length === order.orderClient.length ? 'var(--color-success-900)' : 'var(--color-accent-700)';
+  }
 
   return (
     <>

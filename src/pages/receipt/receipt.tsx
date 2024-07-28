@@ -49,7 +49,9 @@ export const Receipt = () => {
                       <Table.Cell>{item.name}</Table.Cell>
                       <Table.Cell className={s.tdText}>{item.productPrice.toFixed(2) + ' руб./' + item.units}</Table.Cell>
                       <Table.Cell className={s.tdText}>{item.weight.toFixed(2) + ' ' + item.units}</Table.Cell>
-                      <Table.Cell className={s.tdText}>{item.amount.toFixed(2)}</Table.Cell>
+                      <Table.Cell className={s.tdText}>{
+                        item.isGift ? 'Подарок' : item.amount.toFixed(2)
+                      }</Table.Cell>
                     </Table.Row>
                     )
                   )

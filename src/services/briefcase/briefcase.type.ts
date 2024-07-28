@@ -6,6 +6,7 @@ import {
 export type OrderType = {
   productId: string;
   comments: string;
+  isGift: boolean;
   name: string;
   positionId: string;
   quantity: string;
@@ -44,6 +45,7 @@ export type BriefcaseOrder = {
   discount?: number,
   priceDelivery?: number,
   finalTotalAmount?: number,
+  markOrder?: boolean,
 };
 
 
@@ -53,12 +55,13 @@ export type OrderItemsRequest = {
   comments: string;
   weight: number;
   units:string;
+  isGift: boolean
 }
 
 export type OrderItemsResponse = {
   productPrice: number;
   amount: number;
-  name: string
+  name: string;
 
 } & OrderItemsRequest;
 
