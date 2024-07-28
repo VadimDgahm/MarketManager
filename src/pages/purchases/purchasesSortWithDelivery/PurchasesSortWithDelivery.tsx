@@ -8,7 +8,7 @@ import { BriefcaseOrder} from "@/services/briefcase/briefcase.type";
 import classes from './PurchasesSortWithDelivery.module.scss'
 import { Typography } from "@/components/ui/typography";
 
-const REMAINIG_DELIVERY = 'Все остальные'
+const REMAINIG_DELIVERY = 'Еще не в маршрутах'
 
 const PurchasesSortWithDelivery = () => {
     const param = useParams();
@@ -35,9 +35,10 @@ const PurchasesSortWithDelivery = () => {
     }
     
 const onClickHandlerAllOrders = () => {
-    setFilterDeliveryDataOrders(data.orders)
+    setFilterDeliveryDataOrders([])
     setActiveDeliveryButton(null)
 }
+
     return<>
        <Typography variant={"large"}>{data.name}</Typography>
 

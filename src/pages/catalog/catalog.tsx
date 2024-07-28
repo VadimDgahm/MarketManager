@@ -21,22 +21,24 @@ import { CardProduct } from "@/pages/catalog/cardProduct/cardProduct";
 import { ProductType } from "@/services/catalog/catalog-servicesType";
 import {Loader} from "@/components/ui/loader/loader";
 
-export const CHICKEN_VIEW = "Птица";
-export const BEEF_VIEW = "Говядина";
-export const PORK_VIEW = "Свинина";
-export const RABBIT_VIEW = "Кролик";
-export const TURKEY_VIEW = "Индейка";
-export type TView = "Птица" | "Говядина" | "Свинина" | "Кролик" | "Индейка";
+export enum viewProduct  {
+  CHICKEN_VIEW = "Птица",
+  BEEF_VIEW = "Говядина",
+  PORK_VIEW = "Свинина",
+  RABBIT_VIEW = "Кролик",
+  TURKEY_VIEW = "Индейка",
+}
+
 export const optionsView = [
-  { location: "0", value: BEEF_VIEW },
-  { location: "1", value: PORK_VIEW },
-  { location: "2", value: CHICKEN_VIEW },
-  { location: "3", value: RABBIT_VIEW },
-  { location: "5", value: TURKEY_VIEW },
+  { location: "0", value: viewProduct.BEEF_VIEW },
+  { location: "1", value: viewProduct.PORK_VIEW },
+  { location: "2", value: viewProduct.CHICKEN_VIEW },
+  { location: "3", value: viewProduct.RABBIT_VIEW },
+  { location: "5", value: viewProduct.TURKEY_VIEW },
 ];
 export const Catalog = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [filterView, setFilterView] = useState<string>(CHICKEN_VIEW);
+  const [filterView, setFilterView] = useState<string>(viewProduct.CHICKEN_VIEW);
   const [createProduct] = useCreateProductMutation();
   const { data, isLoading } = useGetCatalogQuery({});
 

@@ -1,18 +1,18 @@
-import Select from "react-select";
+import Select, { SingleValue } from "react-select";
 import { Typography } from "@/components/ui/typography";
 import s from "@/components/ui/select/select.module.scss";
 
-type Option = {
+type OptionOrder = {
   value: string;
   label: string;
 };
 
 type SelectWithSearchProps = {
   title: string;
-  options: Option[];
+  options: OptionOrder[];
   onChange: (value: any) => void;
 };
-export const SelectWithSearch = ({
+const SelectWithSearch = ({
   title,
   options,
   onChange,
@@ -24,11 +24,11 @@ export const SelectWithSearch = ({
           {title}
         </Typography>
       )}
-      <Select<Option>
+      <Select<OptionOrder>
         autoFocus={false}
         placeholder={""}
         blurInputOnSelect={true}
-        onChange={(newValue) => onChange(newValue)}
+        onChange={onChange}
         styles={{
           control: (baseStyles) => {
             return {
@@ -76,3 +76,5 @@ export const SelectWithSearch = ({
     </div>
   );
 };
+
+export { SelectWithSearch }

@@ -8,10 +8,12 @@ import { v4 as uuidv4 } from "uuid";
 type PropsType = {
   arrProductsForClient: OrderType[];
   setArrProductsForClient: (arr: OrderType[]) => void;
+  cheackIsEmptyForm: (isEmpty: boolean) => void
 };
 export const useFormOrderClient = ({
   arrProductsForClient,
   setArrProductsForClient,
+  cheackIsEmptyForm
 }: PropsType) => {
   const [arrOptionsProduct, setArrOptionsProduct] = useState([]);
   const { data: catalog, isLoading } = useGetCatalogQuery({});
@@ -46,6 +48,7 @@ export const useFormOrderClient = ({
         setComments("");
         setValueWeightInput("");
         setArrProductsForClient([{ ...body }, ...arrProductsForClient]);
+        cheackIsEmptyForm(false)
       }
     }
   };

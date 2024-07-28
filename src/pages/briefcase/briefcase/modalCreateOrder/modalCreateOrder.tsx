@@ -44,26 +44,31 @@ export const ModalCreateOrder = ({
     setAddressId,
     addressId,
     errorAddress,
+    setIsEmptyOrderForm,
+    isEmptyOrderForm,
+    setErrorAddress
   } = useCreateOrder({ onOpenWindow, setResult });
 
-  const onClickHandlerClose = () => {
+  const [isOpenCreateClientWindow, seIsOpenCreateClientWindow] = useState(false);
+  const navigate = useNavigate();
+
+  const onClickHandlerClose = (value: boolean) => {
     setAddressId("");
     setDayDelivery("Неважно");
     setTimeDelivery("");
     setArrProductsForClient([]);
     handleClientChange(undefined);
-    onOpenWindow(false);
+    setErrorAddress(false)
+    setIsEmptyOrderForm(false)
+    onOpenWindow(value);
   };
-  const [isOpenCreateClientWindow, seIsOpenCreateClientWindow] =
-    useState(false);
-  const navigate = useNavigate();
-  const openWindowCreateClient = () => {
-    seIsOpenCreateClientWindow(true);
-  };
+
+  const openWindowCreateClient = () => {seIsOpenCreateClientWindow(true)};
+
   return (
     <Modal
       className={s.modal}
-      onOpenChange={onOpenWindow}
+      onOpenChange={onClickHandlerClose}
       open={isOpen}
       title={"Создать заказ"}
     >
@@ -108,6 +113,7 @@ export const ModalCreateOrder = ({
               )}
             </div>
             <FormOrderClient
+              cheackIsEmptyForm={setIsEmptyOrderForm}
               arrProductsForClient={arrProductsForClient}
               setArrProductsForClient={setArrProductsForClient}
             />
@@ -140,9 +146,9 @@ export const ModalCreateOrder = ({
         <Typography className={s.red}>НЕ ВЫБРАН АДРЕСС</Typography>
       )}
       <ModalWithButton
-        disabled={!client?.addresses.length}
+        disabled={isEmptyOrderForm || !addressId}
         onClickPrimaryButton={onSubmitHandler}
-        onClickSecondaryButton={onClickHandlerClose}
+        onClickSecondaryButton={() => onClickHandlerClose(false)}
         secondaryTitle={"Отменить"}
         titleButton={"Создать"}
       />

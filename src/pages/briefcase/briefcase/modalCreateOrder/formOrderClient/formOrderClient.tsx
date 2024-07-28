@@ -10,10 +10,12 @@ import { TabSwitcher } from "@/components/ui/tabSwitcher";
 type FormOrderClientProps = {
   arrProductsForClient: OrderType[];
   setArrProductsForClient: (arr: OrderType[]) => void;
+  cheackIsEmptyForm: (isEmpty: boolean) => void
 };
 export const FormOrderClient = ({
   arrProductsForClient,
   setArrProductsForClient,
+  cheackIsEmptyForm
 }: FormOrderClientProps) => {
   const {
     addProductInBasket,
@@ -27,9 +29,15 @@ export const FormOrderClient = ({
     valueWeightSelect,
     errorForValueWeightInput,
   } = useFormOrderClient({
+    cheackIsEmptyForm,
     arrProductsForClient,
     setArrProductsForClient,
   });
+
+  const inputNumberProductHandler = (newValue: any) => {
+    cheackIsEmptyForm(!!newValue)
+    setValueWeightInput(newValue)
+  }
   return (
     <div>
       <SelectWithSearch
@@ -41,7 +49,7 @@ export const FormOrderClient = ({
         <Input
           className={s.inputWeight}
           label={"Кол-во"}
-          onValueChange={(value) => setValueWeightInput(value)}
+          onValueChange={inputNumberProductHandler}
           type={"number"}
           value={valueWeightInput}
           errorMessage={errorForValueWeightInput ? "Заполните поле" : ""}
