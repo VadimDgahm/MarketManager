@@ -1,4 +1,4 @@
-import Select, { SingleValue } from "react-select";
+import Select from "react-select";
 import { Typography } from "@/components/ui/typography";
 import s from "@/components/ui/select/select.module.scss";
 

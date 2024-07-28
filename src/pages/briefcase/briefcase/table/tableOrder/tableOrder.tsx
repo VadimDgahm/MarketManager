@@ -223,6 +223,7 @@ const EditOrderClient = ({
   idBriefcase,
   client,
 }: TEditOrderClient) => {
+  const [isEmptyOrderForm,setIsEmptyOrderForm] = useState<boolean>(false)
   const [arrProductsForClient, setArrProductsForClient] = useState(
     order.orderClient
   );
@@ -265,6 +266,7 @@ const EditOrderClient = ({
           </Typography>
         </div>
         <FormOrderClient
+          cheackIsEmptyForm={setIsEmptyOrderForm}
           arrProductsForClient={arrProductsForClient}
           setArrProductsForClient={setArrProductsForClient}
         />
@@ -292,6 +294,7 @@ const EditOrderClient = ({
         </div>
       </ModalWithContent>
       <ModalWithButton
+        disabled={isEmptyOrderForm}
         onClickPrimaryButton={onSubmitHandler}
         onClickSecondaryButton={() => onOpenWindow(false)}
         secondaryTitle={"Отменить"}
