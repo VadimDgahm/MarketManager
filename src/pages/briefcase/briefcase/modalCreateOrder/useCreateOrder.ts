@@ -15,15 +15,23 @@ export const useCreateOrder = ({ onOpenWindow, setResult }: PropsType) => {
   const [arrProductsForClient, setArrProductsForClient] = useState<OrderType[]>(
     []
   );
+  const [isEmptyOrderForm,setIsEmptyOrderForm] = useState<boolean>(false)
   const [addressId, setAddressId] = useState("");
 
   const [errorAddress, setErrorAddress] = useState(false);
+  
   useEffect(() => {
     if (client && client.addresses.length) {
+      setErrorAddress(false)
       setAddressId(client.addresses[0].idAddress);
     }
   }, [client]);
+
   const onSubmitHandler = () => {
+    if(!addressId) {
+      setErrorAddress(true)
+      return
+    }
     if (client) {
       const body = {
         clientName: client.name,
@@ -67,5 +75,8 @@ export const useCreateOrder = ({ onOpenWindow, setResult }: PropsType) => {
     addressId,
     setAddressId,
     errorAddress,
+    isEmptyOrderForm,
+    setIsEmptyOrderForm,
+    setErrorAddress
   };
 };

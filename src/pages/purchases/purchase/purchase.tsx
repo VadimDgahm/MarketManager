@@ -2,14 +2,7 @@
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { Table } from "@/components/ui/table/Table";
 import { BriefcaseOrder, BriefcaseType, OrderType } from "@/services/briefcase/briefcase.type";
-import {
-  BEEF_VIEW,
-  CHICKEN_VIEW,
-  RABBIT_VIEW,
-  TURKEY_VIEW,
-  PORK_VIEW,
-  TView,
-} from "@/pages/catalog/catalog";
+import { viewProduct } from "@/pages/catalog/catalog";
 import s from "./purchase.module.scss";
 
 import { useEffect, useState } from "react";
@@ -17,58 +10,57 @@ import { optionsView } from "@/pages/catalog/catalog";
 import { ChangeStatus } from "@/pages/clients/client/controlClient/controlClient";
 import { ProductType } from "@/services/catalog/catalog-servicesType";
 
-interface TOrders<T> {
-  ordersWitPork: T[];
-  ordersWitBeef: T[];
-  ordersWitTurkey: T[];
-  ordersWitRabbit: T[];
-  ordersWithChicken: T[];
-}
+
+
 type TPurchase = {
   data: BriefcaseType
   catalog: ProductType[]
   dataOrders: BriefcaseOrder[]
 }
+type TEmptyArray<Y> = Y[] | [] 
+
+type TViewsOrder = Record<viewProduct, TEmptyArray<OrderType>>
+
 export const Purchase = ({data, catalog, dataOrders}: TPurchase) => {
-  const [currencyOrders, setCurrencyOrders] = useState<OrderType[]>([]);
-  const [filterView, setFilterView] = useState<TView>(CHICKEN_VIEW);
-  const [orders, setOrder] = useState<TOrders<OrderType>>({
-    ordersWitPork: [],
-    ordersWitBeef: [],
-    ordersWitTurkey: [],
-    ordersWitRabbit: [],
-    ordersWithChicken: [],
+  const [currencyOrders, setCurrencyOrders] = useState<TEmptyArray<OrderType>>([]);
+  const [filterView, setFilterView] = useState<viewProduct>(viewProduct.CHICKEN_VIEW);
+  const [orders, setOrder] = useState<TViewsOrder>({
+    [viewProduct.PORK_VIEW]: [],
+    [viewProduct.BEEF_VIEW]: [],
+    [viewProduct.TURKEY_VIEW]: [],
+    [viewProduct.RABBIT_VIEW]: [],
+    [viewProduct.CHICKEN_VIEW]: [],
   });
 
   useEffect(() => {
     if (dataOrders) {
       const ordersObj = createPurchases(dataOrders);
       setOrder(ordersObj);
-      setCurrencyOrders(ordersObj.ordersWithChicken);
+      setCurrencyOrders(ordersObj[filterView]);
     }
   }, [dataOrders]);
 
   const onChangeView = (value: string) => {
     switch (value) {
-      case PORK_VIEW:
-        setCurrencyOrders(orders.ordersWitPork);
-        setFilterView(PORK_VIEW);
+      case viewProduct.PORK_VIEW:
+        setCurrencyOrders(orders[viewProduct.PORK_VIEW]);
+        setFilterView(viewProduct.PORK_VIEW);
         break;
-      case BEEF_VIEW:
-        setCurrencyOrders(orders.ordersWitBeef);
-        setFilterView(BEEF_VIEW);
+      case viewProduct.BEEF_VIEW:
+        setCurrencyOrders(orders[viewProduct.BEEF_VIEW]);
+        setFilterView(viewProduct.BEEF_VIEW);
         break;
-      case TURKEY_VIEW:
-        setCurrencyOrders(orders.ordersWitTurkey);
-        setFilterView(TURKEY_VIEW);
+      case viewProduct.TURKEY_VIEW:
+        setCurrencyOrders(orders[viewProduct.TURKEY_VIEW]);
+        setFilterView(viewProduct.TURKEY_VIEW);
         break;
-      case RABBIT_VIEW:
-        setCurrencyOrders(orders.ordersWitRabbit);
-        setFilterView(RABBIT_VIEW);
+      case viewProduct.RABBIT_VIEW:
+        setCurrencyOrders(orders[viewProduct.RABBIT_VIEW]);
+        setFilterView(viewProduct.RABBIT_VIEW);
         break;
       default:
-        setCurrencyOrders(orders.ordersWithChicken);
-        setFilterView(CHICKEN_VIEW);
+        setCurrencyOrders(orders[viewProduct.CHICKEN_VIEW]);
+        setFilterView(viewProduct.CHICKEN_VIEW);
     }
   };
   return (
@@ -115,7 +107,7 @@ export const Purchase = ({data, catalog, dataOrders}: TPurchase) => {
                 .map((el: ProductType) => (
                   <Table.Cell key={el.id}>
                     {readNumber(el.name, currencyOrders).map((order) => (
-                      <div> {order.quantity}</div>
+                      <div> {order.quantity} {order.comments ? `(${order.comments})` : ''}</div>
                     ))}
                   </Table.Cell>
                 ))}
@@ -126,7 +118,8 @@ export const Purchase = ({data, catalog, dataOrders}: TPurchase) => {
     </div>
   );
 };
-const createPurchases = (data: BriefcaseOrder[]) => {
+
+const createPurchases = (data: BriefcaseOrder[]): TViewsOrder => {
   const result: OrderType[] = [];
 
   data.forEach((el) => {
@@ -134,23 +127,25 @@ const createPurchases = (data: BriefcaseOrder[]) => {
       result.push(order);
     });
   });
-  const ordersWitPork = result.filter((order) => order.view === PORK_VIEW);
-  const ordersWitBeef = result.filter((order) => order.view === BEEF_VIEW);
+
+  const ordersWitPork = result.filter((order) => order.view === viewProduct.PORK_VIEW);
+  const ordersWitBeef = result.filter((order) => order.view === viewProduct.BEEF_VIEW);
   const ordersWithChicken = result.filter(
-    (order) => order.view === CHICKEN_VIEW
+    (order) => order.view === viewProduct.CHICKEN_VIEW
   );
-  const ordersWitRabbit = result.filter((order) => order.view === RABBIT_VIEW);
-  const ordersWitTurkey = result.filter((order) => order.view === TURKEY_VIEW);
+  const ordersWitRabbit = result.filter((order) => order.view === viewProduct.RABBIT_VIEW);
+  const ordersWitTurkey = result.filter((order) => order.view === viewProduct.TURKEY_VIEW);
   return {
-    ordersWitPork,
-    ordersWitBeef,
-    ordersWithChicken,
-    ordersWitRabbit,
-    ordersWitTurkey,
+   [viewProduct.PORK_VIEW]: ordersWitPork,
+   [viewProduct.BEEF_VIEW]: ordersWitBeef,
+   [viewProduct.CHICKEN_VIEW]: ordersWithChicken,
+   [viewProduct.RABBIT_VIEW]: ordersWitRabbit,
+   [viewProduct.TURKEY_VIEW]:ordersWitTurkey,
   };
 };
 
-const calculateTotalSum = (nameProduct: string, orders: OrderType[]) => {
+const calculateTotalSum = (nameProduct: string, orders: TEmptyArray<OrderType>) => {
+  
   const needProductsArr = orders?.filter((el) => el.name === nameProduct);
   const result = { quantity: 0, totalWeight: 0 };
   const regex = /[а-яА-ЯёЁ.]+$/;
