@@ -15,7 +15,7 @@ import { Layout } from "@/pages/layout/layout";
 import { Purchases } from "@/pages/purchases/purchases";
 
 import { Login } from "@/pages/login/login";
-import { useCheckAuthQuery } from "@/services/auth/auth.services";
+//import { useCheckAuthQuery } from "@/services/auth/auth.services";
 import {DeliveryRoutes} from "@/pages/deliveryRoutes/deliveryRoutes";
 import {DeliveryRoute} from "@/pages/deliveryRoutes/deliveryRoute/deliveryRoute";
 import {TableInvoiceDR} from "@/pages/invoices/tableInvoiceDR";
