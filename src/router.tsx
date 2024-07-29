@@ -1,4 +1,5 @@
 import {
+  Outlet,
   RouteObject,
   RouterProvider,
   createBrowserRouter,
@@ -14,7 +15,7 @@ import { Layout } from "@/pages/layout/layout";
 import { Purchases } from "@/pages/purchases/purchases";
 
 import { Login } from "@/pages/login/login";
-//import { useCheckAuthQuery } from "@/services/auth/auth.services";
+import { useCheckAuthQuery } from "@/services/auth/auth.services";
 import {DeliveryRoutes} from "@/pages/deliveryRoutes/deliveryRoutes";
 import {DeliveryRoute} from "@/pages/deliveryRoutes/deliveryRoute/deliveryRoute";
 import {TableInvoiceDR} from "@/pages/invoices/tableInvoiceDR";
@@ -100,22 +101,20 @@ const router = createBrowserRouter([
 ]);
 
 function PrivateRoutes() {
-  // const { data, isLoading } = useCheckAuthQuery();
-  // if (isLoading) {
-  //   return (
-  //     <>
-  //       ...........................................ИДЕТ АВТОРИЗАЦИЯ
-  //       ПОДОЖДИТЕ............................
-  //     </>
-  //   );
-  // }
-  return (<>
-    <p>text</p>
-  </>);
-  // if (data?.message === "Пользователь не авторизован") {
-  //   return <Login />;
-  // }
-  // return <Outlet />;
+  const { data, isLoading } = useCheckAuthQuery();
+  if (isLoading) {
+    return (
+      <>
+        ...........................................ИДЕТ АВТОРИЗАЦИЯ
+        ПОДОЖДИТЕ............................
+      </>
+    );
+  }
+
+  if (data?.message === "Пользователь не авторизован") {
+    return <Login />;
+  }
+  return <Outlet />;
 }
 
 export const Router = () => {
