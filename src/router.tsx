@@ -110,13 +110,13 @@ function PrivateRoutes() {
       </>
     );
   }
-  if (data?.message === "Пользователь не авторизован") {
-    return (<>
-      {JSON.stringify(data)}
-    </>);
-    return <Login />;
-  }
-  return <Outlet />;
+  return (<>
+    {JSON.stringify(data)}
+  </>);
+  // if (data?.message === "Пользователь не авторизован") {
+  //   return <Login />;
+  // }
+  // return <Outlet />;
 }
 
 export const Router = () => {
