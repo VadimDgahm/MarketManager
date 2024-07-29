@@ -111,6 +111,9 @@ function PrivateRoutes() {
     );
   }
   if (data?.message === "Пользователь не авторизован") {
+    return (<>
+      {JSON.stringify(data)}
+    </>);
     return <Login />;
   }
   return <Outlet />;
