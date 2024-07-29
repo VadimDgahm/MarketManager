@@ -101,19 +101,19 @@ const router = createBrowserRouter([
 ]);
 
 function PrivateRoutes() {
-  const { data, isLoading } = useCheckAuthQuery();
-  if (isLoading) {
-    return (
-      <>
-        ...........................................ИДЕТ АВТОРИЗАЦИЯ
-        ПОДОЖДИТЕ............................
-      </>
-    );
-  }
-
-  if (data?.message === "Пользователь не авторизован") {
-    return <Login />;
-  }
+  // const { data, isLoading } = useCheckAuthQuery();
+  // if (isLoading) {
+  //   return (
+  //     <>
+  //       ...........................................ИДЕТ АВТОРИЗАЦИЯ
+  //       ПОДОЖДИТЕ............................
+  //     </>
+  //   );
+  // }
+  //
+  // if (data?.message === "Пользователь не авторизован") {
+  //   return <Login />;
+  // }
   return <Outlet />;
 }
 
