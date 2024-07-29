@@ -1,5 +1,4 @@
 import {
-  Outlet,
   RouteObject,
   RouterProvider,
   createBrowserRouter,
