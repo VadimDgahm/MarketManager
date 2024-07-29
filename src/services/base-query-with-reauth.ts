@@ -38,9 +38,7 @@ export const baseQueryWithReauth: BaseQueryFn<
 
         if (refreshResult.data) {
           result = await baseQuery(args, api, extraOptions);
-        } else {
-          window.location.href = "/login";
-        }
+        } 
       } finally {
         release();
       }
