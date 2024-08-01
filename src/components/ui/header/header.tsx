@@ -16,6 +16,9 @@ export const Header = forwardRef<HTMLHeadElement, HeaderInfoType>(() => {
         <Typography className={s.size} variant={"caption"}>
           Meat Market Manager
         </Typography>
+        <a href={'yandexnavi://build_route_on_map?lat_to=55.7558&lon_to=37.6176&description=%D0%A0%D0%B0%D1%84%D0%B8%D0%B5%D0%B2%D0%B0%2C+%D0%B4.109%2C+%D0%BA%D0%B2.86'} >
+          test
+        </a>
       </div>
 
       <label className={s.burger} htmlFor="burger">
