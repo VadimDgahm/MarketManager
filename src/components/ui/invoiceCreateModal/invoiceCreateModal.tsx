@@ -149,7 +149,7 @@ export const InvoiceCreateModal = ({
               const comments = element.dataset.comments;
               const isGift = element.dataset.gift === "true";
               const { value, name } = element;
-              const units = name === 'Яйцо Кур' || name === 'Яйцо Инд' ? 'дес.': 'кг.';
+              const units = name === 'Яйца Куриные' || name === 'Яйца Индейки' ? 'дес.': 'кг.';
 
               invoice.orderItems.push({ productId, weight: +(+value).toFixed(2), units, positionId, comments, isGift});
             });
