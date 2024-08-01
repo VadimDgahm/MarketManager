@@ -34,7 +34,7 @@ export const TrueFoodReceipt = ({order}: {order: BriefcaseOrder}) => {
                         <Table.Cell className={s.tdText}>{item.productPrice.toFixed(2) + ' руб./' + item.units}</Table.Cell>
                         <Table.Cell className={s.tdText}>{item.weight.toFixed(2) + ' ' + item.units}</Table.Cell>
                         <Table.Cell className={s.tdText}>{
-                          item.isGift ? 'Подарок' : item.amount.toFixed(2)
+                          item.isGift ? 'Подарок' : item.amount.toFixed(2) + ' руб.'
                         }</Table.Cell>
                       </Table.Row>
                     )
@@ -44,9 +44,9 @@ export const TrueFoodReceipt = ({order}: {order: BriefcaseOrder}) => {
                 <Table.Row className={s.record}>
                   <Table.Cell className={s.tdText}>{order.invoiceOrderItems?.length ? order.invoiceOrderItems?.length + 1 : ''}</Table.Cell>
                   <Table.Cell>Доставка</Table.Cell>
-                  <Table.Cell className={s.tdText}>{order.priceDelivery?.toFixed(2) + ' руб.'}</Table.Cell>
+                  <Table.Cell className={s.tdText}>{order.priceDelivery?.toFixed(2)} руб.</Table.Cell>
                   <Table.Cell className={s.tdText}>1.00</Table.Cell>
-                  <Table.Cell className={s.tdText}>{order.priceDelivery?.toFixed(2)}</Table.Cell>
+                  <Table.Cell className={s.tdText}>{order.priceDelivery?.toFixed(2)} руб.</Table.Cell>
                 </Table.Row>
               </Table.Body>
             </Table.Root>
