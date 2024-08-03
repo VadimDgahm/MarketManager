@@ -1,6 +1,6 @@
 import Modal from "@/components/ui/modal/modal";
 import ModalWithContent from "@/components/ui/modal/modalWithContent/modalWithContent";
-import {BriefcaseOrder} from "@/services/briefcase/briefcase.type";
+import {BriefcaseOrder, OrderItemsResponse} from "@/services/briefcase/briefcase.type";
 import ModalWithButton from "@/components/ui/modal/modalWithButton/modalWithButton";
 import s from './invoiceCreateModal.module.scss';
 import {useCreateInvoiceMutation} from "@/services/invoices/invoices.services";
@@ -38,8 +38,15 @@ export const InvoiceCreateModal = ({
                                          title,
                                           order
                                        }: PropsType) => {
-  const orderItems = order?.invoiceOrderItems && order?.invoiceOrderItems.length === order.orderClient.length ?
-      order?.invoiceOrderItems : order.orderClient;
+  // const orderItems = order?.invoiceOrderItems && order?.invoiceOrderItems.length === order.orderClient.length ?
+  //     order.invoiceOrderItems : order.orderClient;
+  let orderItems;
+
+  if(order?.invoiceOrderItems) {
+    orderItems = addMissingInvoiceItems(order);
+  } else {
+    orderItems = order.orderClient;
+  }
 
   const [createInvoice] = useCreateInvoiceMutation();
   const [discount, setDiscount] = useState<number>(0);
@@ -67,7 +74,7 @@ export const InvoiceCreateModal = ({
                     //@ts-ignore
                     item.weight
                   } step="0.01" data-productid={item.productId}  type={"number"} data-gift={item.isGift}  min={0} required={true}/>
-                  <label>{order.orderClient[index].quantity}</label>
+                  <label>{order.orderClient[index]?.quantity}</label>
                   <div className={s.giftContainer}>
                       <svg data-id={"in" + index}  onClick={(e) => {
                         // @ts-ignore
@@ -165,6 +172,38 @@ export const InvoiceCreateModal = ({
       />
     </Modal>
 );
+
+  function addMissingInvoiceItems(order: BriefcaseOrder) {
+    if(order.invoiceOrderItems) {
+      const resOrderItems: OrderItemsResponse[] = [];
+
+      order.orderClient.forEach(orderItem => {
+        const matchingInvoiceItem = order.invoiceOrderItems!.find(
+          invoiceItem => invoiceItem.positionId === orderItem.positionId
+        );
+
+        if (matchingInvoiceItem) {
+          resOrderItems.push(matchingInvoiceItem);
+        } else {
+          resOrderItems.push({
+            productId: orderItem.productId,
+            weight: 0,
+            units: "кг.",
+            positionId: orderItem.positionId,
+            comments: orderItem.comments,
+            isGift: false,
+            productPrice: 0,
+            name: orderItem.name,
+            amount: 0
+          });
+        }
+      });
+
+      return resOrderItems;
+    }
+
+    return [];
+  }
 };
 
 
