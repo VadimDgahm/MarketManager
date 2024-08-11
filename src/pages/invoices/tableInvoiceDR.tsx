@@ -2,7 +2,7 @@ import { Table } from "@/components/ui/table/Table";
 import { BriefcaseOrder } from "@/services/briefcase/briefcase.type";
 import {useNavigate, useParams} from "react-router-dom";
 import {useGetInvoicesByIdQuery} from "@/services/invoices/invoices.services";
-import {useState} from "react";
+import React, {useState} from "react";
 import s from './tableInvoiceDR.module.scss';
 import {Button} from "@/components/ui/button";
 import {InvoiceCreateModal} from "@/components/ui/invoiceCreateModal/invoiceCreateModal";
@@ -23,7 +23,7 @@ export const TableInvoiceDR = () => {
     return <Loader />;
   }
 
-  async function copyText() {
+  async function copyInvoiceAsText(): Promise<void> {
     const copyText = data?.orders.map((order: BriefcaseOrder, index: number) => {
       const textAddress = getOrderAddresses(order);
       const textItem = getOrderClient(order);
@@ -36,11 +36,20 @@ export const TableInvoiceDR = () => {
         '\n💰: ' + order.finalTotalAmount + ' руб.';
     });
 
-    const title = 'Счет маршрута: ' + data?.name + '\nОбщая сумма маршрута: **' + getDrTotalAmount() + ' руб.**\n\n\n';
+    const title = '**Счет маршрута: ' + data?.name + '**\n**Общая сумма маршрута: ' + getDrTotalAmount() + ' руб.**\n\n\n';
 
     await navigator.clipboard.writeText(title + copyText.join('\n\n') + '\n\n\n' + title);
 
     toast.success("Счет скопирован как текст!");
+  }
+
+  async function copyText(e:  React.MouseEvent<HTMLTableHeaderCellElement, MouseEvent>): Promise<void> {
+    // @ts-ignore
+    const text = e.target.innerText;
+
+    await navigator.clipboard.writeText(text);
+
+    toast.success("Скопировано: " + text);
   }
 
   function getDrTotalAmount () {
@@ -60,7 +69,7 @@ export const TableInvoiceDR = () => {
         sheet="лист1"
         buttonText="Скачать как XLS"
       />
-      <Button variant={"link"} onClick={copyText}>Скопировать как текст</Button>
+      <Button variant={"link"} onClick={copyInvoiceAsText}>Скопировать как текст</Button>
       <Table.Root className={s.table}  id={"invoice-orders-table"}>
         <Table.Head>
           <Table.Row>
@@ -82,6 +91,7 @@ export const TableInvoiceDR = () => {
               key={el.orderId}
               index={i}
               order={el}
+              copyText={copyText}
             />
           ))}
         </Table.Body>
@@ -93,8 +103,9 @@ export const TableInvoiceDR = () => {
 type TableRawOrderProps = {
   index: number;
   order: BriefcaseOrder;
+  copyText: (e: React.MouseEvent<HTMLTableHeaderCellElement, MouseEvent>) => Promise<void>;
 };
-const TableRawOrder = ({ index, order }: TableRawOrderProps) => {
+const TableRawOrder = ({ index, order, copyText }: TableRawOrderProps) => {
   const client = order.dataClient;
   const [isOpenInvoice, setOpenInvoice] = useState(false);
   const navigate = useNavigate();
@@ -111,8 +122,8 @@ const TableRawOrder = ({ index, order }: TableRawOrderProps) => {
       <Table.Row className={s.table} key={order.orderId} style={{color:color}}>
         <Table.Cell>{++index}</Table.Cell>
         <Table.Cell>{client?.source?.substring(0, 4)}.</Table.Cell>
-        <Table.Cell className={s.cellName}>{order.clientName}</Table.Cell>
-        <Table.Cell>{client?.phones[0]?.tel}</Table.Cell>
+        <Table.Cell className={s.cellName} onClick={copyText}>{order.clientName}</Table.Cell>
+        <Table.Cell onClick={copyText}>{client?.phones[0]?.tel}</Table.Cell>
         <Table.Cell className={s.cellHide}>{order.time}</Table.Cell>
         <Table.Cell className={s.cellHide}>
           {order.dataClient?.addresses

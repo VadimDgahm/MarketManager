@@ -5,14 +5,14 @@ import "react-toastify/dist/ReactToastify.css";
 export const ToastComponent = () => {
   return (
     <ToastContainer
-      autoClose={3000}
+      autoClose={400}
       closeOnClick
       draggable
       hideProgressBar
       newestOnTop={false}
       pauseOnFocusLoss
       pauseOnHover
-      position={"bottom-right"}
+      position={"top-center"}
       rtl={false}
       theme={"dark"}
     />
