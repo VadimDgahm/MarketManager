@@ -20,7 +20,6 @@ import { DeliveryRoutes } from "@/pages/deliveryRoutes/deliveryRoutes";
 import { DeliveryRoute } from "@/pages/deliveryRoutes/deliveryRoute/deliveryRoute";
 import { TableInvoiceDR } from "@/pages/invoices/tableInvoiceDR";
 import { Receipt } from "@/pages/receipt/receipt";
-import { PurchasesSortWithDelivery } from "./pages/purchases/purchasesSortWithDelivery/PurchasesSortWithDelivery";
 import { Purchases2 } from "./pages/purchases/purchase2/purchase2";
 
 const publicRoutes: RouteObject[] = [

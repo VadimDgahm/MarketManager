@@ -8,9 +8,6 @@ const showAllValuePosition: ValuesPosition<string> = {
   value: SHOW_ALL,
 };
 
-const KG_REGEX = /\b\d+(?:\.\d+)?\s*кг\./g;
-const ITEM_REGEX = /\b\d+(?:\.\d+)?\s*шт\./g;
-
 const arrViewProductsPosition: ValuesPosition<string>[] = [
   {
     location: viewProduct.BEEF_VIEW,

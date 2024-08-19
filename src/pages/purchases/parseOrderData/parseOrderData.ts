@@ -1,5 +1,4 @@
 import { ValuesPosition } from "@/components/ui/tabSwitcher";
-import { viewProduct } from "@/pages/catalog/catalog";
 import { BriefcaseOrder, OrderType } from "@/services/briefcase/briefcase.type";
 import { SHOW_ALL } from "../purchase2/utils";
 
