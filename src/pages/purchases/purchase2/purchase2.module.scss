@@ -1,0 +1,20 @@
+.table {
+  max-width: 1400px;
+  overflow: auto;
+}
+
+.cellTable {
+  display: flex;
+  flex-direction: column;
+}
+
+.btnExel {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--color-success-500);
+  transition: 0.3s;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--color-success-900);
+  }
+}

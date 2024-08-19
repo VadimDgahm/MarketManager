@@ -4,16 +4,19 @@ import { Table } from "@/components/ui/table/Table";
 import { useGetBriefcaseQuery } from "@/services/briefcase/briefcase.services";
 
 import s from "./purchases.module.scss";
-import {Loader} from "@/components/ui/loader/loader";
+import { Loader } from "@/components/ui/loader/loader";
 
 export const Purchases = () => {
-  const { data, isLoading } = useGetBriefcaseQuery({});
+  const { data, isLoading, isError } = useGetBriefcaseQuery({});
   const navigate = useNavigate();
 
   if (isLoading) {
     return <Loader />;
   }
-  const reversData = [...data].reverse();
+  if (isError) {
+    return <div>Попробуйте перезагрузить</div>;
+  }
+
   return (
     <div className={s.content}>
       <Table.Root className={s.table}>
@@ -26,7 +29,7 @@ export const Purchases = () => {
           </Table.Row>
         </Table.Head>
         <Table.Body>
-          {reversData.reverse().map((el: any) => (
+          {data.map((el: any) => (
             <Table.Row key={el.id}>
               <Table.Cell
                 className={s.clickCell}

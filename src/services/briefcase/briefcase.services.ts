@@ -1,4 +1,5 @@
 import { baseApi } from "@/services/base-api";
+import { BriefcaseType } from "./briefcase.type";
 
 const briefcaseService = baseApi.injectEndpoints({
   endpoints: (builder) => {
@@ -31,7 +32,7 @@ const briefcaseService = baseApi.injectEndpoints({
           };
         },
       }),
-      getBriefcaseById: builder.query<any, any>({
+      getBriefcaseById: builder.query<BriefcaseType, any>({
         providesTags: ["Briefcase", "Clients"],
         query: ({ id }) => {
           return {

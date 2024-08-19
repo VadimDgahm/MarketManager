@@ -19,9 +19,9 @@ import { z } from "zod";
 import s from "./catalog.module.scss";
 import { CardProduct } from "@/pages/catalog/cardProduct/cardProduct";
 import { ProductType } from "@/services/catalog/catalog-servicesType";
-import {Loader} from "@/components/ui/loader/loader";
+import { Loader } from "@/components/ui/loader/loader";
 
-export enum viewProduct  {
+export enum viewProduct {
   CHICKEN_VIEW = "Птица",
   BEEF_VIEW = "Говядина",
   PORK_VIEW = "Свинина",
@@ -33,12 +33,13 @@ export const optionsView = [
   { location: "0", value: viewProduct.BEEF_VIEW },
   { location: "1", value: viewProduct.PORK_VIEW },
   { location: "2", value: viewProduct.CHICKEN_VIEW },
-  { location: "3", value: viewProduct.RABBIT_VIEW },
   { location: "5", value: viewProduct.TURKEY_VIEW },
 ];
 export const Catalog = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [filterView, setFilterView] = useState<string>(viewProduct.CHICKEN_VIEW);
+  const [filterView, setFilterView] = useState<string>(
+    viewProduct.CHICKEN_VIEW
+  );
   const [createProduct] = useCreateProductMutation();
   const { data, isLoading } = useGetCatalogQuery({});
 
@@ -95,7 +96,7 @@ export const loginSchemaProduct = z.object({
     .max(3000, "Слишком большое название"),
   reductionName: z.string().optional(),
   type: z.string(),
-  price: z.preprocess((a) => parseFloat(a as string), z.number())
+  price: z.preprocess((a) => parseFloat(a as string), z.number()),
 });
 
 export type ModalProductProps = {
@@ -106,7 +107,7 @@ export type ModalProductProps = {
 };
 export type FormDataProduct = {
   name: string;
-  price: number
+  price: number;
   reductionName: string;
   type: "Готовый" | "Сырьевой";
 };
@@ -124,7 +125,7 @@ export const ModalProduct = ({
       name: product?.name || "",
       reductionName: product?.reductionName || "",
       type: product?.type || "Сырьевой",
-      price: product?.price || 0
+      price: product?.price || 0,
     },
     mode: "onSubmit",
     resolver: zodResolver(loginSchemaProduct),
