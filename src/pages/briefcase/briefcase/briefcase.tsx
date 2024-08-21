@@ -16,6 +16,7 @@ import {
 } from "@/services/briefcase/briefcase.services";
 import s from "./briefcase.module.scss";
 import { Loader } from "@/components/ui/loader/loader";
+import {TotalWeightModal} from "@/components/ui/totalWeightModal/totalWeightModal";
 
 export const Briefcase = () => {
   const params = useParams();
@@ -23,6 +24,7 @@ export const Briefcase = () => {
   const [isOpen, setOpen] = useState(false);
   const { data, isLoading } = useGetBriefcaseByIdQuery({ id: params.id });
   const [createOrderForClient] = useCreateOrderClientMutation();
+  const [isOpenTotalWeight, setOpenTotalWeight] = useState(false);
 
   const onOpenWindowHandler = (isOpen: boolean) => {
     setOpen(isOpen);
@@ -73,6 +75,15 @@ export const Briefcase = () => {
                 sheet="лист1"
                 buttonText="Скачать как XLS"
               />
+
+              <Button
+                className={s.button}
+                variant={"secondary"}
+                onClick={() => setOpenTotalWeight(!isOpenTotalWeight)}
+              >
+                Общий вес
+              </Button>
+
               <TableOrders orders={data.orders} idBriefcase={params.id} />
             </>
           )}
@@ -83,6 +94,7 @@ export const Briefcase = () => {
         onOpenWindow={onOpenWindowHandler}
         setResult={createOrder}
       />
+      <TotalWeightModal open={isOpenTotalWeight} briefcaseId={data.id} setOpen={setOpenTotalWeight} />
     </div>
   );
 };

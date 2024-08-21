@@ -30,7 +30,16 @@ const invoicesService = baseApi.injectEndpoints({
             url: `invoices/receipt/${briefcase}/${order}`,
           };
         },
-      })
+      }),
+
+      getTotalWeight: builder.query<any, any>({
+        providesTags: ["Invoices"],
+        query: ({briefcaseId}) => {
+          return {
+            url: `invoices/totalweight/${briefcaseId}`,
+          };
+        },
+      }),
     };
   },
 });
@@ -38,5 +47,6 @@ const invoicesService = baseApi.injectEndpoints({
 export const {
   useGetInvoicesByIdQuery,
   useCreateInvoiceMutation,
-  useGetOrderInvoiceByIdQuery
+  useGetOrderInvoiceByIdQuery,
+  useGetTotalWeightQuery
 } = invoicesService;
