@@ -4,6 +4,7 @@ import {useGetTotalWeightQuery} from "@/services/invoices/invoices.services";
 import {Loader} from "@/components/ui/loader/loader";
 import {Table} from "@/components/ui/table/Table";
 import s from "@/pages/briefcase/briefcase/table/tableOrder/tableOrder.module.scss";
+import sm from "./totalWeightModal.module.scss";
 
 type PropsType = {
   open: boolean,
@@ -20,7 +21,7 @@ export const TotalWeightModal = ({briefcaseId, open, setOpen}: PropsType) => {
 
   return (
     <Modal onOpenChange={setOpen} open={open} title="Общий вес по маршруту">
-      <ModalWithContent>
+      <ModalWithContent className={sm.content}>
         <Table.Root className={s.table} id={"orders-table"}>
           <Table.Head>
             <Table.Row>
@@ -34,7 +35,7 @@ export const TotalWeightModal = ({briefcaseId, open, setOpen}: PropsType) => {
               <Table.Row key={key}>
                 <Table.Cell>{++index}</Table.Cell>
                 <Table.Cell>{key}</Table.Cell>
-                <Table.Cell>{data[key]}</Table.Cell>
+                <Table.Cell>{data[key].toFixed(2)}</Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
