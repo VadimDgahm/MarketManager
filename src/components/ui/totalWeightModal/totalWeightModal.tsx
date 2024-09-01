@@ -19,27 +19,39 @@ export const TotalWeightModal = ({briefcaseId, open, setOpen}: PropsType) => {
     return <Loader/>;
   }
 
+  if(!data) {
+   return;
+  }
+
   return (
     <Modal onOpenChange={setOpen} open={open} title="Общий вес по маршруту">
       <ModalWithContent className={sm.content}>
-        <Table.Root className={s.table} id={"orders-table"}>
-          <Table.Head>
-            <Table.Row>
-              <Table.Cell variant={"head"}>№</Table.Cell>
-              <Table.Cell variant={"head"}>Позиция</Table.Cell>
-              <Table.Cell variant={"head"}>Вес, кг</Table.Cell>
-            </Table.Row>
-          </Table.Head>
-          <Table.Body>
-            {Object.keys(data).map((key, index) => (
-              <Table.Row key={key}>
-                <Table.Cell>{++index}</Table.Cell>
-                <Table.Cell>{key}</Table.Cell>
-                <Table.Cell>{data[key].toFixed(2)}</Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table.Root>
+        {
+          data?.map((category:{view: string; products: { [key: string]: number }}, index: number) => (
+            <>
+              <h4>{category.view}</h4>
+                  <Table.Root className={s.table} id={"orders-table" + index} key={category.view}>
+                <Table.Head>
+                  <Table.Row>
+                    <Table.Cell variant={"head"}>№</Table.Cell>
+                    <Table.Cell variant={"head"}>Позиция</Table.Cell>
+                    <Table.Cell variant={"head"}>Вес, кг</Table.Cell>
+                  </Table.Row>
+                </Table.Head>
+                <Table.Body>
+                  {
+                    Object.keys(category.products).map((item, index)=> (
+                      <Table.Row key={item}>
+                        <Table.Cell>{++index}</Table.Cell>
+                        <Table.Cell>{item}</Table.Cell>
+                        <Table.Cell>{category.products[item].toFixed(2)}</Table.Cell>
+                      </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table.Root>
+            </>
+          ))
+        }
       </ModalWithContent>
     </Modal>
   );
