@@ -2,3 +2,13 @@
   height: 650px;
   overflow: auto;
 }
+
+.content {
+  tr td:first-child{
+    width: 20% !important;
+  }
+
+  tr td:last-child{
+    width: 30% !important;
+  }
+}
