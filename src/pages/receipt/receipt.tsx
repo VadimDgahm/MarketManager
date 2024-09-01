@@ -20,7 +20,7 @@ export const Receipt = () => {
   }
 
   const order: BriefcaseOrder = data;
-console.log(data);
+
   return (
     <>
       {
