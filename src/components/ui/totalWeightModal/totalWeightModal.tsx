@@ -27,7 +27,7 @@ export const TotalWeightModal = ({briefcaseId, open, setOpen}: PropsType) => {
     <Modal onOpenChange={setOpen} open={open} title="Общий вес по маршруту">
       <ModalWithContent className={sm.content}>
         {
-          data?.map((category:{view: string; products: { [key: string]: number }}, index: number) => (
+          data?.map((category:{view: string; products: { name: string; sorValue: number; weight: number }[]}, index: number) => (
             <>
               <h4>{category.view}</h4>
                   <Table.Root className={s.table} id={"orders-table" + index} key={category.view}>
@@ -40,11 +40,11 @@ export const TotalWeightModal = ({briefcaseId, open, setOpen}: PropsType) => {
                 </Table.Head>
                 <Table.Body>
                   {
-                    Object.keys(category.products).map((item, index)=> (
-                      <Table.Row key={item}>
+                    category.products.map((item, index)=> (
+                      <Table.Row key={item.name}>
                         <Table.Cell>{++index}</Table.Cell>
-                        <Table.Cell>{item}</Table.Cell>
-                        <Table.Cell>{category.products[item].toFixed(2)}</Table.Cell>
+                        <Table.Cell>{item.name}</Table.Cell>
+                        <Table.Cell>{item.weight.toFixed(2)}</Table.Cell>
                       </Table.Row>
                   ))}
                 </Table.Body>

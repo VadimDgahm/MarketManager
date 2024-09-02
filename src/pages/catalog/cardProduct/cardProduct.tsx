@@ -46,7 +46,8 @@ export const CardProduct = ({ product }: CardProductProps) => {
               width={34}
             />
           </div>
-          {product.view} , {product.price} руб.
+          {product.view} , {product.price} руб.<br/>
+          Приоритет: {product.sortValue ?? 0}
         </div>
         <TrashOutline
           className={s.removeIcon}

@@ -97,6 +97,7 @@ export const loginSchemaProduct = z.object({
   reductionName: z.string().optional(),
   type: z.string(),
   price: z.preprocess((a) => parseFloat(a as string), z.number()),
+  sortValue: z.preprocess((a) => parseFloat(a as string), z.number())
 });
 
 export type ModalProductProps = {
@@ -109,6 +110,7 @@ export type FormDataProduct = {
   name: string;
   price: number;
   reductionName: string;
+  sortValue: number;
   type: "Готовый" | "Сырьевой";
 };
 export const ModalProduct = ({
@@ -126,6 +128,7 @@ export const ModalProduct = ({
       reductionName: product?.reductionName || "",
       type: product?.type || "Сырьевой",
       price: product?.price || 0,
+      sortValue: product?.sortValue || 0
     },
     mode: "onSubmit",
     resolver: zodResolver(loginSchemaProduct),
@@ -174,6 +177,16 @@ export const ModalProduct = ({
             datatype={"number"}
             min={0}
             name={"price"}
+          />
+          <ControlledInput
+            className={s.input}
+            control={control}
+            label={"Приоритет"}
+            type={"number"}
+            step={1}
+            datatype={"number"}
+            min={1}
+            name={"sortValue"}
           />
 
           <div>

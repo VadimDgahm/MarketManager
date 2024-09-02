@@ -5,6 +5,7 @@ export type ProductTypeRequest = {
   userId: string;
   reductionName: string;
   view: "Говядина" | "Птица" | "Свинина";
+  sortValue: number;
 };
 
 export type ProductType = {
