@@ -1,5 +1,5 @@
 import { Loader } from "@/components/ui/loader/loader";
-import { useGetBriefcaseByIdQuery} from "@/services/briefcase/briefcase.services";
+import {useGetBriefcaseByIdPurchaseQuery} from "@/services/briefcase/briefcase.services";
 import { useParams } from "react-router-dom";
 import s from "./purchase2.module.scss";
 import {
@@ -23,7 +23,7 @@ import { Table } from "@/components/ui/table/Table";
 
 const Purchases2 = () => {
   const param = useParams();
-  const { data, isLoading, isError } = useGetBriefcaseByIdQuery({
+  const { data, isLoading, isError } = useGetBriefcaseByIdPurchaseQuery({
     id: param.id,
   });
 
