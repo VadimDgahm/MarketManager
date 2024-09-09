@@ -40,6 +40,14 @@ const briefcaseService = baseApi.injectEndpoints({
           };
         },
       }),
+      getBriefcaseByIdPurchase: builder.query<BriefcaseType, any>({
+      providesTags: ["Briefcase", "Clients"],
+      query: ({ id }) => {
+        return {
+          url: `briefcase/purchase/${id}`,
+        };
+      },
+    }),
       removeBriefcase: builder.mutation<any, any>({
         invalidatesTags: ["Briefcase"],
         query: ({ id }) => {
@@ -102,4 +110,5 @@ export const {
   useChangeBriefcaseMutation,
   useUpdateOrderClientMutation,
   useUpdateOrderDeliveryRouteMutation,
+  useGetBriefcaseByIdPurchaseQuery
 } = briefcaseService;

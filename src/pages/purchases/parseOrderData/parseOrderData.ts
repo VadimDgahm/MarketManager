@@ -61,6 +61,7 @@ type TSortOrder = {
   productName: string;
   quantities: string[];
   view: string;
+  sortValue: number;
 };
 
 const parseOrderDeliveryData = (
@@ -81,6 +82,7 @@ const parseOrderDeliveryData = (
           productName: cur.name,
           quantities: [quantityWithComment],
           view: cur.view,
+          sortValue: cur.sortValue ?? 0
         };
         return [...acc, newProductObj];
       }
@@ -123,7 +125,7 @@ const filterDataByNameDeliveryAndViewProduct = (
     };
     return parseOrderDeliveryData(allProducts).filter(
       (product) => product.view === viewProduct
-    );
+    ).sort((a, b) => a.sortValue - b.sortValue);
   }
 
   const dataDelivery = orders.find(
@@ -136,7 +138,7 @@ const filterDataByNameDeliveryAndViewProduct = (
 
   const data = parseOrderDeliveryData(dataDelivery).filter(
     (product) => product.view === viewProduct
-  );
+  ).sort((a, b) => a.sortValue - b.sortValue);
 
   return data;
 };

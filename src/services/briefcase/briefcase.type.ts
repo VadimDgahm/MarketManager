@@ -12,6 +12,7 @@ export type OrderType = {
   quantity: string;
   reductionName: string;
   view: string;
+  sortValue?: number;
 };
 
 export type OrderDeliveryRouteType = {
