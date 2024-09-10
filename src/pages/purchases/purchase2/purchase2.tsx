@@ -40,7 +40,7 @@ const Purchases2 = () => {
   if (!data || isError) {
     return <div>Данных нет. Попробуйте перезагрузить страницу</div>;
   }
-console.log(data);
+
   const parseData = parseOrderData(data.orders);
 
   const arrDeliveryName: ValuesPosition<string>[] = [
