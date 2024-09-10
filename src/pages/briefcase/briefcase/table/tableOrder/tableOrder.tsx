@@ -216,7 +216,7 @@ type TEditOrderClient = {
   idBriefcase: string | undefined;
   client: ClientDataBriefcase | undefined;
 };
-const EditOrderClient = ({
+export const EditOrderClient = ({
   onOpenWindow,
   isOpen,
   order,

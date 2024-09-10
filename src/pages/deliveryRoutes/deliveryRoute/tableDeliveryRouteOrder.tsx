@@ -9,6 +9,7 @@ import {CellVariant} from "@/components/ui/table/TableCellVariant/TableCellVaria
 import {DeliveryRouteEditModal} from "@/components/ui/deliveryRouteEditModal/deliveryRouteEditModal";
 import {ToastComponent} from "@/components/ui/ToastComponent/ToastComponent";
 import {toast} from "react-toastify";
+import {EditOrderClient} from "@/pages/briefcase/briefcase/table/tableOrder/tableOrder";
 
 type TableOrdersProps = {
   data: DeliveryRouteResponseType;
@@ -21,6 +22,7 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
   const [isOpenDeliveryRouteModal, setIsOpenDeliveryRouteModal] = useState<boolean>(false);
   const [selectedOrder, setSelectedOrder] = useState(data.orders[0]);
   const [flag, setFlag] = useState(false);
+  const [editModalState, setEditModalState] = useState<Record<string, boolean>>({});
 
   function saveSortOrder() {
     const result: DeliveryRouteResponseType = structuredClone(data);
@@ -55,6 +57,15 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
 
     toast.success("Скопировано: " + text);
   }
+
+  function toggleEditModal(orderId: string) {
+    setEditModalState((prevState) => ({
+      ...prevState,
+      [orderId]: !prevState[orderId],
+    }));
+  }
+
+  console.log('a', data);
 
   return (
     <>
@@ -124,6 +135,20 @@ export const TableDeliveryRouteOrder = ({data}: TableOrdersProps) => {
           <th>
             <div>{`${value.dayDelivery !== "Неважно" || "" ? value.dayDelivery : ""}`}</div>
             <div>{`${value.timeDelivery ? value.timeDelivery : ""}`}</div>
+          </th>
+          <th>
+            <div >
+              <CellVariant.Edit
+                role="button" onClickEdit={() => toggleEditModal(value.orderId)}
+              />
+              <EditOrderClient key={value.orderId}
+                               isOpen={editModalState[value.orderId] || false}
+                               onOpenWindow={() => toggleEditModal(value.orderId)}
+                               order={value}
+                               idBriefcase={value.briefcaseId}
+                               client={value.dataClient}
+              />
+            </div>
           </th>
 
         </tr>}
