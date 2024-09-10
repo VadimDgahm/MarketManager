@@ -1,7 +1,7 @@
 import {forwardRef, useState} from "react";
 import s from "./header.module.scss";
 import { Typography } from "@/components/ui/typography";
-import { NavLinks} from "@/components/ui/navigate/navigate";
+import {Navigate, NavLinks} from "@/components/ui/navigate/navigate";
 
 export type HeaderInfoType = {};
 
@@ -17,6 +17,8 @@ export const Header = forwardRef<HTMLHeadElement, HeaderInfoType>(() => {
           Meat Market Manager
         </Typography>
       </div>
+
+      <Navigate />
 
       <label className={s.burger} htmlFor="burger">
         <input type="checkbox" id="burger" onChange={() => setHide(!hide)}/>

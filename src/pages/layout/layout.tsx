@@ -1,9 +1,6 @@
 import { Outlet } from "react-router-dom";
-
 import { Footer } from "@/components/ui/footer/footer";
 import { Header } from "@/components/ui/header";
-import { Navigate } from "@/components/ui/navigate/navigate";
-
 import s from "./layout.module.scss";
 import {
   ForwardButton,
@@ -24,7 +21,6 @@ export const Layout = () => {
 const Main = () => {
   return (
     <main className={s.main}>
-      <Navigate />
       <div className={s.content}>
         <div className={s.buttonNav}>
           <GoBackButton />
