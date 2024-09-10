@@ -10,32 +10,38 @@ export const Header = forwardRef<HTMLHeadElement, HeaderInfoType>(() => {
 
   return (
     <>
-    <div className={s.headerRoot}>
-      <div className={s.logo}>
-        <Typography variant={"body1"}>MMM</Typography>
-        <Typography className={s.size} variant={"caption"}>
-          Meat Market Manager
-        </Typography>
+    <div className={s.sticky}>
+      <div className={s.headerRoot}>
+        <div className={s.logo}>
+          <Typography variant={"body1"}>MMM</Typography>
+          <Typography className={s.size} variant={"caption"}>
+            Meat Market Manager
+          </Typography>
+        </div>
+
+        <Navigate />
+
+        <label className={s.burger} htmlFor="burger">
+          <input type="checkbox" id="burger" onChange={() => setHide(!hide)}/>
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+
+        <div>
+          <span className={s.beta}>beta</span> 0.1.1
+        </div>
       </div>
 
-      <Navigate />
 
-      <label className={s.burger} htmlFor="burger">
-        <input type="checkbox" id="burger" onChange={() => setHide(!hide)}/>
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
-
-      <div>
-        <span className={s.beta}>beta</span> 0.1.1
+      <div className={s.burgerContainer + ' ' + (hide ? s.hide : '')}>
+        <nav>
+          <NavLinks />
+        </nav>
       </div>
+
     </div>
-    <div className={s.burgerContainer + ' ' + (hide ? s.hide : '')}>
-      <nav>
-        <NavLinks />
-      </nav>
-    </div>
+
     </>
   );
 });
