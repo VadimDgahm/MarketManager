@@ -116,4 +116,9 @@
   .burger {
     display: block;
   }
+
+  .sticky {
+    position: static;
+    z-index: 1;
+  }
 }
