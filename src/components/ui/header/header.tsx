@@ -15,7 +15,7 @@ export const Header = forwardRef<HTMLHeadElement, HeaderInfoType>(() => {
         <div className={s.logo}>
           <Typography variant={"body1"}>MMM</Typography>
           <Typography className={s.size} variant={"caption"}>
-            Meat Market Manager 1
+            Meat Market Manager
           </Typography>
         </div>
 
