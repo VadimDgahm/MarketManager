@@ -47,7 +47,9 @@ export const CardProduct = ({ product }: CardProductProps) => {
             />
           </div>
           {product.view} , {product.price} руб.<br/>
-          Приоритет: {product.sortValue ?? 0}
+          Приоритет: {product.sortValue ?? 0}<br/>
+            {/*TODO: потом закомментить!*/}
+          Закупочная цена: {product.purchasePrice ?? 0} руб.
         </div>
         <TrashOutline
           className={s.removeIcon}

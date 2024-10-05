@@ -1,6 +1,7 @@
 export type ProductTypeRequest = {
   name: string;
   price: number;
+  purchasePrice?: number;
   type: "Готовый" | "Сырьевой";
   userId: string;
   reductionName: string;

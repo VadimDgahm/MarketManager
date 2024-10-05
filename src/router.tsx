@@ -21,6 +21,7 @@ import { DeliveryRoute } from "@/pages/deliveryRoutes/deliveryRoute/deliveryRout
 import { TableInvoiceDR } from "@/pages/invoices/tableInvoiceDR";
 import { Receipt } from "@/pages/receipt/receipt";
 import { Purchases2 } from "./pages/purchases/purchase2/purchase2";
+import {PrivateReport} from "@/pages/privateReport/PrivateReport";
 
 const publicRoutes: RouteObject[] = [
   {
@@ -82,6 +83,10 @@ const privateRoutes: RouteObject[] = [
     element: <Catalog />,
     path: "/catalog",
   },
+  {
+    element: <PrivateReport />,
+    path: "/private-report"
+  }
 ];
 
 const router = createBrowserRouter([
