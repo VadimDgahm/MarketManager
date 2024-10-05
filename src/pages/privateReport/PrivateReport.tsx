@@ -19,14 +19,14 @@ export const PrivateReport = () => {
         return <Loader/>;
     }
 
-    const downloadExcel = async (idBriefcase: string) => {
+    const downloadExcel = async (idBriefcase: string, nameBriefcase: string) => {
         //@ts-ignore
         const response = await triggerDownload(idBriefcase);
         if (response.data) {
             const url = window.URL.createObjectURL(response.data);
             const link = document.createElement('a');
             link.href = url;
-            link.setAttribute('download', 'private_report.xlsx');
+            link.setAttribute('download', 'Отчет продаж ' + nameBriefcase + '.xlsx');
             document.body.appendChild(link);
             link.click();
             //@ts-ignore
@@ -52,7 +52,7 @@ export const PrivateReport = () => {
                 <Table.Body>
                     {data?.map((briefcase: BriefcaseType) => (
                         <>
-                            <Button onClick={() => downloadExcel(briefcase.id)}>Отчет {briefcase.name}</Button>
+                            <Button onClick={() => downloadExcel(briefcase.id, briefcase.name)}>Отчет {briefcase.name}</Button>
                             <BriefcaseRow key={briefcase.id} briefcase={briefcase}/>
                         </>
                     ))}
