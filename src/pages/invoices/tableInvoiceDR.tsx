@@ -119,7 +119,7 @@ const TableRawOrder = ({ index, order, copyText }: TableRawOrderProps) => {
     const existGift= order?.invoiceOrderItems?.find(item => item.isGift);
 
     if(existGift) {
-      color = 'var(--color-warning-500)';
+      color = '#00fff7';
     } else {
       color = order?.invoiceOrderItems && order?.invoiceOrderItems.length === order.orderClient.length ? 'var(--color-success-900)' : 'var(--color-accent-700)';
     }
