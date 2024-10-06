@@ -1,4 +1,7 @@
 import s from "./footer.module.scss";
+import {useNavigate} from "react-router-dom";
 export const Footer = () => {
-  return <footer className={s.footer}>© 2024 YARAKHOVICH</footer>;
+  const navigate = useNavigate();
+
+  return <footer className={s.footer}><span onClick={() => navigate('/private-report')}>© 2024 YARAKHOVICH</span></footer>;
 };
