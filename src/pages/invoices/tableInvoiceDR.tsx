@@ -113,8 +113,16 @@ const TableRawOrder = ({ index, order, copyText }: TableRawOrderProps) => {
 
   if (order.markOrder) {
     color = 'var(--color-danger-300)';
+  } else if(order.discount) {
+    color = 'var(--color-warning-500)';
   } else {
-    color = order?.invoiceOrderItems && order?.invoiceOrderItems.length === order.orderClient.length ? 'var(--color-success-900)' : 'var(--color-accent-700)';
+    const existGift= order?.invoiceOrderItems?.find(item => item.isGift);
+
+    if(existGift) {
+      color = 'var(--color-warning-500)';
+    } else {
+      color = order?.invoiceOrderItems && order?.invoiceOrderItems.length === order.orderClient.length ? 'var(--color-success-900)' : 'var(--color-accent-700)';
+    }
   }
 
   return (
