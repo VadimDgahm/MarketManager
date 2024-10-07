@@ -13,6 +13,8 @@ import { DeleteModal } from "@/components/ui/delete-modal/deleteModal";
 import { useState } from "react";
 import { ProductType } from "@/services/catalog/catalog-servicesType";
 import { ModalProduct } from "@/pages/catalog/catalog";
+import {useSelector} from "react-redux";
+import {selectIsPrivatePassVerified} from "@/services/privateReport/privateReportSelector";
 
 type CardProductProps = {
   product: ProductType;
@@ -22,6 +24,8 @@ export const CardProduct = ({ product }: CardProductProps) => {
   const [changeProduct] = useChangeProductMutation();
   const [isOpenModalRemove, setIsOpenModalRemove] = useState<boolean>(false);
   const [isOpenModalEdit, setIsOpenModalEdit] = useState<boolean>(false);
+  const isPrivatePassVerified = useSelector(selectIsPrivatePassVerified);
+
   return (
     <Card className={s.card}>
       <Typography className={s.nameProduct} variant={"h2"}>
@@ -48,8 +52,7 @@ export const CardProduct = ({ product }: CardProductProps) => {
           </div>
           {product.view} , {product.price} руб.<br/>
           Приоритет: {product.sortValue ?? 0}<br/>
-            {/*TODO: потом закомментить!*/}
-          Закупочная цена: {product.purchasePrice ?? 0} руб.
+          { isPrivatePassVerified ? 'Закупочная цена: ' + product.purchasePrice ?? 0 + ' руб.' : ''}
         </div>
         <TrashOutline
           className={s.removeIcon}

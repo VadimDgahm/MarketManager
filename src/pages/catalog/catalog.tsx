@@ -20,6 +20,8 @@ import s from "./catalog.module.scss";
 import { CardProduct } from "@/pages/catalog/cardProduct/cardProduct";
 import { ProductType } from "@/services/catalog/catalog-servicesType";
 import { Loader } from "@/components/ui/loader/loader";
+import {useSelector} from "react-redux";
+import {selectIsPrivatePassVerified} from "@/services/privateReport/privateReportSelector";
 
 export enum viewProduct {
   CHICKEN_VIEW = "Птица",
@@ -121,6 +123,7 @@ export const ModalProduct = ({
   product,
   resultFn,
 }: ModalProductProps) => {
+  const isPrivatePassVerified = useSelector(selectIsPrivatePassVerified);
   const [viewProduct, setViewProduct] = useState<string | undefined>(
     product?.view
   );
@@ -191,8 +194,8 @@ export const ModalProduct = ({
             min={1}
             name={"sortValue"}
           />
-           {/*TODO: потом закомментить!*/}
-          <ControlledInput
+          {isPrivatePassVerified ?
+              ( <ControlledInput
               className={s.input}
               control={control}
               label={"Закупочная цена"}
@@ -201,8 +204,7 @@ export const ModalProduct = ({
               datatype={"number"}
               min={0}
               name={"purchasePrice"}
-          />
-
+          />) : ''}
           <div>
             <Typography variant={"body2"}>Тип продукта: </Typography>
             <ControlledRadio

@@ -8,9 +8,10 @@ import {Table} from "@/components/ui/table/Table";
 import {BriefcaseType} from "@/pages/briefcase/tableBriefcase/tableBriefcases";
 import style from "./privateReport.module.scss";
 import {Button} from "@/components/ui/button";
+import {selectIsPrivatePassVerified} from "@/services/privateReport/privateReportSelector";
 
 export const PrivateReport = () => {
-    const isPrivatePassVerified = useSelector((state: any) => state.privatePass.isPrivatePassVerified);
+    const isPrivatePassVerified = useSelector(selectIsPrivatePassVerified);
     const {data, isLoading} = useGetBriefcaseQuery({});
     const [triggerDownload] = useLazyDownloadPrivateReportQuery();
 
