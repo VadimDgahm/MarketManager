@@ -1,0 +1,1 @@
+export const selectIsPrivatePassVerified = (state: any) => state.privatePass.isPrivatePassVerified;
