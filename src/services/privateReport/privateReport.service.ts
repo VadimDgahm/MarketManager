@@ -20,6 +20,14 @@ const privateReportService = baseApi.injectEndpoints({
                     responseHandler: (response) => response.blob(),
                 }),
             }),
+            downloadSelectReport: builder.query<Blob, { routes: string[], briefcaseId: string }>({
+                query: ({ routes, briefcaseId }) => ({
+                    url: `private-report/select-report`,
+                    method: "POST",
+                    body: { routes, briefcaseId },
+                    responseHandler: (response) => response.blob(),
+                }),
+            }),
         };
     },
 });
@@ -27,4 +35,5 @@ const privateReportService = baseApi.injectEndpoints({
 export const {
     useCheckPrivatePassMutation,
     useLazyDownloadPrivateReportQuery,
+    useLazyDownloadSelectReportQuery,
 } = privateReportService;

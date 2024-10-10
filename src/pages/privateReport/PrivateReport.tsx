@@ -9,12 +9,15 @@ import {BriefcaseType} from "@/pages/briefcase/tableBriefcase/tableBriefcases";
 import style from "./privateReport.module.scss";
 import {Button} from "@/components/ui/button";
 import {selectIsPrivatePassVerified} from "@/services/privateReport/privateReportSelector";
+import {SelectPrivateReportModal} from "@/components/ui/selectPrivateReportModal/selectPrivateReportModal";
+import {useState} from "react";
 
 export const PrivateReport = () => {
     const isPrivatePassVerified = useSelector(selectIsPrivatePassVerified);
     const {data, isLoading} = useGetBriefcaseQuery({});
     const [triggerDownload] = useLazyDownloadPrivateReportQuery();
-
+    const [open, setOpen] = useState(false);
+    const [selectedBriefcase, setSelectedBriefcase] = useState<BriefcaseType | null>(null);
 
     if (isLoading) {
         return <Loader/>;
@@ -39,6 +42,11 @@ export const PrivateReport = () => {
         return <PasswordCheck/>;
     }
 
+    const openModal = (briefcase: BriefcaseType) => {
+        setSelectedBriefcase(briefcase);
+        setOpen(true);
+    };
+
     return (
         <div>
             <h1>Private Report</h1>
@@ -54,11 +62,20 @@ export const PrivateReport = () => {
                     {data?.map((briefcase: BriefcaseType) => (
                         <>
                             <Button onClick={() => downloadExcel(briefcase.id, briefcase.name)}>Отчет {briefcase.name}</Button>
+                            <Button onClick={() => openModal(briefcase)}>Выбор</Button>
                             <BriefcaseRow key={briefcase.id} briefcase={briefcase}/>
                         </>
                     ))}
                 </Table.Body>
             </Table.Root>
+
+            {selectedBriefcase && (
+                <SelectPrivateReportModal
+                    open={open}
+                    briefcase={selectedBriefcase}
+                    setOpen={setOpen}
+                />
+            )}
         </div>
     );
 };
