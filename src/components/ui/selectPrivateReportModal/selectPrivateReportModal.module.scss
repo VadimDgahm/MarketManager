@@ -1,0 +1,66 @@
+.submitBtn {
+  display: flex;
+  margin: 5px auto !important;
+}
+
+.checkBoxWrapper {
+  display: flex;
+  align-items: center;
+
+  label {
+    cursor: pointer;
+  }
+
+  label:first-child {
+    margin-right: 20px;
+  }
+
+  &:hover {
+    .checkBox {
+      box-shadow: 0px 0px 0px 2px var(--color-accent-100);
+
+      div {
+        background-color: var(--color-accent-100);
+      }
+    }
+  }
+}
+
+.checkBox {
+  display: block;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0);
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0px 0px 0px 2px var(--color-accent-500);
+  margin: 10px 0;
+
+  div {
+    width: 60px;
+    height: 60px;
+    background-color: var(--color-accent-500);
+    top: -52px;
+    left: -52px;
+    position: absolute;
+    transform: rotateZ(45deg);
+    z-index: 100;
+  }
+
+  input[type=checkbox]:checked + div {
+    left: -10px;
+    top: -10px;
+  }
+
+  input[type=checkbox] {
+    position: absolute;
+    left: 50px;
+    visibility: hidden;
+  }
+}
+
+.transition {
+  transition: 300ms ease;
+}
