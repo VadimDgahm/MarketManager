@@ -48,8 +48,8 @@ export const PrivateReport = () => {
     };
 
     return (
-        <div>
-            <h1>Private Report</h1>
+        <div className={style.privateReport}>
+            <h1>Отчет по продажам</h1>
             <Table.Root className={style.tableBriefcase}>
                 <Table.Head>
                     <Table.Row>

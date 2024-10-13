@@ -16,7 +16,7 @@
   width: 100%;
 
   .downloadExcelWrapper {
-    width: 375px;
+    width: 360px;
     display: flex;
     justify-content: space-between;
 
@@ -24,4 +24,8 @@
       margin-right: 20px;
     }
   }
+}
+
+.privateReport {
+  overflow-x: auto;
 }
