@@ -61,8 +61,10 @@ export const PrivateReport = () => {
                 <Table.Body>
                     {data?.map((briefcase: BriefcaseType) => (
                         <>
-                            <Button onClick={() => downloadExcel(briefcase.id, briefcase.name)}>Отчет {briefcase.name}</Button>
-                            <Button onClick={() => openModal(briefcase)}>Выбор</Button>
+                            <div className={style.downloadExcelWrapper}>
+                                <Button onClick={() => downloadExcel(briefcase.id, briefcase.name)}>Отчет {briefcase.name}</Button>
+                                <Button onClick={() => openModal(briefcase)}>Выбор маршрутов</Button>
+                            </div>
                             <BriefcaseRow key={briefcase.id} briefcase={briefcase}/>
                         </>
                     ))}

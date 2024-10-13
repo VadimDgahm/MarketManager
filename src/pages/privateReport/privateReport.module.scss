@@ -14,4 +14,14 @@
 
 .tableBriefcase {
   width: 100%;
+
+  .downloadExcelWrapper {
+    width: 375px;
+    display: flex;
+    justify-content: space-between;
+
+    button:first-child {
+      margin-right: 20px;
+    }
+  }
 }

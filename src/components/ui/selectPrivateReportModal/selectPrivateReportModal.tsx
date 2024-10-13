@@ -6,6 +6,7 @@ import {
     useLazyDownloadSelectReportQuery
 } from "@/services/privateReport/privateReport.service";
 import {Button} from "@/components/ui/button";
+import style from "./selectPrivateReportModal.module.scss";
 
 type PropsType = {
     open: boolean,
@@ -41,7 +42,7 @@ export const SelectPrivateReportModal = ({briefcase, open, setOpen}: PropsType) 
             const url = window.URL.createObjectURL(new Blob([blob]));
             const link = document.createElement('a');
             link.href = url;
-            link.setAttribute('download', `Отчет-${briefcase.name}.xlsx`);
+            link.setAttribute('download', `Отчет продаж ${briefcase.name}.xlsx`);
             document.body.appendChild(link);
             link.click();
             link.remove();
@@ -52,25 +53,27 @@ export const SelectPrivateReportModal = ({briefcase, open, setOpen}: PropsType) 
     };
 
     return (
-        <Modal onOpenChange={setOpen} open={open} title={"Отчет " + briefcase.name}>
+        <Modal onOpenChange={setOpen} open={open} title={"Отчет: " + briefcase.name}>
             <ModalWithContent>
                 <form onSubmit={(e) => {
                     e.preventDefault();
                     handleSubmit();
                 }}>
                     {deliveryRoutes.map((route) => (
-                        <div key={route._id}>
-                            <label>
+                        <div key={route._id} className={style.checkBoxWrapper}>
+                            <label className={style.checkBox}>
                                 <input
                                     type="checkbox"
                                     checked={selectedRoutes.includes(route._id)}
                                     onChange={() => handleCheckboxChange(route._id)}
+                                    id={route._id}
                                 />
-                                {route.name}
+                                <div className={style.transition}></div>
                             </label>
+                            <label htmlFor={route._id}>{route.name}</label>
                         </div>
                     ))}
-                    <Button type="submit" disabled={isLoading}>
+                    <Button className={style.submitBtn} type="submit" disabled={isLoading}>
                         {isLoading ? "Загрузка..." : "Отправить и скачать отчет"}
                     </Button>
                 </form>
