@@ -70,32 +70,34 @@ export const TableInvoiceDR = () => {
         buttonText="Скачать как XLS"
       />
       <Button variant={"link"} onClick={copyInvoiceAsText}>Скопировать как текст</Button>
-      <Table.Root className={s.table}  id={"invoice-orders-table"}>
-        <Table.Head>
-          <Table.Row>
-            <Table.Cell variant={"head"}>№</Table.Cell>
-            <Table.Cell variant={"head"}></Table.Cell>
-            <Table.Cell variant={"head"}>Имя</Table.Cell>
-            <Table.Cell variant={"head"}>Номер телефона</Table.Cell>
-            <Table.Cell className={s.cellHide} variant={"head"}>Время</Table.Cell>
-            <Table.Cell className={s.cellHide} variant={"head"}>Адрес</Table.Cell>
-            <Table.Cell variant={"head"}>Заказ</Table.Cell>
-            <Table.Cell variant={"head"}>Сумма, руб.</Table.Cell>
-          </Table.Row>
-        </Table.Head>
-        <Table.Body>
-          {
-            // @ts-ignore
-            data?.orders.map((el, i) => (
-            <TableRawOrder
-              key={el.orderId}
-              index={i}
-              order={el}
-              copyText={copyText}
-            />
-          ))}
-        </Table.Body>
-      </Table.Root>
+      <div className={s.tableWrapper}>
+        <Table.Root className={s.table}  id={"invoice-orders-table"}>
+          <Table.Head>
+            <Table.Row>
+              <Table.Cell variant={"head"}>№</Table.Cell>
+              <Table.Cell variant={"head"}></Table.Cell>
+              <Table.Cell variant={"head"}>Имя</Table.Cell>
+              <Table.Cell variant={"head"}>Номер телефона</Table.Cell>
+              <Table.Cell className={s.cellHide} variant={"head"}>Время</Table.Cell>
+              <Table.Cell className={s.cellHide} variant={"head"}>Адрес</Table.Cell>
+              <Table.Cell variant={"head"}>Заказ</Table.Cell>
+              <Table.Cell variant={"head"}>Сумма, руб.</Table.Cell>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            {
+              // @ts-ignore
+              data?.orders.map((el, i) => (
+              <TableRawOrder
+                key={el.orderId}
+                index={i}
+                order={el}
+                copyText={copyText}
+              />
+            ))}
+          </Table.Body>
+        </Table.Root>
+      </div>
     </>
   );
 };

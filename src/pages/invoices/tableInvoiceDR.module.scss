@@ -58,6 +58,10 @@
 }
 
 @media(max-width: 900px) {
+  .tableWrapper {
+    overflow-x: auto;
+  }
+
   .table {
     button {
       padding: 0;
