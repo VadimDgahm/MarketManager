@@ -20,7 +20,7 @@ type TableClientsProps = {
 };
 export const TableClients = ({ data }: TableClientsProps) => {
   return (
-    <Table.Root>
+    <Table.Root style={{width:'100%'}}>
       <ContentTableHead />
       <ContentTableBody data={data} />
     </Table.Root>
