@@ -12,10 +12,12 @@ export type TableDeliveryRoutesProps = {
 
 export const TableDeliveryRoutes = ({btnHandler, btnName}: TableDeliveryRoutesProps) => {
   return (
-    <Table.Root className={s.table}>
-      <ContentTableHead isSetButton={!!btnName}/>
-      <ContentTableBody btnHandler={btnHandler} btnName={btnName}/>
-    </Table.Root>
+    <div className={s.tableWrapper}>
+      <Table.Root className={s.table}>
+        <ContentTableHead isSetButton={!!btnName}/>
+        <ContentTableBody btnHandler={btnHandler} btnName={btnName}/>
+      </Table.Root>
+    </div>
   );
 };
 
