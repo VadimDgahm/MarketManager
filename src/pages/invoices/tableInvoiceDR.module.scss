@@ -100,4 +100,10 @@
     max-width: unset;
     min-width: unset;
   }
+
+  .cellReceipt {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }

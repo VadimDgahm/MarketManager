@@ -44,6 +44,7 @@ export const useFormOrderClient = ({
           quantity: `${valueWeightInput}${valueWeightSelect}`,
           reductionName: product.reductionName,
           isGift: false,
+          typeReceipt: product.typeReceipt
         };
         setErrorForValueWeightInput(false);
         setComments("");

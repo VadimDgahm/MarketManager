@@ -127,6 +127,25 @@ const TableRawOrder = ({ index, order, copyText }: TableRawOrderProps) => {
     }
   }
 
+  let sumSZ = order?.invoiceOrderItems?.reduce((sum, value) => {
+    if (value?.typeReceipt == 'СЗ') {
+      return value.amount + sum;
+    }
+
+    return  sum;
+  }, 0) ?? 0;
+
+  const priceDelivery = order.priceDelivery ?? 0;
+  const finalAmountIP = order.finalTotalAmount ? order.finalTotalAmount - sumSZ * ((100 - (order.discount ?? 0)) /100) : 0;
+  const amountIP = finalAmountIP - priceDelivery;
+  const withDelivery = amountIP > 0 ? 0 : 1;
+
+  if(withDelivery && order.priceDelivery) {
+    sumSZ += order.priceDelivery;
+  }
+
+  const amountSZ = order.discount ? sumSZ * ((100 - order.discount) /100) : sumSZ;
+
   return (
     <>
       <Table.Row className={s.table} key={order.orderId} style={{color:color}}>
@@ -155,9 +174,11 @@ const TableRawOrder = ({ index, order, copyText }: TableRawOrderProps) => {
           </Button>
           <InvoiceCreateModal open={isOpenInvoice} title={"Формирование счета"} setOpen={setOpenInvoice} order={order}/>
         </Table.Cell>
-        <Table.Cell>
-          {order.finalTotalAmount ? <Button variant={"link"} style={{color:color}} onClick={() => {
-            navigate(`/invoices/receipt/${order.briefcaseId}/${order.orderId}`)}}>{order.finalTotalAmount}</Button> : "---"
+        <Table.Cell className={ finalAmountIP && amountSZ  ? s.cellReceipt : ''}>
+          {amountIP > 0 ? <Button variant={"link"} style={{color:color}} onClick={() => {
+            navigate(`/invoices/receipt/${order.briefcaseId}/${order.orderId}`)}}>{finalAmountIP.toFixed(2)}</Button> : ""}
+          {amountSZ ? <Button variant={"link"} style={{color:color}} onClick={() => {
+            navigate(`/invoices/receipt/cz/${withDelivery}/${order.briefcaseId}/${order.orderId}`)}}>(сз) {amountSZ.toFixed(2)}</Button> : ""
           }
         </Table.Cell>
       </Table.Row>

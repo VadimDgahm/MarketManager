@@ -20,6 +20,7 @@ type OrderItems = {
   units:string;
   comments: string;
   isGift: boolean;
+  typeReceipt: string;
 }
 
 type Invoice = {
@@ -70,7 +71,7 @@ export const InvoiceCreateModal = ({
               <div className={s.inputContainer} key={index + item.productId}>
                 <label className={s.label}>{item.name}</label>
                 <div className={s.control}>
-                  <input id={"in" + index} className={s.input} name={item.name} data-positionid={item.positionId} data-comments={item.comments} defaultValue={
+                  <input id={"in" + index} className={s.input} name={item.name} data-positionid={item.positionId} data-typereceipt={item?.typeReceipt ?? "ИП"} data-comments={item.comments} defaultValue={
                     //@ts-ignore
                     item.weight
                   } step="0.01" data-productid={item.productId}  type={"number"} data-gift={item.isGift}  min={0} required={true}/>
@@ -157,8 +158,9 @@ export const InvoiceCreateModal = ({
               const isGift = element.dataset.gift === "true";
               const { value, name } = element;
               const units = name === 'Яйца Куриные' || name === 'Яйца Индейки' ? 'дес.': 'кг.';
+              const typeReceipt = element.dataset.typereceipt;
 
-              invoice.orderItems.push({ productId, weight: +(+value).toFixed(2), units, positionId, comments, isGift});
+              invoice.orderItems.push({ productId, weight: +(+value).toFixed(2), units, positionId, comments, isGift, typeReceipt});
             });
 
             createInvoice(invoice);
@@ -194,7 +196,8 @@ export const InvoiceCreateModal = ({
             isGift: false,
             productPrice: 0,
             name: orderItem.name,
-            amount: 0
+            amount: 0,
+            typeReceipt: orderItem.typeReceipt
           });
         }
       });

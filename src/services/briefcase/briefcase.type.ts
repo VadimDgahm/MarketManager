@@ -13,6 +13,7 @@ export type OrderType = {
   reductionName: string;
   view: string;
   sortValue?: number;
+  typeReceipt: string;
 };
 
 export type OrderDeliveryRouteType = {
@@ -57,7 +58,8 @@ export type OrderItemsRequest = {
   comments: string;
   weight: number;
   units:string;
-  isGift: boolean
+  isGift: boolean;
+  typeReceipt: string;
 }
 
 export type OrderItemsResponse = {

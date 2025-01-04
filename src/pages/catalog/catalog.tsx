@@ -100,7 +100,8 @@ export const loginSchemaProduct = z.object({
   type: z.string(),
   price: z.preprocess((a) => parseFloat(a as string), z.number()),
   sortValue: z.preprocess((a) => parseFloat(a as string), z.number()),
-  purchasePrice: z.preprocess((a) => parseFloat(a as string), z.number())
+  purchasePrice: z.preprocess((a) => parseFloat(a as string), z.number()),
+  typeReceipt: z.string()
 });
 
 export type ModalProductProps = {
@@ -116,6 +117,7 @@ export type FormDataProduct = {
   reductionName: string;
   sortValue: number;
   type: "Готовый" | "Сырьевой";
+  typeReceipt: "ИП" | "СЗ";
 };
 export const ModalProduct = ({
   isOpen,
@@ -134,7 +136,8 @@ export const ModalProduct = ({
       type: product?.type || "Сырьевой",
       price: product?.price || 0,
       purchasePrice: product?.purchasePrice || 0,
-      sortValue: product?.sortValue || 0
+      sortValue: product?.sortValue || 0,
+      typeReceipt: product?.typeReceipt || "ИП",
     },
     mode: "onSubmit",
     resolver: zodResolver(loginSchemaProduct),
@@ -195,7 +198,7 @@ export const ModalProduct = ({
             name={"sortValue"}
           />
           {isPrivatePassVerified ?
-              ( <ControlledInput
+            (<ControlledInput
               className={s.input}
               control={control}
               label={"Закупочная цена"}
@@ -204,7 +207,7 @@ export const ModalProduct = ({
               datatype={"number"}
               min={0}
               name={"purchasePrice"}
-          />) : ''}
+            />) : ''}
           <div>
             <Typography variant={"body2"}>Тип продукта: </Typography>
             <ControlledRadio
@@ -212,8 +215,20 @@ export const ModalProduct = ({
               control={control}
               name={"type"}
               options={[
-                { grade: 0, value: "Готовый" },
-                { grade: 1, value: "Сырьевой" },
+                {grade: 0, value: "Готовый"},
+                {grade: 1, value: "Сырьевой"},
+              ]}
+            />
+          </div>
+          <div>
+            <Typography variant={"body2"}>Тип чека: </Typography>
+            <ControlledRadio
+              defaultValue={product?.typeReceipt || "ИП"}
+              control={control}
+              name={"typeReceipt"}
+              options={[
+                {grade: 0, value: "ИП"},
+                {grade: 1, value: "СЗ"},
               ]}
             />
           </div>
