@@ -68,7 +68,7 @@ export const LavkaReceipt = ({order}: {order: BriefcaseOrder}) => {
                 </>
               ) : (
                 <>
-                  <p className={s.resultPrice}>Общая сумма заказа: <b>{finalAmountSZ} руб.</b></p>
+                  <p className={s.resultPrice}>Общая сумма заказа: <b>{finalAmountSZ?.toFixed(2)} руб.</b></p>
                 </>)
             }
 
