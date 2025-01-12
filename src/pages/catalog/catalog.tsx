@@ -29,6 +29,8 @@ export enum viewProduct {
   PORK_VIEW = "Свинина",
   RABBIT_VIEW = "Кролик",
   TURKEY_VIEW = "Индейка",
+  DUMPLINGS_VIEW = "Пельмени",
+  LAMB_VIEW = "Баранина"
 }
 
 export const optionsView = [
@@ -36,6 +38,8 @@ export const optionsView = [
   { location: "1", value: viewProduct.PORK_VIEW },
   { location: "2", value: viewProduct.CHICKEN_VIEW },
   { location: "5", value: viewProduct.TURKEY_VIEW },
+  { location: "6", value: viewProduct.DUMPLINGS_VIEW },
+  { location: "7", value: viewProduct. LAMB_VIEW },
 ];
 export const Catalog = () => {
   const [isOpen, setIsOpen] = useState(false);

@@ -25,6 +25,14 @@ const arrViewProductsPosition: ValuesPosition<string>[] = [
     location: viewProduct.TURKEY_VIEW,
     value: viewProduct.TURKEY_VIEW,
   },
+  {
+    location: viewProduct.DUMPLINGS_VIEW,
+    value: viewProduct.DUMPLINGS_VIEW
+  },
+  {
+    location: viewProduct.LAMB_VIEW,
+    value: viewProduct.LAMB_VIEW
+  },
 ];
 
 function extractNumbers(sentence: string) {
