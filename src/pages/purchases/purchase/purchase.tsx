@@ -30,6 +30,8 @@ export const Purchase = ({data, catalog, dataOrders}: TPurchase) => {
     [viewProduct.TURKEY_VIEW]: [],
     [viewProduct.RABBIT_VIEW]: [],
     [viewProduct.CHICKEN_VIEW]: [],
+    [viewProduct.DUMPLINGS_VIEW]: [],
+    [viewProduct.LAMB_VIEW]: [],
   });
 
   useEffect(() => {
@@ -135,12 +137,17 @@ const createPurchases = (data: BriefcaseOrder[]): TViewsOrder => {
   );
   const ordersWitRabbit = result.filter((order) => order.view === viewProduct.RABBIT_VIEW);
   const ordersWitTurkey = result.filter((order) => order.view === viewProduct.TURKEY_VIEW);
+  const ordersWithDumplings = result.filter((order) => order.view === viewProduct.DUMPLINGS_VIEW);
+  const ordersWithLamb = result.filter((order) => order.view === viewProduct.LAMB_VIEW);
+
   return {
    [viewProduct.PORK_VIEW]: ordersWitPork,
    [viewProduct.BEEF_VIEW]: ordersWitBeef,
    [viewProduct.CHICKEN_VIEW]: ordersWithChicken,
    [viewProduct.RABBIT_VIEW]: ordersWitRabbit,
    [viewProduct.TURKEY_VIEW]:ordersWitTurkey,
+   [viewProduct.DUMPLINGS_VIEW]: ordersWithDumplings,
+   [viewProduct.LAMB_VIEW]: ordersWithLamb,
   };
 };
 
